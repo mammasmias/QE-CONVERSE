@@ -3,7 +3,7 @@
 
 = Tutorials =
 
-Here you can find short tutorials on how to calculate the NMR chemical shift of 29^Si and ^O atoms in alpha-quartz crystal with QE-CONVERSE code.
+Here you can find short tutorials on how to calculate the NMR chemical shift of 29^Si and 17^O atoms in alpha-quartz crystal with QE-CONVERSE code.
 To obtain the NMR chemical shift you have to execute three step:
 
 1) A spin-polarized SCF calculation
