@@ -16,7 +16,7 @@ You can find all the calculations done in the directory /reference/
 
 1) SCF calculation
 
-You have to perform a spin-polarized SCF calculation using the PW code of Quantum-ESPRESSO on on a geometrically optimized structure. In this directory you can find the PW input of alpha-quartz:
+You have to perform a spin-polarized SCF calculation using the PW code of Quantum-ESPRESSO on a geometrically optimized structure. In this directory you can find the PW input of alpha-quartz:
 
 $ pw.x < quartz_scf.in > quartz_scf.out 
 
