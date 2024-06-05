@@ -4,7 +4,7 @@ current version is compatible with the version 7.2 of Quantum-Espresso package (
  
 
 ## Features
-the QE-CONVERSE implement a non-perturbative approach (converse) to compute the orbitalmagnetization in isolated and periodic systems. The calculation of orbital magnetization allows ab-initio computation of macroscopic properties like the Nuclear Magnetic Resonance (NMR) chemical shifts and the Electronic Paramagnetic Resonance (EPR) g tensor.
+the QE-CONVERSE implement a non-perturbative approach (converse) to compute the orbital magnetization in isolated and periodic systems. The calculation of orbital magnetization allows ab-initio computation of macroscopic properties like the Nuclear Magnetic Resonance (NMR) chemical shifts and the Electronic Paramagnetic Resonance (EPR) g tensor.
 
 * NMR shielding tensors
 * EPR g-tensor
