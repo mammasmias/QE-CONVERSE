@@ -23,7 +23,7 @@ $ pw.x < quartz_scf.in > quartz_scf.out
 The input must contain the flag `nspin=2` and `tot_magnetization = 0.0`
 The symmetry must be switched off using `nosym=.true.` and `noinv=.true.`
 It's important to include at least one empty band.
-
+{{{
 &control
     calculation = 'scf'
     prefix = 'quartz'
@@ -73,7 +73,7 @@ CELL_PARAMETERS hexagonal
 
 K_POINTS automatic
 2 2 2   0 0 0
-
+}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 2) NMR shielding tensor calculation
@@ -82,7 +82,7 @@ Replace "YOUR_QUANTUM_ESPRESSO" in `nmr_shift.sh` script with the folder contain
 Executing the bash script `nmr_shift.sh` you compute the NMR shielding tensor for the first three equivalent Si atoms and the O atom:
 
 ./nmr_shift.sh
-
+{{{
 #!/bin/bash
 NAME="nmr"
 molecule=quartz
@@ -120,13 +120,13 @@ mpirun -np 6 "YOUR_QUANTUM_ESPRESSO"/bin/qe-converse.x < ${base}.in > ${base}.ou
 
 done
 done
-
+}}}
 By inspecting the output files, the contribution of the core to the NMR shielding
 is 837.9127 ppm for Si and 271.0758 ppm for O. 
 Now executing the `getshifts.sh` script you grep the shielding tensors and compute the isotropic shielding:
 
 ./getshifts.sh
-
+{{{
 #!/bin/sh
 
 echo "Si shielding:"
@@ -139,7 +139,7 @@ grep Chemical *_O*out | awk ' { tr=$5; getline; tr+=$6; getline; tr+=$7; print 2
 
 echo
 
-
+}}}
 You obtain the following the isotropic shielding, sigma(iso):
 
 Si shielding:
