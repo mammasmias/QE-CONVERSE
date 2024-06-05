@@ -1,6 +1,3 @@
-#summary Tutorials main page
-#labels Tutorial
-
 = Tutorials =
 
 Here you can find short tutorials on how to calculate the NMR chemical shift of 29^Si and 17^O atoms in alpha-quartz crystal with QE-CONVERSE code.
