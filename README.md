@@ -21,7 +21,7 @@ S. Fioccola, L. Giacomazzi, D. Ceresoli, N. Richard, A. Hemeryck, L. Martin-Samo
 2. git clone https://github.com/SFioccola/QE-CONVERSE.git 
 3. cd QE-CONVERSE
 4. Copy the source files and the Makefile from /src/ dictory into /PP/ directory of Quantum-Espresso.
-5. In the main directory of QE-7.2 type ```make pp```. You should fine the binary file qe-converse.x in the /bin/ directory. 
+5. In the main directory of QE-7.2 type ```make pp```. You should find the binary file ```qe-converse.x``` in the /bin/ directory. 
 
 ## How to use it:
 $/QE-7.2/bin/qe-converse.x < input > output
