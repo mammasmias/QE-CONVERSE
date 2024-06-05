@@ -79,6 +79,7 @@ K_POINTS automatic
 2) NMR shielding tensor calculation
 
 Replace "YOUR_QUANTUM_ESPRESSO" in `nmr_shift.sh` script with the folder containing your Quantum-ESPRESSO installation.
+A detailed explanation of the input for QE-CONVERSE code is in the Input_NMR.wiki file.
 Executing the bash script `nmr_shift.sh` you compute the NMR shielding tensor for the first three equivalent Si atoms and the O atom:
 
 ./nmr_shift.sh
