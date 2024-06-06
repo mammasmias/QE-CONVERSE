@@ -1,6 +1,6 @@
 = Tutorials =
 
-Here you can find short tutorials on how to calculate the NMR chemical shift of 29^Si and 17^O atoms in alpha-quartz crystal with QE-CONVERSE code.
+Here you can find short tutorials on how to calculate the NMR chemical shift of 29 Si and 17 O atoms in alpha-quartz crystal with QE-CONVERSE code.
 To obtain the NMR chemical shift you have to execute three step:
 
 1) A spin-polarized SCF calculation
@@ -166,17 +166,17 @@ Now you can extrapolate the NMR chemical shift for the Si and O atom using the r
 delta(ppm) = sigma(ref) - sigma(iso)
 
 where 
-sigma(ref) for 29^Si = 324.511 ppm
-sigma(ref) for 17^O  = 253.343 ppm 
+sigma(ref) for 29 Si = 324.511 ppm
+sigma(ref) for 17 O  = 253.343 ppm 
 
-delta(ppm) 29^Si = 324.511 - 432.043 = -107.53
-delta(ppm) 17^O  = 253.343 - 210.251 =  43.09
+delta(ppm) 29 Si = 324.511 - 432.043 = -107.53
+delta(ppm) 17 O  = 253.343 - 210.251 =  43.09
 
 Comparing with experimental values (Ref.1) there's a very close agreement:
                    
                  Calc.(ppm)  Exp.(ppm)
-        29^Si     -107.53     -107.73
-        17^O        43.09       40.08
+        29 Si     -107.53     -107.73
+        17 O        43.09       40.08
                     
 
 (Ref.1) M. B. Boslough, R. T. Cygan, and J. R. Kirkpatrick, Abstracts of
