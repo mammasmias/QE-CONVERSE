@@ -26,3 +26,5 @@ S. Fioccola, L. Giacomazzi, D. Ceresoli, N. Richard, A. Hemeryck, L. Martin-Samo
 
 ## How to use it:
 $/QE-7.2/bin/qe-converse.x < input > output
+
+##
