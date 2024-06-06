@@ -1,5 +1,5 @@
 # QE-CONVERSE
-This is the official Git repository of the QE-CONVERSE code for Quantum-Espresso. 
+This is the official Git repository of the QE-CONVERSE code for Quantum-Espresso.  
 This current version of the code is compatible with the version 7.2 of Quantum-Espresso package.
 
 
