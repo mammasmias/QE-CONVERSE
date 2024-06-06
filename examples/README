@@ -3,8 +3,8 @@ This folder contains some examples of NMR and EPR calculations.
 in /NMR/ directory
 
 quartz: NMR chemical shift of 29 Si and 17 O in quartz
-        Tutorial.wiki
-        Input.wiki
+        read the Tutorial.wiki
+        you can find deteils on Input.wiki
 
 in /EPR/ directory
 
