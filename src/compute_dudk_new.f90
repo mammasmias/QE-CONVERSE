@@ -129,7 +129,7 @@ END SUBROUTINE compute_dudk_new
   call get_buffer(evc, nwordwfc, iunwfc, ik)
   q_gipaw3(:) = 0.d0
   call compute_u_kq(ik, q_gipaw3)
-   save the refreshed (now SO including) result on disk ( as evc(:,:) )
+  ! save the refreshed (now SO including) result on disk ( as evc(:,:) )
   call save_buffer(evc, nwordwfc, iunwfc, ik)
   delta_k = q_gipaw/tpiba
 
