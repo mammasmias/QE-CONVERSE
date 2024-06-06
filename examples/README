@@ -4,7 +4,7 @@ in /NMR/ directory
 
 quartz: NMR chemical shift of 29 Si and 17 O in quartz
         read the Tutorial.wiki
-        you can find deteils on Input.wiki
+        you can find details of input file for QE-CONVERSE calculation on Input.wiki
 
 in /EPR/ directory
 
