@@ -1,0 +1,166 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% QE-CONVERSE user's manual
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,11pt,twoside]{article}
+\usepackage[utf8]{inputenc}             % For accents and weird symbols
+%\usepackage{braket}                     % bra-ket's
+\usepackage{amsmath}                    % extra mathematical symbols
+\usepackage{bm}                         % bold mathematical symbols
+\usepackage{verbatim}                   % insert verbatim files
+\usepackage[hang,small,bf]{caption}     % customizable captions
+\usepackage{psfrag}                     % smart postscript substitutions
+\usepackage{fancyvrb}                   % for including source code
+\usepackage[in]{fullpage}               % use all page
+\usepackage[pdftex]{graphicx}           % to insert figures
+\usepackage{epstopdf}                   % convert eps to pdf
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.eps}
+\usepackage{hyperref}                   % crossref in PDF
+\hypersetup{pdftex, colorlinks=true, linkcolor=blue, citecolor=blue,
+            filecolor=blue, urlcolor=blue, pdftitle=, pdfauthor=Davide Ceresoli,
+            pdfsubject=QE-GIPAW user's manual, pdfkeywords=}
+
+%===================================================================================================
+\title{QE-CONVERSE user's manual}
+\author{Simone Fioccola, \texttt{sfioccola@laas.fr}}
+\date{Last revision: \today}
+%===================================================================================================
+
+%===================================================================================================
+\begin{document}
+%===================================================================================================
+\maketitle
+\thispagestyle{empty}
+%\tableofcontents
+%\clearpage
+
+%===================================================================================================
+\section{Introduction}
+%===================================================================================================
+The QE-CONVERSE implement a non-perturbative approach (converse) to compute the orbital magnetization in isolated and periodic systems. The calculation of orbital magnetization allows ab-initio computation of macroscopic properties like the Nuclear Magnetic Resonance (NMR) chemical shifts and the Electronic Paramagnetic Resonance (EPR) g tensor.
+
+%===================================================================================================
+\section{Features}
+%===================================================================================================
+\begin{itemize}
+  \item Periodic and isolated systems
+  \item Norm-conserving pseudopotentials
+  \item Parallelization over bands and g-vectors
+  \item NMR shielding tensors 
+  \item EPR g-tensor
+  \item LDA and GGA functionals
+\end{itemize}
+
+%===================================================================================================
+\section{Author contributions}
+%===================================================================================================
+{
+  S. Fioccola, L. Giacomazzi, D. Ceresoli, N. Richard, A. Hemeryck, L. Martin-Samos
+} 
+%===================================================================================================
+\section{Build instructions}
+%===================================================================================================
+This current version of the code is compatible with the version 7.2 of Quantum-Espresso package.
+\begin{enumerate}
+\item A Quantum-Espresso package version 7.2 must be previously installed (\url{https://gitlab.com/QEF/q-e/-/releases/qe-7.2}). To take advantage of the enhancements in linear algebra operations, the configuration with scaLAPACK package or ELPA library is suggested.
+QE user's guide at \url{http://www.quantum-espresso.org/user_guide/user_guide.html}
+\item Type:
+\begin{verbatim}
+    git clone https://github.com/mammasmias/QE-CONVERSE 
+\end{verbatim}
+This will download from github the latest stable version of QE-CONVERSE.
+\item Type:
+\begin{verbatim}
+cd QE-CONVERSE
+\end{verbatim}
+\item 
+ Copy the source files and the Makefile from \texttt{/src/} dictory into \texttt{/PP/} directory of Quantum-Espresso.
+\item
+ In the main directory of QE-7.2 type \texttt{make pp}. You should find the binary file \texttt{qe-converse.x} in the \texttt{/bin/} directory of Quantum-Espresso.
+\end{enumerate}
+%===================================================================================================
+\section{Quick start}
+%===================================================================================================
+To calculate NMR/EPR parameters you need: 
+\begin{enumerate}
+\item pseudopotentials containing the GIPAW reconstruction (\url{https://sites.google.com/site/dceresoli/pseudopotentials})
+\item run \texttt{pw.x} to perform the SCF calculation 
+\item run \texttt{qe-converse.x} to calculate parameters (look into folder
+\texttt{examples} for NMR shielding, EPR g-tensor.
+)
+\end{enumerate}
+
+%===================================================================================================
+\section{Input file description}
+%===================================================================================================
+The input file consists on only one namelist \texttt{\&input\textunderscore{}qeconverse} with the
+following keywords:
+\begin{description}
+
+\item[prefix] (type: character, default: \texttt{'prefix'})\\
+Description: prefix of files saved by program \texttt{pw.x}. The value of this keyword must be the same used in the SCF calculation.
+
+\item[outdir] (type: character, default: \texttt{'./'})\\
+Description: temporary directory for \texttt{pw.x} restart files. The value of this keyword must be the same used in the SCF calculation.
+
+\item[diagonalization] (type: string, default: \texttt{'david'})\\
+Description: diagonalization method (only allowed values: \texttt{'david'} )
+
+\item[verbosity] (type: string default: \texttt{'high'})\\
+Description: verbosity level (allowed values: \texttt{'low'}, \texttt{'medium'}, \texttt{'high'})
+
+\item[q\_gipaw] (type: real, default: 0.01, units: bohrradius$^{-1}$)\\
+Description: the small wave-vector for the covariant finite difference formula.
+
+\item[dudk\_method] (type: string, default: \texttt{'covariant'})\\
+Description: k-point derivative method (only allowed values: \texttt{'covariant'} )
+
+\item[diag\_thr\_init] (type: real, default: 10$^{-7}$, units: Ry$^2$)\\
+Description: Convergence threshold (ethr) for iterative diagonalization.
+
+\item[conv\_threshold] (type: real, default: 10$^{-8}$, units: Ry$^2$)\\
+Description: convergence threshold for the diagonalization in the SCF step.
+
+\item[mixing\_beta] (type: real, default: 0.5)\\
+Description: mixing factor for self-consistency.
+
+\item[lambda\_so(1,..,3)] (type: real, default: 0.0, units: Bohr magneton)\\
+Description: Cartesian components of electron spin. The value (1,..,3) denotes the spin-orbit coupling direction.
+
+\item[m\_0(1,..,3)] (type: real, default: 0.0, units: nuclear magneton)\\
+Description: Cartesian components of nuclear dipole. The value (1,..,3) denotes the nuclear dipole moment direction.
+
+\item[m\_0\_atom] (type: integer, default: 0)\\
+Description: Atom index carrying the nuclear magnetic dipole.
+
+
+\end{description}
+
+
+%===================================================================================================
+\section{Limitations}
+%===================================================================================================
+Parallelization on k-point (pool) is not allowed. 
+
+
+%===================================================================================================
+\section{Resources}
+%===================================================================================================
+\begin{itemize}
+
+\item NMR periodic table: \url{http://www.pascal-man.com/periodic-table/periodictable.html}
+
+\end{itemize}
+
+
+%===================================================================================================
+\begin{thebibliography}{99}
+%===================================================================================================
+\bibitem{}
+  
+
+\end{thebibliography}
+
+%===================================================================================================
+\end{document}
+%===================================================================================================
+
