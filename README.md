@@ -14,7 +14,7 @@ The QE-CONVERSE implement a non-perturbative approach (converse) to compute the 
 
 ## Build instructions:
 1. the Quantum-Espresso package version 7.2 must be previously installed (https://gitlab.com/QEF/q-e/-/releases/qe-7.2). To take advantage of the enhancements in linear algebra operations, the configuration with scaLAPACK package or ELPA library is suggested.
-2. git clone (https://github.com/mammasmias/QE-CONVERSE) 
+2. git clone [(https://github.com/mammasmias/QE-CONVERSE)](https://github.com/mammasmias/QE-CONVERSE.git) 
 3. cd QE-CONVERSE
 4. Copy the source files and the Makefile from ```/src/``` dictory into ```/PP/``` directory of Quantum-Espresso.
 5. In the main directory of QE-7.2 type ```make pp```. You should find the binary file ```qe-converse.x``` in the /bin/ directory. 
