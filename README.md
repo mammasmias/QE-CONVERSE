@@ -20,7 +20,7 @@ The QE-CONVERSE implement a non-perturbative approach (converse) to compute the 
 5. In the main directory of QE-7.2 type ```make pp```. You should find the binary file ```qe-converse.x``` in the /bin/ directory. 
 
 ## How to use it:
-$/QE-7.2/bin/qe-converse.x < input > output
+run ```./qe-converse.x```
 
 ## Directory contents
 
