@@ -24,7 +24,8 @@ run ```./qe-converse.x```
 
 ## Directory contents
 
-```/src/```: Contains the source code and the Makefile.  
+```/src/```: Contains the source code and the Makefile.
+```/doc/```: Contains the User's manual.
 ```/example/```: Contains two directories:  
  ```/EPR/``` about a EPR g tensor and  ```/NMR/``` about a NMR chemical shift calculation. Inside each one there's a Tutorial.wiki file that explain how to perform the calculation step-by-step.
 
