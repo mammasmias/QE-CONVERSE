@@ -1,0 +1,585 @@
+
+     Program QE-CONVERSE v.7.2 starts on 31Jul2024 at 14:31:29 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+         "P. Giannozzi et al., J. Chem. Phys. 152 154105 (2020);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI), running on     6 processors
+
+     MPI processes distributed on     1 nodes
+     R & G space division:  proc/nbgrp/npool/nimage =       6
+     9867 MiB available memory on the printing compute node when the environment starts
+
+
+     Reading xml data from directory:
+
+     ./scratch/PbF.save/
+     WARNING: atomic wfc #  6 for atom typePb has zero norm
+
+     IMPORTANT: XC functional enforced from input :
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
+     Any further DFT definition will be discarded
+     Please, verify this is what you really want
+
+
+     Parallelization info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Min        2123    2123    529               180125   180125   22507
+     Max        2125    2125    531               180126   180126   22508
+     Sum       12745   12745   3181              1080751  1080751  135043
+
+     Using Slab Decomposition
+
+     Reading collected, re-writing distributed wavefunctions
+     GIPAW projectors -----------------------------------------------
+     atom=  F    l=0  rc=    1.1000  rs=    0.7333
+     atom=  F    l=0  rc=    1.1000  rs=    0.7333
+     atom=  F    l=1  rc=    1.1000  rs=    0.7333
+     atom=  F    l=1  rc=    1.1000  rs=    0.7333
+     projs nearly linearly dependent: l=0  n1,n2= 1, 2  s=  0.99398006
+     projs nearly linearly dependent: l=1  n1,n2= 1, 2  s=  0.99925063
+
+     atom=  Pb   l=0  rc=    2.0000  rs=    1.3333
+     atom=  Pb   l=0  rc=    2.0000  rs=    1.3333
+     atom=  Pb   l=1  rc=    2.1000  rs=    1.4000
+     atom=  Pb   l=1  rc=    2.1000  rs=    1.4000
+     atom=  Pb   l=2  rc=    1.6000  rs=    1.0667
+     atom=  Pb   l=2  rc=    1.6000  rs=    1.0667
+     projs nearly linearly dependent: l=0  n1,n2= 1, 2  s=  0.99788576
+     projs nearly linearly dependent: l=1  n1,n2= 1, 2  s=  0.99959511
+     projs nearly linearly dependent: l=2  n1,n2= 1, 2  s=  0.99298427
+     -----------------------------------------------------------------
+
+     GIPAW integrals: -------------------------------------------
+     Atom  i/j   nmr_para    nmr_dia     epr_rmc    epr_para     epr_dia
+       F   1 1  0.1755E+04  0.4135E+00  0.1317E+02  0.3233E+05  0.8506E+01
+       F   2 1  0.1889E+04  0.3962E+00  0.1418E+02  0.3487E+05  0.8754E+01
+       F   2 2  0.2033E+04  0.3737E+00  0.1518E+02  0.3761E+05  0.9188E+01
+       F   3 3  0.6568E+01  0.1235E+00  0.1369E+01  0.1830E+03  0.2707E+01
+       F   4 3  0.7145E+01  0.1504E+00  0.1599E+01  0.1963E+03  0.3163E+01
+       F   4 4  0.7764E+01  0.1791E+00  0.1863E+01  0.2105E+03  0.3673E+01
+       Pb  1 1  0.8673E+05  0.3576E+00  0.4102E+02  0.1423E+08  0.7287E+02
+       Pb  2 1  0.8543E+05  0.3221E+00  0.4043E+02  0.1401E+08  0.7179E+02
+       Pb  2 2  0.8415E+05  0.2857E+00  0.3983E+02  0.1380E+08  0.7082E+02
+       Pb  3 3  0.2984E+03  0.4924E+00  0.4443E+02  0.4794E+05  0.7759E+02
+       Pb  4 3  0.2887E+03  0.4524E+00  0.4296E+02  0.4638E+05  0.7535E+02
+       Pb  4 4  0.2793E+03  0.4138E+00  0.4153E+02  0.4488E+05  0.7322E+02
+       Pb  5 5  0.3500E+02  0.2422E+00  0.2967E+02  0.5240E+04  0.9191E+02
+       Pb  6 5  0.3874E+02  0.2718E+00  0.3285E+02  0.5799E+04  0.9515E+02
+       Pb  6 6  0.4288E+02  0.3028E+00  0.3640E+02  0.6419E+04  0.1001E+03
+     ------------------------------------------------------------
+
+
+     R & G space division:  proc/nbgrp/npool/nimage =       6
+     Subspace diagonalization in iterative solution of the eigenvalue problem:
+     a serial algorithm will be used
+
+
+
+     bravais-lattice index     =            1
+     lattice parameter (alat)  =      20.0000  a.u.
+     unit-cell volume          =    8000.0000 (a.u.)^3
+     number of atoms/cell      =            2
+     number of atomic types    =            2
+     number of electrons       =        21.00 (up:  11.00, down:  10.00)
+     number of Kohn-Sham states=           11
+     kinetic-energy cutoff     =     100.0000  Ry
+     charge density cutoff     =     400.0000  Ry
+     scf convergence threshold =      1.0E-08
+     mixing beta               =       0.5000
+     number of iterations used =            8  plain     mixing
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
+
+     celldm(1)=  20.000000  celldm(2)=   0.000000  celldm(3)=   0.000000
+     celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
+
+     crystal axes: (cart. coord. in units of alat)
+               a(1) = (   1.000000   0.000000   0.000000 )  
+               a(2) = (   0.000000   1.000000   0.000000 )  
+               a(3) = (   0.000000   0.000000   1.000000 )  
+
+     reciprocal axes: (cart. coord. in units 2 pi/alat)
+               b(1) = (  1.000000  0.000000  0.000000 )  
+               b(2) = (  0.000000  1.000000  0.000000 )  
+               b(3) = (  0.000000  0.000000  1.000000 )  
+
+
+     PseudoPot. # 1 for F  read from file:
+     ../pseudo/F_pbe-20080902.UPF
+     MD5 check sum: c4eff971cdb459dd7b15ab7248b0a311
+     Pseudo is Norm-conserving, Zval =  7.0
+     Generated by new atomic code, or converted to UPF format
+     Using radial grid of 1105 points,  1 beta functions with: 
+                l(1) =   0
+
+     PseudoPot. # 2 for Pb read from file:
+     ../pseudo/Pb_pbe-20080902.UPF
+     MD5 check sum: bcaa549d210b2aed628b5d2011f4d406
+     Pseudo is Norm-conserving, Zval = 14.0
+     Generated by new atomic code, or converted to UPF format
+     Using radial grid of 1281 points,  2 beta functions with: 
+                l(1) =   1
+                l(2) =   2
+
+     atomic species   valence    mass     pseudopotential
+        F              7.00     9.00000     F ( 1.00)
+        Pb            14.00   207.20000     Pb( 1.00)
+
+     Starting magnetic structure 
+     atomic species   magnetization
+        F            0.000
+        Pb           0.000
+
+     No symmetry found
+
+
+                                    s                        frac. trans.
+
+      isym =  1     identity                                     
+
+ cryst.   s( 1) = (     1          0          0      )
+                  (     0          1          0      )
+                  (     0          0          1      )
+
+ cart.    s( 1) = (  1.0000000  0.0000000  0.0000000 )
+                  (  0.0000000  1.0000000  0.0000000 )
+                  (  0.0000000  0.0000000  1.0000000 )
+
+
+     point group C_1 (1)    
+     there are  1 classes
+     the character table:
+
+       E    
+A      1.00
+
+     the symmetry operations in each class and the name of the first element:
+
+     E        1
+          identity                                               
+
+   Cartesian axes
+
+     site n.     atom                  positions (alat units)
+         1           F   tau(   1) = (   0.0000000   0.0000000  -0.0286596  )
+         2           Pb  tau(   2) = (   0.0000000   0.0000000   0.1703891  )
+
+   Crystallographic axes
+
+     site n.     atom                  positions (cryst. coord.)
+         1           F   tau(   1) = (  0.0000000  0.0000000 -0.0286596  )
+         2           Pb  tau(   2) = (  0.0000000  0.0000000  0.1703891  )
+
+     number of k points=     1
+                       cart. coord. in units 2pi/alat
+        k(    1) = (   0.0000000   0.0000000   0.0000000), wk =   1.0000000
+
+                       cryst. coord.
+        k(    1) = (   0.0000000   0.0000000   0.0000000), wk =   1.0000000
+
+     Dense  grid:  1080751 G-vectors     FFT dimensions: ( 128, 128, 128)
+
+     Initial potential from superposition of free atoms
+
+     starting charge      20.9976, renormalised to      21.0000
+
+     negative rho (up, down):  9.349E-04 9.349E-04
+     Starting wfcs are   17 atomic wfcs
+
+     Self-consistent Calculation
+
+     iteration #  1     ecut=   100.00 Ry     beta= 0.50
+     Davidson diagonalization with overlap 
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+           194 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+          9070 MiB available memory on the node where the printing process lives
+------------------
+     ethr =  1.00E-08,  avg # of iterations = 12.0
+
+     negative rho (up, down):  3.605E-04 4.621E-04
+
+     total energy              =    -167.86901968 Ry
+     Harris-Foulkes estimate   =    -168.12698150 Ry
+     estimated scf accuracy    <       0.40780481 Ry
+
+     total magnetization       =     1.00 Bohr mag/cell
+     absolute magnetization    =     1.00 Bohr mag/cell
+
+     iteration #  2     ecut=   100.00 Ry     beta= 0.50
+     Davidson diagonalization with overlap 
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+           257 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+          8449 MiB available memory on the node where the printing process lives
+------------------
+     ethr =  1.94E-03,  avg # of iterations =  4.0
+
+     negative rho (up, down):  2.311E-04 3.240E-04
+
+     total energy              =    -167.92097692 Ry
+     Harris-Foulkes estimate   =    -168.07042629 Ry
+     estimated scf accuracy    <       0.39059907 Ry
+
+     total magnetization       =     1.00 Bohr mag/cell
+     absolute magnetization    =     1.01 Bohr mag/cell
+
+     iteration #  3     ecut=   100.00 Ry     beta= 0.50
+     Davidson diagonalization with overlap 
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+           268 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+          8380 MiB available memory on the node where the printing process lives
+------------------
+     ethr =  1.86E-03,  avg # of iterations =  3.0
+
+     negative rho (up, down):  1.347E-07 1.061E-06
+
+     total energy              =    -168.00271300 Ry
+     Harris-Foulkes estimate   =    -168.01544538 Ry
+     estimated scf accuracy    <       0.02831836 Ry
+
+     total magnetization       =     1.00 Bohr mag/cell
+     absolute magnetization    =     1.01 Bohr mag/cell
+
+     iteration #  4     ecut=   100.00 Ry     beta= 0.50
+     Davidson diagonalization with overlap 
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+           279 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+          8314 MiB available memory on the node where the printing process lives
+------------------
+     ethr =  1.35E-04,  avg # of iterations =  4.0
+
+     negative rho (up, down):  1.883E-06 8.225E-06
+
+     total energy              =    -168.00976384 Ry
+     Harris-Foulkes estimate   =    -168.01375489 Ry
+     estimated scf accuracy    <       0.01045531 Ry
+
+     total magnetization       =     1.00 Bohr mag/cell
+     absolute magnetization    =     1.02 Bohr mag/cell
+
+     iteration #  5     ecut=   100.00 Ry     beta= 0.50
+     Davidson diagonalization with overlap 
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+           290 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+          8243 MiB available memory on the node where the printing process lives
+------------------
+     ethr =  4.98E-05,  avg # of iterations =  2.5
+
+     negative rho (up, down):  5.190E-08 5.313E-07
+
+     total energy              =    -168.01166562 Ry
+     Harris-Foulkes estimate   =    -168.01165625 Ry
+     estimated scf accuracy    <       0.00004670 Ry
+
+     total magnetization       =     1.00 Bohr mag/cell
+     absolute magnetization    =     1.02 Bohr mag/cell
+
+     iteration #  6     ecut=   100.00 Ry     beta= 0.50
+     Davidson diagonalization with overlap 
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+           301 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+          8181 MiB available memory on the node where the printing process lives
+------------------
+     ethr =  2.22E-07,  avg # of iterations =  3.5
+
+     negative rho (up, down):  2.409E-09 4.307E-08
+
+     total energy              =    -168.01171819 Ry
+     Harris-Foulkes estimate   =    -168.01171818 Ry
+     estimated scf accuracy    <       0.00001463 Ry
+
+     total magnetization       =     1.00 Bohr mag/cell
+     absolute magnetization    =     1.02 Bohr mag/cell
+
+     iteration #  7     ecut=   100.00 Ry     beta= 0.50
+     Davidson diagonalization with overlap 
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+           312 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+          8117 MiB available memory on the node where the printing process lives
+------------------
+     ethr =  6.97E-08,  avg # of iterations =  3.0
+
+     negative rho (up, down):  6.190E-09 9.597E-08
+
+     total energy              =    -168.01172224 Ry
+     Harris-Foulkes estimate   =    -168.01172259 Ry
+     estimated scf accuracy    <       0.00000262 Ry
+
+     total magnetization       =     1.00 Bohr mag/cell
+     absolute magnetization    =     1.02 Bohr mag/cell
+
+     iteration #  8     ecut=   100.00 Ry     beta= 0.50
+     Davidson diagonalization with overlap 
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+           323 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+          8043 MiB available memory on the node where the printing process lives
+------------------
+     ethr =  1.25E-08,  avg # of iterations =  3.0
+
+     total energy              =    -168.01172305 Ry
+     Harris-Foulkes estimate   =    -168.01172313 Ry
+     estimated scf accuracy    <       0.00000042 Ry
+
+     total magnetization       =     1.00 Bohr mag/cell
+     absolute magnetization    =     1.02 Bohr mag/cell
+
+     iteration #  9     ecut=   100.00 Ry     beta= 0.50
+     Davidson diagonalization with overlap 
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+           334 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+          7977 MiB available memory on the node where the printing process lives
+------------------
+     ethr =  2.02E-09,  avg # of iterations =  3.0
+
+     End of self-consistent calculation
+
+ ------ SPIN UP ------------
+
+
+          k = 0.0000 0.0000 0.0000 (135043 PWs)   bands (ev):
+
+   -26.4235 -21.9147 -21.6758 -21.1776 -20.5909 -19.7636 -12.2473  -7.6883
+    -7.4969  -7.4462  -3.4624
+
+     occupation numbers 
+     1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
+     1.0000   1.0000   1.0000
+
+ ------ SPIN DOWN ----------
+
+
+          k = 0.0000 0.0000 0.0000 (135043 PWs)   bands (ev):
+
+   -26.3373 -21.7681 -21.5873 -21.1201 -20.4893 -19.6021 -11.7813  -7.5199
+    -7.4682  -7.2716  -2.8779
+
+     occupation numbers 
+     1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
+     1.0000   1.0000   0.0000
+
+     highest occupied, lowest unoccupied level (ev):    -3.4624   -2.8779
+
+!    total energy              =    -168.01172314 Ry
+     Harris-Foulkes estimate   =    -168.01172313 Ry
+     estimated scf accuracy    <          5.9E-09 Ry
+
+     The total energy is the sum of the following terms:
+     one-electron contribution =    -269.67007519 Ry
+     hartree contribution      =     138.09399465 Ry
+     xc contribution           =     -23.96888168 Ry
+     ewald contribution        =     -12.46676092 Ry
+
+     total magnetization       =     1.00 Bohr mag/cell
+     absolute magnetization    =     1.02 Bohr mag/cell
+
+     convergence has been achieved in   9 iterations
+     Computing du/dk (covariant derivative)
+     k-point:   1    occ= 11
+     compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
+     ethr =  1.00E-13,  avg # of iterations =  7.0
+     eigenvalues at k:
+ -26.4235 -21.9147 -21.6758 -21.1776 -20.5909 -19.7636 -12.2473  -7.6883
+  -7.4969  -7.4462  -3.4624
+     eigenvalues at k+q:
+ -26.4229 -21.9144 -21.6757 -21.1775 -20.5907 -19.7633 -12.2472  -7.6877
+  -7.4963  -7.4456  -3.4623
+     compute_u_kq: q = (   -0.0318,    0.0000,    0.0000)
+     ethr =  1.00E-13,  avg # of iterations = 15.0
+     eigenvalues at k:
+ -26.4235 -21.9147 -21.6758 -21.1776 -20.5909 -19.7636 -12.2473  -7.6883
+  -7.4969  -7.4462  -3.4624
+     eigenvalues at k+q:
+ -26.4229 -21.9144 -21.6757 -21.1775 -20.5907 -19.7633 -12.2472  -7.6877
+  -7.4963  -7.4456  -3.4624
+     compute_u_kq: q = (    0.0318,    0.0000,    0.0000)
+     ethr =  1.00E-13,  avg # of iterations = 15.0
+     eigenvalues at k:
+ -26.4235 -21.9147 -21.6758 -21.1776 -20.5909 -19.7636 -12.2473  -7.6883
+  -7.4969  -7.4462  -3.4624
+     eigenvalues at k+q:
+ -26.4229 -21.9144 -21.6757 -21.1775 -20.5907 -19.7633 -12.2472  -7.6877
+  -7.4963  -7.4456  -3.4623
+     compute_u_kq: q = (    0.0000,   -0.0318,    0.0000)
+     ethr =  1.00E-13,  avg # of iterations = 15.0
+     eigenvalues at k:
+ -26.4235 -21.9147 -21.6758 -21.1776 -20.5909 -19.7636 -12.2473  -7.6883
+  -7.4969  -7.4462  -3.4624
+     eigenvalues at k+q:
+ -26.4229 -21.9144 -21.6757 -21.1775 -20.5907 -19.7633 -12.2472  -7.6877
+  -7.4963  -7.4456  -3.4623
+     compute_u_kq: q = (    0.0000,    0.0318,    0.0000)
+     ethr =  1.00E-13,  avg # of iterations = 15.0
+     eigenvalues at k:
+ -26.4235 -21.9147 -21.6758 -21.1776 -20.5909 -19.7636 -12.2473  -7.6883
+  -7.4969  -7.4462  -3.4624
+     eigenvalues at k+q:
+ -26.4229 -21.9144 -21.6757 -21.1775 -20.5907 -19.7633 -12.2472  -7.6877
+  -7.4963  -7.4456  -3.4623
+     compute_u_kq: q = (    0.0000,    0.0000,   -0.0318)
+     ethr =  1.00E-13,  avg # of iterations = 15.0
+     eigenvalues at k:
+ -26.4235 -21.9147 -21.6758 -21.1776 -20.5909 -19.7636 -12.2473  -7.6883
+  -7.4969  -7.4462  -3.4624
+     eigenvalues at k+q:
+ -26.4229 -21.9144 -21.6757 -21.1775 -20.5907 -19.7633 -12.2472  -7.6877
+  -7.4963  -7.4456  -3.4623
+     compute_u_kq: q = (    0.0000,    0.0000,    0.0318)
+     ethr =  1.00E-13,  avg # of iterations = 15.0
+     eigenvalues at k:
+ -26.4235 -21.9147 -21.6758 -21.1776 -20.5909 -19.7636 -12.2473  -7.6883
+  -7.4969  -7.4462  -3.4624
+     eigenvalues at k+q:
+ -26.4229 -21.9144 -21.6757 -21.1775 -20.5907 -19.7633 -12.2472  -7.6877
+  -7.4963  -7.4456  -3.4623
+     k-point:   2    occ= 10
+     compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
+     ethr =  1.00E-13,  avg # of iterations =  6.0
+     eigenvalues at k:
+ -26.3373 -21.7681 -21.5873 -21.1201 -20.4893 -19.6021 -11.7813  -7.5199
+  -7.4682  -7.2716  -2.8779
+     eigenvalues at k+q:
+ -26.3369 -21.7680 -21.5873 -21.1201 -20.4893 -19.6020 -11.7811  -7.5195
+  -7.4678  -7.2712  -2.8779
+     compute_u_kq: q = (   -0.0318,    0.0000,    0.0000)
+     ethr =  1.00E-13,  avg # of iterations = 11.0
+     eigenvalues at k:
+ -26.3373 -21.7681 -21.5873 -21.1201 -20.4893 -19.6021 -11.7813  -7.5199
+  -7.4682  -7.2716  -2.8779
+     eigenvalues at k+q:
+ -26.3369 -21.7680 -21.5873 -21.1201 -20.4893 -19.6020 -11.7811  -7.5195
+  -7.4678  -7.2712  -2.8779
+     compute_u_kq: q = (    0.0318,    0.0000,    0.0000)
+     ethr =  1.00E-13,  avg # of iterations = 12.0
+     eigenvalues at k:
+ -26.3373 -21.7681 -21.5873 -21.1201 -20.4893 -19.6021 -11.7813  -7.5199
+  -7.4682  -7.2716  -2.8779
+     eigenvalues at k+q:
+ -26.3369 -21.7680 -21.5873 -21.1201 -20.4893 -19.6020 -11.7811  -7.5195
+  -7.4678  -7.2712  -2.8779
+     compute_u_kq: q = (    0.0000,   -0.0318,    0.0000)
+     ethr =  1.00E-13,  avg # of iterations = 12.0
+     eigenvalues at k:
+ -26.3373 -21.7681 -21.5873 -21.1201 -20.4893 -19.6021 -11.7813  -7.5199
+  -7.4682  -7.2716  -2.8779
+     eigenvalues at k+q:
+ -26.3369 -21.7680 -21.5873 -21.1201 -20.4893 -19.6020 -11.7811  -7.5195
+  -7.4678  -7.2712  -2.8780
+     compute_u_kq: q = (    0.0000,    0.0318,    0.0000)
+     ethr =  1.00E-13,  avg # of iterations = 12.0
+     eigenvalues at k:
+ -26.3373 -21.7681 -21.5873 -21.1201 -20.4893 -19.6021 -11.7813  -7.5199
+  -7.4682  -7.2716  -2.8779
+     eigenvalues at k+q:
+ -26.3369 -21.7680 -21.5873 -21.1201 -20.4893 -19.6020 -11.7811  -7.5195
+  -7.4678  -7.2712  -2.8780
+     compute_u_kq: q = (    0.0000,    0.0000,   -0.0318)
+     ethr =  1.00E-13,  avg # of iterations = 11.0
+     eigenvalues at k:
+ -26.3373 -21.7681 -21.5873 -21.1201 -20.4893 -19.6021 -11.7813  -7.5199
+  -7.4682  -7.2716  -2.8779
+     eigenvalues at k+q:
+ -26.3369 -21.7680 -21.5873 -21.1201 -20.4893 -19.6020 -11.7811  -7.5195
+  -7.4678  -7.2712  -2.8779
+     compute_u_kq: q = (    0.0000,    0.0000,    0.0318)
+     ethr =  1.00E-13,  avg # of iterations = 11.0
+     eigenvalues at k:
+ -26.3373 -21.7681 -21.5873 -21.1201 -20.4893 -19.6021 -11.7813  -7.5199
+  -7.4682  -7.2716  -2.8779
+     eigenvalues at k+q:
+ -26.3369 -21.7680 -21.5873 -21.1201 -20.4893 -19.6020 -11.7811  -7.5195
+  -7.4678  -7.2712  -2.8779
+     done with du/dk   q_gipaw = 0.010000
+
+     Computing the orbital magnetization (bohr mag/cell):
+BC: k-point:    1  pool:   1       -0.000000    0.024219    0.000000
+LC: k-point:    1  pool:   1       -0.000000   -0.210148    0.000000
+IC: k-point:    1  pool:   1        0.000000    0.076204   -0.000000
+BC: k-point:    2  pool:   1        0.000000   -0.000116   -0.000000
+LC: k-point:    2  pool:   1       -0.000000    0.009156    0.000000
+IC: k-point:    2  pool:   1       -0.000000    0.006655   -0.000000
+
+     SPIN-ORBIT:
+     lambda_so          =       0.000000      1.000000      0.000000
+
+     Berry curvature    =      -0.000000      0.024103      0.000000
+     Fermi energy       =      -0.232999 rydberg
+
+     NUCLEAR DIPOLE ON ATOM   1:
+     m_0                =       0.000000      0.000000      0.000000
+
+     (without Berry curvature term)
+     M_LC               =      -0.000000     -0.401985      0.000000
+     M_IC               =       0.000000     -0.141715     -0.000000
+     Delta_M_bare       =       0.000000     -0.025997     -0.000000
+     Delta_M_para       =      -0.000000      0.003772     -0.000000
+     Delta_M_dia        =       0.000000      0.000035      0.000000
+     M_tot              =       0.000000     -0.565889     -0.000000
+
+     (with Berry curvature term)
+     M_LC               =      -0.000000     -0.396369      0.000000
+     M_IC               =      -0.000000     -0.136099      0.000000
+     Delta_M            =      -0.000000     -0.022190     -0.000000
+     M_tot              =      -0.000000     -0.554657      0.000000
+
+     SPIN-ORBIT:
+     lambda_so          =       0.000000      1.000000      0.000000
+     Contributions to the g-tensor (ppm):
+     delta_g RMC        =       -42.0431
+     delta_g RMC(GIPAW) =      -138.7355
+     delta_g SO         =        -0.0000  -554657.4756        0.0000
+
+     delta_g total      =        -0.0000  -554838.2543        0.0000
+
+     QE-CONVERSE  :   2m48.50s CPU   2m53.80s WALL
+
+
+   This run was terminated on:  14:34:22  31Jul2024            
+
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=
+     Initialization:
+
+     read_file    :      1.44s CPU      1.61s WALL (       1 calls)
+     gipaw_setup  :      0.08s CPU      0.10s WALL (       1 calls)
+     wfcinit      :      2.14s CPU      2.22s WALL (       1 calls)
+     hinit0       :      0.10s CPU      0.11s WALL (       1 calls)
+     potinit      :      0.84s CPU      0.93s WALL (       1 calls)
+
+     SCF calculation:
+
+     electrons    :     53.38s CPU     55.03s WALL (       1 calls)
+     h_psi        :    141.96s CPU    146.05s WALL (     408 calls)
+     add_so_valen :     76.34s CPU     78.23s WALL (    2133 calls)
+     add_so_Fnl   :     14.05s CPU     14.09s WALL (     408 calls)
+
+     g-tensor:
+
+     compute_dudk :     97.52s CPU    100.53s WALL (       1 calls)
+     orbital_magn :     12.58s CPU     12.86s WALL (       1 calls)

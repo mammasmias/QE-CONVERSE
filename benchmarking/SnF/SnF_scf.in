@@ -1,0 +1,35 @@
+&control
+    prefix = 'SnF'
+    calculation = 'scf'
+    restart_mode = 'from_scratch'
+    pseudo_dir = '../pseudo/'
+    outdir = './scratch/'
+    tstress = .false.
+    tprnfor = .false.
+    verbosity = 'high'
+/
+&system
+    ibrav = 1
+    celldm(1) = 20
+    nat = 2
+    ntyp = 2
+    ecutwfc = 100
+    occupations = 'fixed'
+    nspin = 2
+    tot_magnetization = 1
+/
+&electrons
+    diagonalization = 'david'
+    diago_thr_init = 1e-4
+    conv_thr = 1e-8
+/
+ATOMIC_SPECIES
+F    9.0000       F_pbe-20080902.UPF
+Sn   118.7100     Sn_pbe-20080909.UPF
+
+ATOMIC_POSITIONS angstrom
+F             0.0000000000        0.0000000000       -0.2576410171
+Sn            0.0000000000        0.0000000000        1.7576410171
+K_POINTS automatic
+1 1 1 0 0 0
+

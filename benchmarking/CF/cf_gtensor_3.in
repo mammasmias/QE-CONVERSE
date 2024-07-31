@@ -1,0 +1,13 @@
+
+&input_qeconverse
+        prefix = 'CF'
+        outdir = './scratch/'
+        diagonalization = 'david'
+        verbosity = 'high'
+        q_gipaw = 0.01
+        dudk_method = 'covariant'
+        diago_thr_init = 1d-4
+        conv_threshold = 1d-8
+        mixing_beta = 0.5
+        lambda_so(3) = 1.0
+/
