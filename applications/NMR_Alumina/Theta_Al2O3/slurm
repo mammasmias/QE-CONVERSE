@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH -J Theta_Al2O3
+#SBATCH -N 10
+#SBATCH -n 360
+#SBATCH --ntasks-per-node=36
+#SBATCH --ntasks-per-core=10
+#SBATCH --mail-user=simone.fioccola@laas.fr
+#SBATCH --mail-type=ALL
+
+module purge
+module load intel/18.2 intelmpi/18.2
+module list
+
+srun pw.x -ndiag 144 < al2o3_theta_scf.in > al2o3_theta_scf.out
+
+wait

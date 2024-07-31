@@ -1,0 +1,15 @@
+
+
+
+&input_toygipaw
+        prefix = 'theta-al2o3'
+        outdir = './scratch/'
+        diagonalization = 'david'
+        verbosity = 'high'
+        q_gipaw = 0.01
+        dudk_method = 'covariant'
+        mixing_beta = 0.5
+        lambda_so(1) = 0.0
+        m_0(1) = 1.0
+        m_0_atom = 1
+/

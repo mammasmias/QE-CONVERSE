@@ -1,0 +1,46 @@
+#!/bin/bash
+#SBATCH -J alpha-Al2O3
+#SBATCH -N 10
+#SBATCH -n 360
+#SBATCH --ntasks-per-node=36
+#SBATCH --mail-type=ALL
+
+module purge
+module load intel/18.2 intelmpi/18.2
+module list
+
+NAME="nmr"
+molecule=Al2O3_gamma
+natoms=1
+atoms=("Al")
+cart=("null" "x" "y" "z")
+
+
+for i in 1
+do
+for DIR in 1 2 3
+do
+	base=${molecule}_${atoms}$i${cart[$DIR]}
+	cat > ${base}.in << EOF
+
+
+
+&input_qeconverse
+        prefix = 'alpha-al2o3'
+        outdir = './scratch/'
+        diagonalization = 'david'
+        verbosity = 'high'
+        q_gipaw = 0.01
+        dudk_method = 'covariant'
+        mixing_beta = 0.5
+        lambda_so(1) = 0.0
+        m_0(${DIR}) = 1.0
+        m_0_atom = ${i}
+/
+EOF
+
+
+srun qe-converse.x -pd .true. -ndiag 144 < ${base}.in > ${base}.out
+
+done
+done

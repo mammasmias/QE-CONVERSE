@@ -1,0 +1,35 @@
+#!/bin/bash
+#SBATCH -J SL5	
+#SBATCH -N 10
+#SBATCH -n 360
+#SBATCH --ntasks-per-node=36
+#SBATCH --mail-type=ALL
+
+module purge
+module load intel/18.2 intelmpi/18.2
+module list
+
+NAME="g_tensor_NSi_512off"
+
+for DIR in 1 2 3
+do
+cat > ${NAME}_${DIR}.in << EOF
+
+&input_qeconverse
+        prefix = '512off'
+        outdir = './scratch/'
+        diagonalization = 'david'
+        verbosity = 'high'
+        q_gipaw = 0.01
+        dudk_method = 'covariant'
+        diago_thr_init = 1d-4
+        conv_threshold = 1e-8
+        mixing_beta = 0.5
+        lambda_so(${DIR}) = 1.0
+/
+EOF
+
+
+srun qe-converse.x -pd .true. -ndiag 144 < ${NAME}_${DIR}.in > ${NAME}_${DIR}.out
+
+done

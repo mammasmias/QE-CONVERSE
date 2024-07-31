@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH -J alpha-Al2O3
+#SBATCH -N 10
+#SBATCH -n 360
+#SBATCH --ntasks-per-node=36
+#SBATCH --ntasks-per-core=10
+#SBATCH --mail-type=ALL
+
+module purge
+module load intel/18.2 intelmpi/18.2
+module list
+
+srun pw.x -ndiag 144 < al2o3_alpha_scf.in > al2o3_alpha_scf.out
+
+wait

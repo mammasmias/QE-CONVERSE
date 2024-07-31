@@ -1,0 +1,9 @@
+delta=sigma_ref - sigma_iso 
+
+
+sigma_ref(Alpha-Al2O3) = 531.665
+
+sigma(Al4)= 531.665 -470.69  = 60.97 ppm
+sigma(Al6)= 531.665 -537.97  = -6.30 ppm
+
+ 
