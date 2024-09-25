@@ -1,0 +1,37 @@
+&control
+    prefix = 'sih3'
+    calculation = 'scf'
+    restart_mode = 'from_scratch'
+    pseudo_dir = '../pseudo/'
+    outdir = './scratch/'
+    tstress = .false.
+    tprnfor = .false.
+    verbosity = 'high'
+/
+&system
+    ibrav = 1
+    celldm(1) = 20
+    nat = 4
+    ntyp = 2
+    ecutwfc = 100
+    occupations = 'fixed'
+    nspin = 2
+    tot_charge=0
+    tot_magnetization = 1
+/
+&electrons
+    diagonalization = 'david'
+    diago_thr_init = 1e-4
+    conv_thr = 1.0E-8
+   mixing_beta = 0.5
+/
+ATOMIC_SPECIES
+Si  1.0      Si.pbe-tm-gipaw.UPF
+H   1.0000    H.pbe-tm-new-gipaw.UPF
+ ATOMIC_POSITIONS (angstrom)
+Si            5.0195901714        4.8850407684        5.3837896730
+H             6.4067733476        4.9566210054        4.8434294888
+H             4.3841920969        3.5765820237        5.0593411892
+H             4.1894443841        6.0217562025        4.8934396490
+K_POINTS automatic
+1 1 1 0 0 0

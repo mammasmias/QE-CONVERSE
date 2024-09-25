@@ -29,7 +29,7 @@ run ```./qe-converse.x```
 ```/example/```: Contains two directories:  
  ```/EPR/``` about a EPR g tensor and  ```/NMR/``` about a NMR chemical shift calculation. Inside each one there's a Tutorial.wiki file that explain how to perform the calculation step-by-step.
 ```/benchmarking/``` : Contains the input files used to benchmark the code. Concerns the EPR g tensor calculation of diatomic paramagnetic radicals.
-```/application/```: Contains the EPR and NMR calculations described in the chapter 7 of the paper.
+```/application/```: Contains the EPR and NMR calculationsw.
  ## Authors and contributors
 S. Fioccola, L. Giacomazzi, D. Ceresoli, N. Richard, A. Hemeryck, L. Martin-Samos
 

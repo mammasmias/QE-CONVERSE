@@ -529,7 +529,7 @@
   USE io_files,             ONLY : nwordwfc, iunwfc
   USE wvfct,                ONLY : npw, g2kin, nbnd, npwx, wg, et, &
                                    current_k
-  USE klist,                ONLY : xk, nks, igk_k
+  USE klist,                ONLY : xk, nks, igk_k, tot_magnetization
   USE cell_base,            ONLY : tpiba2
   USE gvect,                ONLY : ngm, g
   USE io_global,            ONLY : stdout
@@ -545,13 +545,14 @@
   real(dp) :: orb_magn_tot(3)
   real(dp) :: delta_rmc, delta_rmc_gipaw, lambda_mod, delta_g_orb_magn(3)
   real(dp) :: tmp, delta_g_total(3)
-  integer :: ik, ibnd, ipol, s_weight
+  integer :: ik, ibnd, ipol, s_weight, unp_ele
 
   !--------------------------------------------------
   ! Relativistic Mass Correction and diamagnetic term
   !--------------------------------------------------
   delta_rmc = 0.d0
   delta_rmc_gipaw = 0.d0
+  unp_ele = nint(tot_magnetization)
 
   do ik = 1, nks
     call get_buffer(evc, nwordwfc, iunwfc, ik)
@@ -582,15 +583,16 @@
 #endif
 
 
-  delta_rmc = delta_rmc * rydtohar * alpha**2.d0 * g_e * 1d6
-  delta_rmc_gipaw = delta_rmc_gipaw * rydtohar * alpha**2.d0 * g_e * 1d6
+  delta_rmc = delta_rmc * rydtohar * alpha**2.d0 * g_e * 1d6 / unp_ele
+  delta_rmc_gipaw = delta_rmc_gipaw * rydtohar * alpha**2.d0 * g_e * 1d6 / unp_ele
 
   ! report results
   lambda_mod = sqrt(sum(lambda_so(:)**2.d0))
-  delta_g_orb_magn = orb_magn_tot/lambda_mod * 1d6
+  delta_g_orb_magn = orb_magn_tot/lambda_mod * 1d6/ unp_ele
   write(stdout,*)
   write(stdout,'(5X,''SPIN-ORBIT:'')')
   write(stdout,'(5X,''lambda_so          = '',3(F14.6))') lambda_so
+  write(stdout,'(5X,''unpaired electrons = '',3(I10))') unp_ele
   write(stdout,'(5X,''Contributions to the g-tensor (ppm):'')')
   write(stdout,'(5X,''delta_g RMC        = '',F14.4)') delta_rmc
   write(stdout,'(5X,''delta_g RMC(GIPAW) = '',F14.4)') delta_rmc_gipaw

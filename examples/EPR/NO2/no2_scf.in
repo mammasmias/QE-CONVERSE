@@ -1,0 +1,38 @@
+&control
+    prefix = 'no2'
+    calculation = 'scf'
+    restart_mode = 'from_scratch'
+    pseudo_dir = '../pseudo/'
+    outdir = './scratch/'
+    tstress = .false.
+    tprnfor = .false.
+    verbosity = 'high'
+/
+&system
+    ibrav = 1
+    celldm(1) = 20
+    nat = 3
+    ntyp = 2
+    ecutwfc = 100
+    occupations = 'fixed'
+    nspin = 2
+    tot_charge = 0
+    tot_magnetization = 1
+    nosym = .true.
+/
+&electrons
+    diagonalization = 'david'
+    diago_thr_init = 1e-4
+    conv_thr = 1e-8
+/
+ATOMIC_SPECIES
+O  16.0000    O.pbe-tm-new-gipaw-dc.UPF
+N  14.0000    N.pbe-tm-new-gipaw.UPF
+
+ATOMIC_POSITIONS angstrom
+N             0.0000000089        0.0000105410       -0.0144314915
+O            -0.0000000030        1.1233589960        0.4725101301
+O            -0.0000000059       -1.1233695371        0.4725213614
+K_POINTS automatic
+1 1 1 0 0 0
+

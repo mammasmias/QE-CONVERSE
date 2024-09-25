@@ -544,7 +544,7 @@ SUBROUTINE find_nbnd_occ(ik, nbnd_occ, emin, emax)
 !-----------------------------------------------------------------------
   USE kinds,     ONLY : dp
   USE wvfct,     ONLY : wg, nbnd
-  USE klist,     ONLY : wk, lgauss, degauss, ngauss
+  USE klist,     ONLY : wk, lgauss, degauss, ngauss, two_fermi_energies
   USE constants, ONLY : pi
   USE pwcom
   implicit none
@@ -553,6 +553,10 @@ SUBROUTINE find_nbnd_occ(ik, nbnd_occ, emin, emax)
   real(dp), intent(out) :: emin, emax
   real(dp) :: small, xmax, fac, e_target
   integer :: ibnd
+
+  IF ( two_fermi_energies ) THEN
+     ef = (ef_up + ef_dw) / 2
+  ENDIF
 
   if (lgauss) then ! metallic case
     small = 6.9626525973374d-5

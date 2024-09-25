@@ -1,0 +1,124 @@
+= Tutorials =
+
+Here you can find short tutorials on how to calculate the EPR g tensor for the radical H2O+ with QE-CONVERSE code.
+You have to execute three step:
+
+1) A spin-polarized SCF calculation
+2) delta-g tensor calculation
+3) g tensor extrapolation
+
+You can find all the calculations done in the directory /reference/
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+1) SCF calculation
+
+You have to perform a spin-polarized SCF calculation using the PW code of Quantum-ESPRESSO on a geometrically optimized structure. 
+In this directory you can find the PW input for the radical H2O+:
+
+$ pw.x < h2o+_scf.in > h2o+_scf.out
+
+The input must contain the flag `nspin=2` and `tot_magnetization = 1.0` since it's a magnetic molecule.
+For cystal systems the symmetry must be switched off using `nosym=.true.` and `noinv=.true.`. For isolated systems is not strictly necessary.
+
+{{{
+&control
+    prefix = 'h2o+'
+    calculation = 'scf'
+    restart_mode = 'from_scratch'
+    pseudo_dir = './pseudo/'
+    outdir = './scratch/'
+    tstress = .false.
+    tprnfor = .false.
+    verbosity = 'high'
+/
+&system
+    ibrav = 1
+    celldm(1) = 20
+    nat = 3
+    ntyp = 2
+    ecutwfc = 100
+    nspin = 2
+    tot_charge = 1
+    occupations = 'fixed'
+    tot_magnetization = 1
+/
+&electrons
+    diagonalization = 'david'
+    diago_thr_init = 1e-4
+    conv_thr = 1e-8
+/
+ATOMIC_SPECIES
+O  16.0000    O.pbe-tm-gipaw.UPF
+H   1.0000    H.pbe-tm-gipaw.UPF
+
+ATOMIC_POSITIONS angstrom
+O        5.000000030      5.000000030      5.000000030
+H        5.820825912      5.569427559      5.000000030
+H        4.179175207      5.569427559      5.000000030
+K_POINTS automatic
+1 1 1 0 0 0
+}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+2) delta-g tensor calculation
+
+Replace "your_path" in `g-tensor_script.sh` script with the folder containing your QE-CONVERSE installation.
+Executing the bash script `g-tensor_script.sh` you compute the 3x3 delta-g tensor:
+
+./g-tensor_script.sh
+
+{{{
+#!/bin/sh
+NAME="h2o+_gtensor"
+
+for DIR in 1 2 3
+do
+cat > ${NAME}_${DIR}.in << EOF
+
+&input_qeconverse
+        prefix = 'h2o+'
+        outdir = './scratch/'
+        diagonalization = 'david'
+        verbosity = 'high'
+        q_gipaw = 0.01
+        dudk_method = 'covariant'
+        diago_thr_init = 1d-4
+        conv_threshold = 1d-8
+        mixing_beta = 0.5
+        lambda_so(${DIR}) = 1.0
+/
+EOF
+
+mpirun -np 6 "your_path"/bin/qe-converse.x  < ${NAME}_${DIR}.in > ${NAME}_${DIR}.out
+echo ${NAME}_${DIR}
+
+done
+}}}
+
+
+You obtain the following 3x3 tensor:
+
+12702.6716     0.0059     -0.0014
+-0.0011        4485.7369   0.0011
+-0.0005        0.0053     -219.5703
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+3) g tensor extrapolation
+
+First, you have to diagonalize the delta-g tensor :
+
+12703  0.0000   0.000
+0.000  4485.7   0.000
+0.000  0.0000  -219.57
+
+Now you can extrapolate the g tensor using the relationship :
+
+g tensor = delta-g*10^-06 + ge
+
+where ge = 2.002319
+
+g1 = 2.0150  g2 = 2.0068  g3 =2.0021
