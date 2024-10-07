@@ -145,9 +145,6 @@ if (.not. ionode .or. my_image_id > 0) goto 400
   !read ground state wavefunctions  
   CALL read_file ( )
   call stop_clock ('read_file')
-
-  call gipaw_openfil ( )
-
   call gipaw_setup ( )
   if (any(m_0 /= 0.d0)) then
      call init_nmr
@@ -204,34 +201,6 @@ SUBROUTINE gipaw_bcast_input
 
 END SUBROUTINE gipaw_bcast_input
 #endif
-
-
-!-----------------------------------------------------------------------
-SUBROUTINE gipaw_openfil
-  !-----------------------------------------------------------------------
-  !
-  ! ... Open files needed for GIPAW
-  !
-  USE gipaw_module
-  USE wvfct,            ONLY : nbnd, npwx
-  USE io_files,         ONLY : iunwfc, nwordwfc
-  USE noncollin_module, ONLY : npol
-  USE buffers,          ONLY : open_buffer
-  USE control_flags,    ONLY : io_level
-  IMPLICIT NONE
-
-  logical :: exst
-
-  !
-  ! ... nwordwfc is the record length (IN REAL WORDS)
-  ! ... for the direct-access file containing wavefunctions
-  ! ... io_level > 0 : open a file; io_level <= 0 : open a buffer
-  !
-  nwordwfc =nbnd*npwx*npol
-  CALL open_buffer( iunwfc, 'wfc', nwordwfc, io_level, exst )
-
-END SUBROUTINE gipaw_openfil
-
 !-----------------------------------------------------------------------
 SUBROUTINE print_clock_gipaw
   !-----------------------------------------------------------------------

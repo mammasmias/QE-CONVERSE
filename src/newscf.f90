@@ -112,8 +112,7 @@ SUBROUTINE newscf
   niter=100
   nexxiter=100
   !
-  iunwfc  = 9 ! change the number of unit iunwfc
-  call openfil
+  !call openfil !DFT+U(V) implementation
   call summary ( )
   call hinit0 ( )
   call potinit ( )
