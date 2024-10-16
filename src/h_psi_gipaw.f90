@@ -263,11 +263,9 @@ SUBROUTINE vloc_psi_k_gipaw( lda, n, m, psi, v, hpsi )
         !
         CALL tg_get_group_nr3( dffts, right_nr3 )
         !
-        !$omp parallel do
         DO j = 1, dffts%nr1x*dffts%nr2x*right_nr3
            tg_psic(j) = tg_psic(j) * tg_v(j)
         ENDDO
-        !$omp end parallel do
         !
 !        write (6,*) 'v psi R '
 !        write (6,99) (tg_psic(i), i=1,400)
@@ -276,7 +274,6 @@ SUBROUTINE vloc_psi_k_gipaw( lda, n, m, psi, v, hpsi )
         !
         CALL tgwave_r2g( tg_psic, tg_vpsi(:,1:brange), dffts, n, igk_k(:,current_k) )
         !
-        !$omp parallel do collapse(2)
         DO idx = 0, MIN(fftx_ntgrp(dffts)-1, m-ibnd)
            DO j = 1, numblock
               DO iin = (j-1)*blocksize+1, MIN(j*blocksize,n)
@@ -284,7 +281,6 @@ SUBROUTINE vloc_psi_k_gipaw( lda, n, m, psi, v, hpsi )
               ENDDO
            ENDDO
         ENDDO
-        !$omp end parallel do
         !
      ENDDO
      !
@@ -305,7 +301,6 @@ SUBROUTINE vloc_psi_k_gipaw( lda, n, m, psi, v, hpsi )
         !        write (6,*) 'wfc R '
 !        write (6,99) (psic(i), i=1,400)
         !
-        !$omp parallel do
         if (any(m_0 /= 0.d0)) then
 !                print*, 'chiama nmr_valance'
             call add_nmr_valence(current_k, n, psi(1:n,ibnd), p_psic)
@@ -314,7 +309,6 @@ SUBROUTINE vloc_psi_k_gipaw( lda, n, m, psi, v, hpsi )
              psic(j) = psic(j) * v(j)
           ENDDO
         endif
-        !$omp end parallel do
         !
 !        write (6,*) 'v psi R '
 !        write(6,*) (psic(i), i=1,400i)
@@ -332,11 +326,9 @@ SUBROUTINE vloc_psi_k_gipaw( lda, n, m, psi, v, hpsi )
      !   endif
         !
         !
-        !$omp parallel do
         DO i = 1, n
            hpsi(i,ibnd) = hpsi(i,ibnd) + vpsi(i,1)
         ENDDO
-        !$omp end parallel do
         !
 !        write (6,*) 'v psi G ', ibnd
 !        write (6,99) (psic(i), i=1,400)
