@@ -291,7 +291,7 @@ SUBROUTINE dudk_covariant_single_point(ik, occ, dudk)
 #endif
       call invert_matrix(occ, overlap) 
       ! 
-      bmod = sum(bg(1:3,ipol)**2.d0 ) * tpiba      
+      bmod = sqrt( sum(bg(1:3,ipol)**2.d0) ) * tpiba  
       !
       do ibnd = 1, occ
         do jbnd = 1, occ
