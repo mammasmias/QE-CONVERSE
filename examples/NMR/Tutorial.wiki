@@ -3,7 +3,7 @@
 Here you can find short tutorials on how to calculate the NMR chemical shift of 29 Si and 17 O atoms in alpha-quartz crystal with QE-CONVERSE code.
 To obtain the NMR chemical shift you have to execute three step:
 
-1) A spin-polarized SCF calculation
+1) SCF calculation
 2) the NMR shielding tensor calculation
 3) the NMR chemical shift extrapolation
 
@@ -13,12 +13,11 @@ You can find all the calculations done in the directory /reference/
 
 1) SCF calculation
 
-You have to perform a spin-polarized SCF calculation using the PW code of Quantum-ESPRESSO on a geometrically optimized structure. 
+You have to perform a SCF calculation using the PW code of Quantum-ESPRESSO on a geometrically optimized structure. 
 In this directory you can find the PW input of alpha-quartz:
 
 $ pw.x < quartz_scf.in > quartz_scf.out 
 
-The input must contain the flag `nspin=2` and `tot_magnetization = 0.0`
 The symmetry must be switched off using `nosym=.true.` and `noinv=.true.`
 It's important to include at least one empty band.
 {{{
@@ -38,8 +37,6 @@ It's important to include at least one empty band.
     ecutwfc = 70
     nosym = .true.
     noinv = .true.
-    nspin = 2
-    tot_magnetization = 0.0
     nbnd = 25
 /
 &electrons
