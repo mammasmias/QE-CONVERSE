@@ -14,8 +14,6 @@
     ecutwfc = 70
     nosym = .true.
     noinv = .true.
-    nspin = 2
-    tot_magnetization = 0.0
     nbnd = 25
 /
 &electrons
