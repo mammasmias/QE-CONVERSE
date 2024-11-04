@@ -138,12 +138,12 @@ echo
 You obtain the following the isotropic shielding, sigma(iso):
 
 Si shielding:
-432.038
-432.025
-432.067
+432.046
+432.006
+432.077
 
 O shielding:
-210.251
+210.253
 
 You can avarage the NMR isotropic shielding tensors for the equivalent Si atoms obtaining:
 
@@ -151,7 +151,7 @@ Si shielding:
 432.043
 
 O shielding:
-210.251
+210.253
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
