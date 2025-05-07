@@ -220,7 +220,7 @@ END SUBROUTINE dudk_covariant
 !-----------------------------------------------------------------------
 SUBROUTINE dudk_covariant_single_point(ik, occ, dudk)
   USE kinds,     ONLY : dp  
-  USE cell_base, ONLY : bg, tpiba
+  USE cell_base, ONLY : bg, tpiba, at
   USE gvect,     ONLY : ngm, g
   USE klist,     ONLY : igk_k
   USE wvfct,     ONLY : npw, nbnd, npwx 
@@ -242,7 +242,9 @@ SUBROUTINE dudk_covariant_single_point(ik, occ, dudk)
   integer :: ibnd, jbnd, ipol
   integer :: nls, nlm
   complex(dp), allocatable :: overlap(:,:)
+  complex(dp), allocatable :: tmp(:,:)
   real(dp) :: bmod, q_gipaw3(3)
+  complex(dp) :: bginv(3,3)
   
    
 !!! nls = dffts%nl
@@ -293,6 +295,8 @@ SUBROUTINE dudk_covariant_single_point(ik, occ, dudk)
       ! 
       bmod = sqrt( sum(bg(1:3,ipol)**2.d0) ) * tpiba  
       !
+      bmod = 1
+      !
       do ibnd = 1, occ
         do jbnd = 1, occ
           dudk(1:npw,ibnd,ipol) = dudk(1:npw,ibnd,ipol) + &
@@ -304,6 +308,16 @@ SUBROUTINE dudk_covariant_single_point(ik, occ, dudk)
     enddo ! sig
   enddo ! ipol
   deallocate(psir, aux, aux2, overlap)
+  ! make dudk cartesian
+  allocate(tmp(npw,3))
+  do ibnd = 1, occ
+     tmp = dudk(1:npw,ibnd,1:3)
+     do ipol = 1,3
+        bmod = sqrt( sum(bg(1:3,ipol)**2.d0) ) !* tpiba
+        dudk(1:npw,ibnd,ipol) = ( at(ipol,1)*tmp(:,1) + at(ipol,2)*tmp(:,2)+ at(ipol,3)*tmp(:,3) ) /tpiba 
+     enddo
+  enddo
+  deallocate(tmp)
 
 END SUBROUTINE dudk_covariant_single_point
 
