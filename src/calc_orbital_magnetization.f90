@@ -144,7 +144,7 @@
         kp_berry(kk) = kp_berry(kk) + 2.d0*wg(ibnd,ik)*imag(braket)
         berry_curvature(kk) = berry_curvature(kk) + &
                               2.d0*wg(ibnd,ik)*imag(braket)
-        kp_M_IC(kk) =  2.d0*wg(ibnd,ik)*et(ibnd,ik)*imag(braket)
+        kp_M_IC(kk) = kp_M_IC(kk) + 2.d0*wg(ibnd,ik)*et(ibnd,ik)*imag(braket)
         orb_magn_IC(kk) = orb_magn_IC(kk) + &
                          2.d0*wg(ibnd,ik)*et(ibnd,ik)*imag(braket)
 
