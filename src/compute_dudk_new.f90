@@ -17,6 +17,7 @@ SUBROUTINE compute_dudk_new(dudk_method)
   USE cell_base,     ONLY : tpiba
   USE io_global,     ONLY : stdout
   USE mp_global,     ONLY : my_pool_id, me_pool, root_pool
+  USE nmr_mod,       ONLY : dudk_name_x, dudk_name_y, dudk_name_z
   USE gipaw_module,  ONLY : q_gipaw, alpha_pv, evq
   USE io_files,      ONLY : nwordwfc, diropn
   implicit none
@@ -29,9 +30,9 @@ SUBROUTINE compute_dudk_new(dudk_method)
   
   call start_clock ('compute_dudk')
 
-  call diropn(iundudk1, 'dudk1', 2*nwordwfc, exst)
-  call diropn(iundudk2, 'dudk2', 2*nwordwfc, exst)
-  call diropn(iundudk3, 'dudk3', 2*nwordwfc, exst)
+  call diropn(iundudk1, dudk_name_x(), 2*nwordwfc, exst)
+  call diropn(iundudk2, dudk_name_y(), 2*nwordwfc, exst)
+  call diropn(iundudk3, dudk_name_z(), 2*nwordwfc, exst)
   
   ! allocate covariant derivatives
     allocate (dudk(npwx,nbnd,3) )

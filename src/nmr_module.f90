@@ -17,10 +17,41 @@ MODULE nmr_mod
   REAL(DP)                    :: m_0(3), sigma = 0.0D0, toggle = 1.0D0
   REAL(DP)                    :: r_nlpp(nlpp_max)
   COMPLEX(DP),    ALLOCATABLE :: A_vec(:,:), grad_psi(:,:), A_0(:,:)
+  CHARACTER(len=1)            :: m_0_dir = '_'
+  LOGICAL                     :: delete_dudk_files
 
 !-----------------------------------------------------------------------
   CONTAINS
 !-----------------------------------------------------------------------
+  subroutine set_m_0_dir()
+    if (m_0(1) > 0.5d0) m_0_dir = 'x'
+    if (m_0(2) > 0.5d0) m_0_dir = 'y'
+    if (m_0(3) > 0.5d0) m_0_dir = 'z'
+  end subroutine
+
+  function dudk_name_x()    
+    character(len=4) :: atom_index
+    character(len=80) :: dudk_name_x
+    call set_m_0_dir
+    write(atom_index, '(I4.4)') m_0_atom
+    dudk_name_x = 'atom.' // atom_index // m_0_dir // 'dudk1'
+  end function
+
+  function dudk_name_y()    
+    character(len=4) :: atom_index
+    character(len=80) :: dudk_name_y
+    call set_m_0_dir
+    write(atom_index, '(I4.4)') m_0_atom
+    dudk_name_y = 'atom.' // atom_index // m_0_dir // 'dudk2'
+  end function
+
+  function dudk_name_z()    
+    character(len=4) :: atom_index
+    character(len=80) :: dudk_name_z
+    call set_m_0_dir
+    write(atom_index, '(I4.4)') m_0_atom
+    dudk_name_z = 'atom.' // atom_index // m_0_dir // 'dudk3'
+  end function
 
 #if 0
 !-----------------------------------------------------------------------
