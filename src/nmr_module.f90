@@ -17,16 +17,16 @@ MODULE nmr_mod
   REAL(DP)                    :: m_0(3), sigma = 0.0D0, toggle = 1.0D0
   REAL(DP)                    :: r_nlpp(nlpp_max)
   COMPLEX(DP),    ALLOCATABLE :: A_vec(:,:), grad_psi(:,:), A_0(:,:)
-  CHARACTER(len=1)            :: m_0_dir
+  CHARACTER(len=1)            :: m_0_dir = '_'
   LOGICAL                     :: delete_dudk_files
 
 !-----------------------------------------------------------------------
   CONTAINS
 !-----------------------------------------------------------------------
   subroutine set_m_0_dir()
-    if (m_0(1) > 0.5) m_0_dir = 'x'
-    if (m_0(2) > 0.5) m_0_dir = 'y'
-    if (m_0(3) > 0.5) m_0_dir = 'z'
+    if (m_0(1) > 0.5d0) m_0_dir = 'x'
+    if (m_0(2) > 0.5d0) m_0_dir = 'y'
+    if (m_0(3) > 0.5d0) m_0_dir = 'z'
   end subroutine
 
   function dudk_name_x()    
