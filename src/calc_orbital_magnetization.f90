@@ -198,9 +198,15 @@
 
 
   ! close files
-  close(unit=iundudk1, status='keep')
-  close(unit=iundudk2, status='keep')
-  close(unit=iundudk3, status='keep')
+  if (delete_dudk_files) then
+    close(unit=iundudk1, status='delete')
+    close(unit=iundudk2, status='delete')
+    close(unit=iundudk3, status='delete')
+  else
+    close(unit=iundudk1, status='keep')
+    close(unit=iundudk2, status='keep')
+    close(unit=iundudk3, status='keep')
+  endif
 
   orb_magn_tot = orb_magn_LC + orb_magn_IC + &
                  delta_M_bare + delta_M_dia + delta_M_para
@@ -243,11 +249,6 @@
   CALL deallocate_bec_type ( becp )
   deallocate( dudk_bra, dudk_ket, hpsi )
 
-  ! close files
-  close(unit=iundudk1)
-  close(unit=iundudk2)
-  close(unit=iundudk3)
-  
   call stop_clock ('orbital_magnetization')
   ! go on, reporting the g-tensor
   if (any(lambda_so /= 0.d0)) call calc_g_tensor(orb_magn_tot)
