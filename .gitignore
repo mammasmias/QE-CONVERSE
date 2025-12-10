@@ -1,4 +1,6 @@
 *.o
 *.mod
 *.x
+*.status
 config.log
+makedeps.sh
