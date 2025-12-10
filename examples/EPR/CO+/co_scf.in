@@ -9,10 +9,11 @@
 /
 &system
     ibrav = 1
-    celldm(1) = 20
+    celldm(1) = 10
     nat = 2
     ntyp = 2
-    ecutwfc = 100
+    nbnd = 6
+    ecutwfc = 30
     occupations = 'fixed'
     tot_charge = +1
     nspin = 2

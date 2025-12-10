@@ -17,9 +17,20 @@ SUBROUTINE compute_dudk_new(dudk_method)
   USE cell_base,     ONLY : tpiba
   USE io_global,     ONLY : stdout
   USE mp_global,     ONLY : my_pool_id, me_pool, root_pool
-  USE nmr_mod,       ONLY : dudk_name_x, dudk_name_y, dudk_name_z
-  USE gipaw_module,  ONLY : q_gipaw, alpha_pv, evq
+  USE gipaw_module,  ONLY : q_gipaw, alpha_pv, evq, lambda_so
+  USE nmr_mod,      ONLY : m_0
+
   USE io_files,      ONLY : nwordwfc, diropn
+  USE nmr_mod, ONLY : &
+       nmr_dudk_name_x => dudk_name_x, &
+       nmr_dudk_name_y => dudk_name_y, &
+       nmr_dudk_name_z => dudk_name_z
+
+USE orbital_magnetization, ONLY : &
+       om_dudk_name_x  => dudk_name_x, &
+       om_dudk_name_y  => dudk_name_y, &
+       om_dudk_name_z  => dudk_name_z
+
   implicit none
   character(80), intent(in) :: dudk_method
   complex(dp), allocatable :: dudk(:,:,:)
@@ -30,9 +41,41 @@ SUBROUTINE compute_dudk_new(dudk_method)
   
   call start_clock ('compute_dudk')
 
-  call diropn(iundudk1, dudk_name_x(), 2*nwordwfc, exst)
-  call diropn(iundudk2, dudk_name_y(), 2*nwordwfc, exst)
-  call diropn(iundudk3, dudk_name_z(), 2*nwordwfc, exst)
+! --------------------------------------------------------------
+! Safety check: NMR and g-tensor must NOT be active together
+! --------------------------------------------------------------
+if ( any(m_0 /= 0.0_dp) .and. any(lambda_so /= 0.0_dp) ) then
+    write(stdout,*) "compute_dudk_new: incompatible input"
+    write(stdout,*) "Both m_0 and lambda_so are non-zero."
+    write(stdout,*) "Current version supports either NMR or g-tensor calculations, not both."
+    call errore("compute_dudk_new", "incompatible input: m_0 and lambda_so cannot be both non-zero", 1)
+end if
+
+! --------------------------------------------------------------
+! NMR mode
+! --------------------------------------------------------------
+if (any(m_0 /= 0.0_dp)) then
+    call diropn(iundudk1, nmr_dudk_name_x(), 2*nwordwfc, exst)
+    call diropn(iundudk2, nmr_dudk_name_y(), 2*nwordwfc, exst)
+    call diropn(iundudk3, nmr_dudk_name_z(), 2*nwordwfc, exst)
+
+! --------------------------------------------------------------
+! g-tensor mode
+! --------------------------------------------------------------
+else if (any(lambda_so /= 0.0_dp)) then
+    call diropn(iundudk1, om_dudk_name_x(), 2*nwordwfc, exst)
+    call diropn(iundudk2, om_dudk_name_y(), 2*nwordwfc, exst)
+    call diropn(iundudk3, om_dudk_name_z(), 2*nwordwfc, exst)
+
+! --------------------------------------------------------------
+! No mode selected → fatal error
+! --------------------------------------------------------------
+else
+    write(stdout,*) "compute_dudk_new: no selection (m_0 = 0, lambda_so = 0)"
+    call errore("compute_dudk_new", &
+                "unable to determine whether this is an NMR or g-tensor calculation", 1)
+end if
+ 
   
   ! allocate covariant derivatives
     allocate (dudk(npwx,nbnd,3) )

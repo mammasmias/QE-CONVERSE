@@ -5,7 +5,7 @@ MODULE orbital_magnetization
   ! ... the title is self explaining
   !
   USE kinds, ONLY : DP
-  USE gipaw_module, ONLY: dudk_method
+  USE gipaw_module, ONLY: dudk_method, lambda_so
   USE lsda_mod,   ONLY: nspin, current_spin
   USE fft_base,      ONLY : dfftp, dffts 
   IMPLICIT NONE
@@ -21,6 +21,7 @@ MODULE orbital_magnetization
   COMPLEX(dp), ALLOCATABLE :: paw_dbecp(:,:,:)
   INTEGER, ALLOCATABLE :: igk(:,:)
   real(dp) :: delta_k
+  CHARACTER(len=1)            :: lambda_0_dir = '_'
 
   REAL(DP), ALLOCATABLE :: &
        dvrs(:,:,:)      ! gradient of (the total pot. in real space...)
@@ -34,6 +35,36 @@ MODULE orbital_magnetization
   REAL(DP), PARAMETER :: a2gp4 = alpha*alpha*gprime/4_dp
   ! (alpha^2 g')/8
   REAL(DP), PARAMETER :: a2gp8 = alpha*alpha*gprime/8_dp
+
+
+!-----------------------------------------------------------------------
+  CONTAINS
+!-----------------------------------------------------------------------
+
+  subroutine set_OM_0_dir()
+    if (lambda_so(1) > 0.5d0) lambda_0_dir = 'x'
+    if (lambda_so(2) > 0.5d0) lambda_0_dir = 'y'
+    if (lambda_so(3) > 0.5d0) lambda_0_dir = 'z'
+  end subroutine
+
+  function dudk_name_x()    
+    character(len=4) :: atom_index
+    character(len=80) :: dudk_name_x
+    call set_OM_0_dir
+    dudk_name_x =  lambda_0_dir // 'dudk1'
+  end function
+  function dudk_name_y()    
+    character(len=4) :: atom_index
+    character(len=80) :: dudk_name_y
+    call set_OM_0_dir
+    dudk_name_y =  lambda_0_dir // 'dudk2'
+  end function
+  function dudk_name_z()    
+    character(len=4) :: atom_index
+    character(len=80) :: dudk_name_z
+    call set_OM_0_dir
+    dudk_name_z =  lambda_0_dir // 'dudk3'
+  end function
 
  !-----------------------------------------------------------------------
 END MODULE orbital_magnetization

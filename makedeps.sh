@@ -4,7 +4,7 @@
 # make sure there is no locale setting creating unneeded differences.
 export LC_ALL=C
 
-QE_SOURCE=/home/sfioccola/Desktop/q-e-qe-7.2
+QE_SOURCE=/home/sfioccola/Desktop/q-e-qe-7.2_clean
 DEPENDS="${QE_SOURCE}/include ${QE_SOURCE}/iotk/src
          ${QE_SOURCE}/Modules ${QE_SOURCE}/PW/src
          ${QE_SOURCE}/FFTXlib/src ${QE_SOURCE}/UtilXlib

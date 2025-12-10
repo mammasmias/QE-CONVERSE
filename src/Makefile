@@ -1,6 +1,6 @@
 # Makefile for qe-gipaw
 
-QE_SOURCE=/home/sfioccola/Desktop/q-e-qe-7.2
+QE_SOURCE=/home/sfioccola/Desktop/q-e-qe-7.2_clean
 include $(QE_SOURCE)/make.inc
 DFLAGS += 
 INCLUDE_DIRS = -I$(QE_SOURCE)/KS_Solvers

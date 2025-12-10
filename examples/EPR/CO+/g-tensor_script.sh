@@ -19,7 +19,7 @@ cat > ${NAME}_${DIR}.in << EOF
 /
 EOF
 
-mpirun -np 6 /home/sfioccola/Desktop/QE-CONVERSE/bin/qe-converse.x  < ${NAME}_${DIR}.in > ${NAME}_${DIR}.out
+mpirun -np 6 ../../../bin/qe-converse.x  < ${NAME}_${DIR}.in > ${NAME}_${DIR}.out
 echo ${NAME}_${DIR}
 
 done
