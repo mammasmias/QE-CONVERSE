@@ -1,6 +1,6 @@
 # QE-CONVERSE
 This is the official Git repository of the QE-CONVERSE code for Quantum-Espresso.  
-This current version of the code is compatible with the version 7.2 of Quantum-Espresso package.
+This current version of the code is compatible with the version 7.5 of Quantum-Espresso package.
 
 
 ## Features
@@ -13,7 +13,7 @@ The QE-CONVERSE implement a non-perturbative approach (converse) to compute the 
 * isolated and periodic systems
 
 ## Build instructions:
-1. the Quantum-Espresso package version 7.2 must be previously installed (https://gitlab.com/QEF/q-e/-/releases/qe-7.2). To take advantage of the enhancements in linear algebra operations, the configuration with scaLAPACK package or ELPA library is suggested.
+1. the Quantum-Espresso package version 7.5 must be previously installed (https://gitlab.com/QEF/q-e/-/releases/qe-7.5). To take advantage of the enhancements in linear algebra operations, the configuration with scaLAPACK package or ELPA library is suggested.
 2. ```git clone https://github.com/mammasmias/QE-CONVERSE``` 
 3. ```cd QE-CONVERSE```
 4. ```chmod +x configure```
