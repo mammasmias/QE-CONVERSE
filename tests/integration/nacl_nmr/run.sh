@@ -3,7 +3,7 @@
 # clean directory
 rm -rf *.out scratch
 
-mpirun -np 4 $PW -in pw.scf.in > scf.out 2>&1
+mpirun --oversubscribe -np 4 $PW -in pw.scf.in > scf.out 2>&1
 
 $QECONVERSE < Na1x.in > Na1x.out &
 $QECONVERSE < Na1y.in > Na1y.out &
