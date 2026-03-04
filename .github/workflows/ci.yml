@@ -123,4 +123,4 @@ jobs:
         run: chmod +x bin/qe-converse.x
 
       - name: Run integration tests
-        run: make -C tests integration
+        run: make test-integration

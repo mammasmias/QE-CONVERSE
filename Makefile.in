@@ -13,8 +13,9 @@ build:
 test:
 	$(MAKE) -C tests QE_SRC_DIR=$(QE_SOURCE)
 
-test-parallel:
-	$(MAKE) -C tests integration-parallel QE_SRC_DIR=$(QE_SOURCE)
+test-integration:
+	$(MAKE) -C tests integration QE_SRC_DIR=$(QE_SOURCE)
+
 
 clean:
 	@echo "Cleaning qe-converse..."
