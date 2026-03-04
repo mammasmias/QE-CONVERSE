@@ -6,14 +6,14 @@ on:
   pull_request:
     branches: [main]
 
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    env:
-      OMPI_ALLOW_RUN_AS_ROOT: 1
-      OMPI_ALLOW_RUN_AS_ROOT_CONFIRM: 1
-      OMP_NUM_THREADS: 1
+env:
+  OMPI_ALLOW_RUN_AS_ROOT: 1
+  OMPI_ALLOW_RUN_AS_ROOT_CONFIRM: 1
+  OMP_NUM_THREADS: 1
 
+jobs:
+  build:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -31,8 +31,6 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/q-e
-          # Cache is keyed to QE version + OS + this workflow file.
-          # Bump the suffix (v1, v2, …) to force a full rebuild.
           key: qe-7.5-${{ runner.os }}-gfortran-v1
 
       - name: Download and build QE 7.5
@@ -52,5 +50,76 @@ jobs:
       - name: Build QE-CONVERSE
         run: make -j$(nproc)
 
-      - name: Run tests
-        run: make test
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: qe-converse-build
+          # Makefile and src/Makefile are configure-generated (not in git)
+          # src/*.mod are needed by the unit test build
+          path: |
+            Makefile
+            makedeps.sh
+            bin/
+            src/Makefile
+            src/*.mod
+
+  unit-tests:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            gfortran \
+            libopenmpi-dev openmpi-bin \
+            libopenblas-dev \
+            libfftw3-dev
+
+      - name: Restore QE 7.5 cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/q-e
+          key: qe-7.5-${{ runner.os }}-gfortran-v1
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: qe-converse-build
+
+      - name: Run unit tests
+        run: make -C tests unit
+
+  integration-tests:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libopenmpi-dev openmpi-bin \
+            libopenblas-dev \
+            libfftw3-dev \
+            python3
+
+      - name: Restore QE 7.5 cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/q-e
+          key: qe-7.5-${{ runner.os }}-gfortran-v1
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: qe-converse-build
+
+      - name: Fix binary permissions
+        run: chmod +x bin/qe-converse.x
+
+      - name: Run integration tests
+        run: make -C tests integration
