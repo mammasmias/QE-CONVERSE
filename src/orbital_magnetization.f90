@@ -15,6 +15,7 @@ MODULE orbital_magnetization
   REAL(DP) :: berry_curvature(3)
   REAL(DP) :: orb_magn_tot(3)
   REAL(DP) :: delta_M_bare(3)
+  REAL(DP) :: delta_M_hub(3)
   REAL(DP) :: delta_M_para(3)
   REAL(DP) :: delta_M_dia(3)
   COMPLEX(dp), ALLOCATABLE :: dbecp(:,:,:)

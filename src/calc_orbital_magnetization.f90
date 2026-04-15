@@ -17,7 +17,7 @@
   USE becmod,                ONLY : deallocate_bec_type
   USE wavefunctions,         ONLY : evc
   USE lsda_mod,              ONLY : current_spin, lsda, isk, nspin
-  USE gipaw_module,          ONLY : lambda_so, dudk_method
+  USE gipaw_module,          ONLY : lambda_so, dudk_method, lhub_magnetization
   USE paw_gipaw,             ONLY : paw_vkb, paw_nkb, paw_becp
   USE ener,                  ONLY : ef
   USE ldaU,                 ONLY : lda_plus_u, wfcU, Hubbard_projectors, nwfcU
@@ -88,6 +88,7 @@
   orb_magn_LC = 0.d0
   orb_magn_IC = 0.d0
   delta_M_bare = 0.d0
+  delta_M_hub  = 0.d0
   delta_M_para = 0.d0
   delta_M_dia = 0.d0
 
@@ -95,7 +96,7 @@
   call allocate_bec_type(nkb, nbnd, becp)
   allocate(dbecp(nkb,nbnd,3), paw_dbecp(paw_nkb,nbnd,3))
   allocate(vkb_save(npwx,nkb), aux(nkb,nbnd))
-  if (lda_plus_u .and. Hubbard_projectors /= 'pseudo') &
+  if (lhub_magnetization .and. lda_plus_u .and. Hubbard_projectors /= 'pseudo') &
     allocate(dhubbecp(nwfcU,nbnd,3))
 #define __USE_BARRIER
 
@@ -130,7 +131,7 @@
 
     call compute_dbecp  ! for deltaM bare (KB pseudopotential)
     call compute_paw_dbecp ! for delta_M_para_so
-    if (lda_plus_u .and. Hubbard_projectors /= 'pseudo') call compute_dhubbecp
+    if (lhub_magnetization .and. lda_plus_u .and. Hubbard_projectors /= 'pseudo') call compute_dhubbecp
 
     ! loop over the magnetization directions
     do kk =  1, 3
@@ -173,7 +174,7 @@
       enddo
      ! compute the GIPAW corrections
       call calc_delta_M_bare
-      if (lda_plus_u .and. Hubbard_projectors /= 'pseudo') call calc_delta_M_hub
+      if (lhub_magnetization .and. lda_plus_u .and. Hubbard_projectors /= 'pseudo') call calc_delta_M_hub
       if (any(lambda_so /= 0.d0)) call calc_delta_M_para_so
       if (any(m_0 /= 0.d0))       call calc_delta_M_para_nmr
     enddo ! kk
@@ -205,6 +206,7 @@
   call mp_sum(orb_magn_IC, inter_pool_comm )
   call mp_sum(berry_curvature, inter_pool_comm )
   call mp_sum(delta_M_bare, inter_pool_comm )
+  call mp_sum(delta_M_hub,  inter_pool_comm )
   call mp_sum(delta_M_para, inter_pool_comm )
   call mp_sum(delta_M_dia, inter_pool_comm )
 #endif
@@ -228,7 +230,7 @@
   endif
 
   orb_magn_tot = orb_magn_LC + orb_magn_IC + &
-                 delta_M_bare + delta_M_dia + delta_M_para
+                 delta_M_bare + delta_M_hub + delta_M_dia + delta_M_para
 
   write(stdout,*)
  ! print results
@@ -249,6 +251,7 @@
     write(stdout,'(5X,''M_LC               = '',3(F14.6))') orb_magn_LC
     write(stdout,'(5X,''M_IC               = '',3(F14.6))') orb_magn_IC
     write(stdout,'(5X,''Delta_M_bare       = '',3(F14.6))') delta_M_bare
+    write(stdout,'(5X,''Delta_M_hubbard        = '',3(F14.6))') delta_M_hub
     write(stdout,'(5X,''Delta_M_para       = '',3(F14.6))') delta_M_para
     write(stdout,'(5X,''Delta_M_dia        = '',3(F14.6))') delta_M_dia
     write(stdout,'(5X,''M_tot              = '',3(F14.6))') orb_magn_tot
@@ -260,14 +263,16 @@
   orb_magn_tot = orb_magn_tot - 2.d0*ef*berry_curvature
   write(stdout,'(5X,''M_LC               = '',3(F14.6))') orb_magn_LC
   write(stdout,'(5X,''M_IC               = '',3(F14.6))') orb_magn_IC
+  write(stdout,'(5X,''Delta_M_bare       = '',3(F14.6))') delta_M_bare
+  write(stdout,'(5X,''Delta_M_hubbard        = '',3(F14.6))') delta_M_hub
   write(stdout,'(5X,''Delta_M            = '',3(F14.6))') &
-        delta_M_bare + delta_M_para + delta_M_dia
+        delta_M_bare + delta_M_hub + delta_M_para + delta_M_dia
   write(stdout,'(5X,''M_tot              = '',3(F14.6))') orb_magn_tot
 
   ! free memory
   CALL deallocate_bec_type ( becp )
   deallocate( dudk_bra, dudk_ket, hpsi )
-  if (allocated(dhubbecp)) deallocate(dhubbecp)
+  if (lhub_magnetization .and. allocated(dhubbecp)) deallocate(dhubbecp)
 
   call stop_clock ('orbital_magnetization')
   ! go on, reporting the g-tensor
@@ -489,7 +494,7 @@
         enddo
       enddo
     enddo
-    delta_M_bare(kk) = delta_M_bare(kk) - 2.d0*imag(hub_tmp)
+    delta_M_hub(kk) = delta_M_hub(kk) - 2.d0*imag(hub_tmp)
     END SUBROUTINE calc_delta_M_hub
 
     !------------------------------------------------------------------

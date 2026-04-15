@@ -61,6 +61,9 @@ MODULE gipaw_module
   ! strenght of spin-orbit
   REAL(DP) :: lambda_so(3)
 
+  ! if true, include the nonlocal Hubbard (DFT+U) contribution to the orbital magnetization
+  LOGICAL :: lhub_magnetization
+
 
 
   ! max CPU time, in s
