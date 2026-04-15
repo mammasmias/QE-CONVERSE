@@ -20,7 +20,8 @@
   USE gipaw_module,          ONLY : lambda_so, dudk_method
   USE paw_gipaw,             ONLY : paw_vkb, paw_nkb, paw_becp
   USE ener,                  ONLY : ef
-  USE ldaU,                 ONLY : lda_plus_u, wfcU, Hubbard_projectors
+  USE ldaU,                 ONLY : lda_plus_u, wfcU, Hubbard_projectors, &
+                                   nwfcU
   USE io_files,             ONLY : nwordwfcU, iunhub
   USE buffers,               ONLY : get_buffer
   USE scf,                   ONLY : vrs
@@ -40,6 +41,8 @@
   USE nmr_mod
   USE dudk_storage,          ONLY : dudk_in_memory, retrieve_dudk, &
                                     deallocate_dudk_storage
+  USE noncollin_module,      ONLY : npol
+  USE basis,ONLY : natomwfc, wfcatom, swfcatom
 
   implicit none
   complex(dp), external :: ZDOTC
@@ -47,6 +50,7 @@
   real(dp), parameter :: rydtohar = 0.5d0
   complex(dp), allocatable :: dudk_bra(:,:), dudk_ket(:,:), hpsi(:)
   complex(dp), allocatable :: vkb_save(:,:), aux(:,:)
+  complex(dp), allocatable :: wfcU_save(:,:), auxU(:,:)
   complex(dp) :: braket
   real(dp) :: kp_berry(3), kp_berry2(3), kp_M_LC(3), kp_M_IC(3), tmp1(3), tmp2(3)
   integer :: ik, ibnd, jbnd, kk, ii, jj, occ, nrxxs, nr1, nr2, nr3
@@ -95,6 +99,11 @@
   call allocate_bec_type(nkb, nbnd, becp)
   allocate(dbecp(nkb,nbnd,3), paw_dbecp(paw_nkb,nbnd,3))
   allocate(vkb_save(npwx,nkb), aux(nkb,nbnd))
+  allocate(wfcU_save(npwx*npol,nwfcU), auxU(nwfcU,nbnd))
+  allocate(projU(nwfcU,nbnd,3))
+  if ( lda_plus_u .AND. Hubbard_projectors /= 'pseudo' ) then
+  allocate( wfcatom(npwx*npol, natomwfc), swfcatom(npwx*npol, natomwfc) )
+  endif
 #define __USE_BARRIER
 
   CALL set_dvrs( dvrs, vrs, dfftp%nnr, nspin )
@@ -120,16 +129,19 @@
       call init_us_2(ngk(ik), igk_k(1,ik), xk(1,ik), vkb)
       CALL calbec( npw, vkb, evc, becp, nbnd )
     endif
-!    if (lda_plus_u) call davcio(swfcatom, nwordatwfc, iunsat, ik, -1)
+    !if (lda_plus_u) call davcio(swfcatom, nwordatwfc, iunsat, ik, -1)
 
     ! compute the diamagnetic terms
     call init_gipaw_2(ngk(ik), igk_k(1,current_k), xk(1,current_k), paw_vkb)
     call calbec( npw, paw_vkb, evc, paw_becp, nbnd )
     if (any(m_0 /= 0.d0))       call calc_delta_M_dia_nmr
     if (any(lambda_so /= 0.d0)) call calc_delta_M_dia_so
-
+    if ( lda_plus_u .AND. Hubbard_projectors /= 'pseudo' ) then
+    call compute_projU
+    endif
     call compute_dbecp  ! for deltaM bare
     call compute_paw_dbecp ! for delta_M_para_so
+!    stop
 
     ! loop over the magnetization directions
     do kk =  1, 3
@@ -171,6 +183,9 @@
 
       enddo
      ! compute the GIPAW corrections
+      if ( lda_plus_u .AND. Hubbard_projectors /= 'pseudo' ) then
+      call calc_delta_M_hub
+      endif
       call calc_delta_M_bare
       if (any(lambda_so /= 0.d0)) call calc_delta_M_para_so
       if (any(m_0 /= 0.d0))       call calc_delta_M_para_nmr
@@ -205,6 +220,7 @@
   call mp_sum(delta_M_bare, inter_pool_comm )
   call mp_sum(delta_M_para, inter_pool_comm )
   call mp_sum(delta_M_dia, inter_pool_comm )
+  call mp_sum(delta_M_hub, inter_pool_comm )
 #endif
 
   ! close files (only if not using in-memory storage)
@@ -226,7 +242,8 @@
   endif
 
   orb_magn_tot = orb_magn_LC + orb_magn_IC + &
-                 delta_M_bare + delta_M_dia + delta_M_para
+                 delta_M_bare + delta_M_dia + delta_M_para + &
+                 delta_M_hub
 
   write(stdout,*)
  ! print results
@@ -247,6 +264,7 @@
     write(stdout,'(5X,''M_LC               = '',3(F14.6))') orb_magn_LC
     write(stdout,'(5X,''M_IC               = '',3(F14.6))') orb_magn_IC
     write(stdout,'(5X,''Delta_M_bare       = '',3(F14.6))') delta_M_bare
+    write(stdout,'(5X,''Delta_M_HUB        = '',3(F14.6))') delta_M_hub
     write(stdout,'(5X,''Delta_M_para       = '',3(F14.6))') delta_M_para
     write(stdout,'(5X,''Delta_M_dia        = '',3(F14.6))') delta_M_dia
     write(stdout,'(5X,''M_tot              = '',3(F14.6))') orb_magn_tot
@@ -259,12 +277,13 @@
   write(stdout,'(5X,''M_LC               = '',3(F14.6))') orb_magn_LC
   write(stdout,'(5X,''M_IC               = '',3(F14.6))') orb_magn_IC
   write(stdout,'(5X,''Delta_M            = '',3(F14.6))') &
-        delta_M_bare + delta_M_para + delta_M_dia
+        delta_M_bare + delta_M_para + delta_M_dia + delta_M_hub
   write(stdout,'(5X,''M_tot              = '',3(F14.6))') orb_magn_tot
 
   ! free memory
   CALL deallocate_bec_type ( becp )
   deallocate( dudk_bra, dudk_ket, hpsi )
+  deallocate( wfcatom, swfcatom )
 
   call stop_clock ('orbital_magnetization')
   ! go on, reporting the g-tensor
@@ -276,6 +295,40 @@
 
 
   CONTAINS
+    !------------------------------------------------------------------
+    ! derivative of the wfcU (projU)
+    !------------------------------------------------------------------
+    SUBROUTINE compute_projU
+    USE cell_base, ONLY : tpiba
+    USE uspp_init, ONLY : init_us_2
+    USE uspp,  ONLY : vkb
+    USE ldaU, ONLY : wfcU
+    implicit none
+    integer :: ipol, sig
+    integer :: iu
+    real(dp) :: kq(3), xk_save(3)
+    call deallocate_bec_type(becp)    
+    xk_save(:) = xk(:,ik)
+    if (nkb == 0) return
+    wfcU_save = wfcU
+    do ipol = 1, 3
+      projU(:,:,ipol) = (0.d0,0.d0)
+      do sig = -1, 1, 2
+        xk(:,ik) = xk_save(:)
+        xk(ipol,ik) = xk(ipol,ik) + sig * delta_k
+
+        CALL orthoUwfc_k( ik, .FALSE. )
+        CALL strip_kphase_wfcU( ik )
+        call calbec( npw, wfcU, evc, auxU, nbnd )
+        projU(:,:,ipol) = projU(:,:,ipol) + &
+                          0.5d0*sig/(delta_k*tpiba) * auxU(:,:)
+      enddo
+    enddo
+    xk(:,ik) = xk_save(:)
+    wfcU = wfcU_save
+    CALL allocate_bec_type(nkb, nbnd, becp)
+    END SUBROUTINE compute_projU
+
     !------------------------------------------------------------------
     ! derivative of the beta's
     !------------------------------------------------------------------
@@ -326,6 +379,47 @@
     enddo
     END SUBROUTINE compute_paw_dbecp
 
+
+    !------------------------------------------------------------------
+    ! GIPAW correction (delta_M_Hub)
+    !------------------------------------------------------------------
+    SUBROUTINE calc_delta_M_hub
+    USE ions_base,  ONLY : nat, ntyp => nsp, ityp
+    USE ldaU,     ONLY : Hubbard_l, is_hubbard, offsetU, nwfcU
+    USE scf,        ONLY : v
+    implicit none
+    complex(dp) :: tmp, hub_product
+    integer :: ibnd, na, nt, m1, m2, ldim, off
+      if (nwfcU == 0) return
+
+    tmp = (0.d0, 0.d0)
+
+    do nt = 1, ntyp
+     if (.not. is_hubbard(nt)) cycle
+      ldim = 2*Hubbard_l(nt) + 1
+
+     do na = 1, nat
+      if (ityp(na) /= nt) cycle
+      off = offsetU(na)
+
+      do m2 = 1, ldim
+        do m1 = 1, ldim
+          do ibnd = 1, nbnd
+            hub_product = conjg(projU(off+m1, ibnd, ii)) * &
+                                projU(off+m2, ibnd, jj)
+            tmp = tmp + wg(ibnd,ik) * &
+                        v%ns(m1, m2, current_spin, na) * &  ! ← U^I_{mm'}
+                        hub_product
+          enddo
+        enddo
+      enddo
+     enddo
+    enddo
+
+    delta_M_hub(kk) = delta_M_hub(kk) - 2.d0*imag(tmp)
+    END SUBROUTINE calc_delta_M_hub
+
+
     !------------------------------------------------------------------
     ! GIPAW correction (delta_M_bare)
     !------------------------------------------------------------------
@@ -333,10 +427,12 @@
     USE ions_base,  ONLY : nat, ntyp => nsp, ityp
     USE uspp_param, ONLY : nh
     USE uspp,       ONLY : deeq, indv, nhtol
+    USE scf,        ONLY : v
     implicit none
     complex(dp) :: tmp, becp_product
     integer :: ibnd, ijkb0, nt, na, jh, jkb, ih, ikb
     integer :: nbs1, nbs2, l1, l2
+
     if (nkb == 0) return
     tmp = (0.d0,0.d0)
     ijkb0 = 0
@@ -851,7 +947,48 @@
     delta_M_para(kk) = delta_M_para(kk) - 2.d0*imag(tmp)/sqrt(2.d0)
     END SUBROUTINE calc_delta_M_para_nmr
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+  SUBROUTINE strip_kphase_wfcU(ik)
+  USE kinds,     ONLY : DP
+  USE constants, ONLY : tpi          ! tpi = 2*pi in QE
+  USE klist,     ONLY : xk
+  USE ions_base, ONLY : nat, tau, ityp
+  USE ldaU,      ONLY : wfcU, nwfcU, Hubbard_l  ! Hubbard_l(ntyp)
+  ! Se nel tuo QE il nome è diverso (es. hubbard_l), adattalo.
+  IMPLICIT NONE
+
+  INTEGER, INTENT(IN) :: ik
+  INTEGER :: na, nt, l, m, iu, nproj
+  REAL(DP) :: arg
+  COMPLEX(DP) :: phase
+
+  iu = 0
+
+  DO na = 1, nat
+     nt = ityp(na)
+     l  = Hubbard_l(nt)
+
+     ! Convenzione tipica: l < 0 => no Hubbard on this type
+     IF (l >= 0) THEN
+        nproj = 2*l + 1   ! collinear / NC
+
+        arg = tpi * ( xk(1,ik)*tau(1,na) + xk(2,ik)*tau(2,na) + xk(3,ik)*tau(3,na) )
+        phase = CMPLX( COS(arg), -SIN(arg), KIND=DP )  ! exp(+i arg)
+
+        DO m = 1, nproj
+           iu = iu + 1
+           wfcU(:,iu) = phase * wfcU(:,iu)
+        END DO
+     END IF
+  END DO
+
+  IF (iu /= nwfcU) THEN
+     CALL errore('strip_kphase_wfcU', 'unexpected wfcU ordering: iu != nwfcU', 1)
+  END IF
+
+END SUBROUTINE strip_kphase_wfcU
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   END SUBROUTINE calc_orbital_magnetization
 
 

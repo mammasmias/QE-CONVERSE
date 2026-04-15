@@ -1,6 +1,6 @@
 #!/bin/bash
 NAME="nmr"
-molecule=LiCoO2
+molecule=LiCoO2_U_SF
 natoms=1
 atoms=("Co")
 cart=("null" "x" "y" "z")
@@ -15,7 +15,7 @@ do
 
 &input_qeconverse
         prefix = 'licoo2'
-        outdir = './scratch/'
+        outdir = './scratchU/'
         diagonalization = 'david'
         verbosity = 'high'
         q_gipaw = 0.01
