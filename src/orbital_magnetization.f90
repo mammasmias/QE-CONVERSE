@@ -19,6 +19,7 @@ MODULE orbital_magnetization
   REAL(DP) :: delta_M_dia(3)
   COMPLEX(dp), ALLOCATABLE :: dbecp(:,:,:)
   COMPLEX(dp), ALLOCATABLE :: paw_dbecp(:,:,:)
+  COMPLEX(dp), ALLOCATABLE :: dhubbecp(:,:,:)  ! no-phase k-deriv of Hubbard projectors
   INTEGER, ALLOCATABLE :: igk(:,:)
   real(dp) :: delta_k
   CHARACTER(len=1)            :: lambda_0_dir = '_'
