@@ -1,0 +1,11 @@
+task               : magres
+magres_task        : nmr
+
+xc_functional      : PBE
+spin_polarized     : false
+fix_occupancy      : true
+
+cut_off_energy     : 816 eV
+elec_energy_tol    : 1.0e-9
+max_scf_cycles     : 200
+opt_strategy       : speed

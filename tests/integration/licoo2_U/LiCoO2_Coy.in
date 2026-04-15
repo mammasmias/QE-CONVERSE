@@ -1,11 +1,15 @@
+
+
+
 &input_qeconverse
         prefix = 'licoo2'
-        outdir = './scratchU/'
+        outdir = './scratch/'
         diagonalization = 'david'
+        verbosity = 'high'
         q_gipaw = 0.01
         dudk_method = 'covariant'
         mixing_beta = 0.5
-        m_0(1) = 1.0
-        m_0_atom = 1
+        lambda_so(1) = 0.0
+        m_0(2) = 1.0
+        m_0_atom = 4
 /
-

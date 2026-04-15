@@ -1,7 +1,7 @@
 &CONTROL
-  pseudo_dir = '../gipaw_pbesol'
+  pseudo_dir = './pseudo'
   calculation = 'scf'
-  outdir = './scratch'
+  outdir = './scratchU0'
   prefix = 'licoo2'
 /
 
@@ -9,7 +9,7 @@
   ibrav = 0
   nat = 12
   ntyp = 3
-  ecutwfc = 80.0
+  ecutwfc = 60.0
   nosym = .true.
   noinv = .true.
   occupations = 'smearing'
@@ -22,9 +22,9 @@
 /
 
 ATOMIC_SPECIES
-  Li  6.940000  Li.upf
-  Co  58.933194  Co.upf
-  O  15.999000  O.upf
+  Li  6.940000  Li.pbe-tm-gipaw-dc.UPF
+  Co  58.933194  Co.pbe-tm-gipaw-dc.UPF
+  O  15.999000  O.pbe-tm-new-gipaw.UPF
 
 CELL_PARAMETERS angstrom
   2.8112569800  0.0000000000  0.0000000000
@@ -49,4 +49,4 @@ K_POINTS automatic
   3 3 1 0 0 0
 
 HUBBARD (ortho-atomic)
-  U Co-3d  8.0
+  U Co-3d  20.0000

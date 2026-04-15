@@ -1,0 +1,11 @@
+Error, mismatch in no. spinor comps in wave_dot_all_wv_slice
+Current trace stack:
+ wave_dot_all_wv_slice
+ hubbard_apply_slice
+ hamiltonian_apply_slice
+ hamiltonian_diagonalise_slice
+ magres_nmr_current_crystal
+ magres_nmr_calculate
+ magres_run
+ castep_run_task
+ castep
