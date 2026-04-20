@@ -380,9 +380,9 @@
     !
     ! The no-phase overlap is obtained by multiplying the S-orthogonalized
     ! wfcU^{full}(k+/-q) produced by orthoUwfc_k by e^{-i(k+/-q).tau_I}
-    ! per atom I, which removes the k-dependent structure factor phase.
-    ! The DFT+U S-matrix is block-diagonal per atom, so e^{ikq.tau_I}
-    ! cancels within each atomic block and the conversion is exact.
+    ! wfcU_full(k,G) = e^{-i(k+G)tau} F(k+G) (from atomic_wfc convention).
+    ! Multiplying by e^{+ikq.tau} leaves e^{-iG.tau} F, matching the
+    ! no-phase KB convention of init_us_2_no_phase.
     !------------------------------------------------------------------
     SUBROUTINE compute_dhubbecp
     USE constants,        ONLY : tpi
@@ -425,12 +425,14 @@
         deallocate( wfcatom, swfcatom )
 
         ! Convert full-phase -> no-phase: multiply each orbital of atom na
-        ! by e^{-i kq.tau_na}, removing the k-dependent structure factor.
+        ! Multiply by e^{+i kq.tau_na} to cancel the k-part of the structure
+        ! factor: wfcU_full(G) = e^{-i(kq+G)tau} F(kq+G), so multiplying by
+        ! e^{+ikq.tau} leaves e^{-iG.tau} F, matching init_us_2_no_phase.
         do na = 1, nat
           nt = ityp(na)
           if ( .not. is_hubbard(nt) ) cycle
           arg      = tpi * dot_product( kq(:), tau(:,na) )
-          phase_na = cmplx( cos(arg), -sin(arg), kind=dp )
+          phase_na = cmplx( cos(arg), +sin(arg), kind=dp )
           do m = 1, 2*Hubbard_l(nt) + 1
             ihubst = offsetU(na) + m
             wfcU(1:npw, ihubst) = wfcU(1:npw, ihubst) * phase_na
