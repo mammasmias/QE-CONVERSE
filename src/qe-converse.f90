@@ -20,7 +20,7 @@ PROGRAM qe_converse
   USE constants, ONLY : eps12
   USE control_flags, ONLY : gamma_only, io_level
   USE environment, ONLY : environment_start, environment_end
-  USE io_files, ONLY : prefix, tmp_dir, nwordwfc, iunwfc
+  USE io_files, ONLY : prefix, tmp_dir, nwordwfc, iunwfc, iunhub
   USE io_global, ONLY : ionode, ionode_id
   USE kinds, ONLY : DP
   USE lsda_mod, ONLY : nspin, starting_magnetization !FZ: added starting_magnetization for spinors
@@ -158,7 +158,9 @@ if (.not. ionode .or. my_image_id > 0) goto 400
   call newscf
 
   call calc_orbital_magnetization ( )
-  
+
+  if ( lda_plus_u ) call close_buffer(iunhub, 'DELETE')
+
   call environment_end(codename)
   call print_clock_gipaw
   call stop_code( .true. )

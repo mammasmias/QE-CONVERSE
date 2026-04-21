@@ -117,6 +117,8 @@
      CALL gk_sort( xk(1,ik), ngm, g, gcutw, ngk(ik), igk_k(1,ik), g2kin )
      g2kin(1:ngk(ik)) = g2kin(1:ngk(ik)) * tpiba2
     call get_buffer(evc, nwordwfc, iunwfc, ik)
+    if (lda_plus_u .AND. Hubbard_projectors /= 'pseudo') &
+       call get_buffer(wfcU, nwordwfcU, iunhub, ik)
     if (nkb > 0) then
       call init_us_2(ngk(ik), igk_k(1,ik), xk(1,ik), vkb)
       CALL calbec( npw, vkb, evc, becp, nbnd )

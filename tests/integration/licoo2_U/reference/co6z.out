@@ -1,5 +1,5 @@
 
-     Program QE-CONVERSE v.7.5 starts on 21Apr2026 at 14:15:16 
+     Program QE-CONVERSE v.7.5 starts on 21Apr2026 at 15:10: 7 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -14,7 +14,7 @@
 
      MPI processes distributed on     1 nodes
      K-points division:     npool     =       9
-     1837 MiB available memory on the printing compute node when the environment starts
+     2149 MiB available memory on the printing compute node when the environment starts
 
 
      Reading xml data from directory:
@@ -119,6 +119,13 @@
      number of iterations used =            8  plain     mixing
      Exchange-correlation= PBESOL
                            (   1   4  10   8   0   0   0)
+     Hubbard projectors: atomic
+     Hubbard parameters of DFT+U (Dudarev formulation) in eV:
+     U(Co-3d) =  8.0000
+
+     Internal variables: lda_plus_u =T, lda_plus_u_kind = 0
+
+     Internal variables: orbital_resolved =F, hub_pot_fix =F, apply_U = F
 
      celldm(1)=   5.312506  celldm(2)=   0.000000  celldm(3)=   0.000000
      celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
@@ -253,6 +260,65 @@
      Initial potential from superposition of free atoms
 
      starting charge      95.9846, renormalised to      96.0000
+
+     HUBBARD ENERGY =    1.8522  (Ry)
+
+     STARTING HUBBARD OCCUPATIONS:
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.00000
+     eigenvalues:
+       0.700  0.700  0.700  0.700  0.700
+     eigenvectors (columns):
+       1.000  0.000  0.000  0.000  0.000
+       0.000  1.000  0.000  0.000  0.000
+       0.000  0.000  1.000  0.000  0.000
+       0.000  0.000  0.000  1.000  0.000
+       0.000  0.000  0.000  0.000  1.000
+     occupation matrix ns (before diag.):
+       0.700  0.000  0.000  0.000  0.000
+       0.000  0.700  0.000  0.000  0.000
+       0.000  0.000  0.700  0.000  0.000
+       0.000  0.000  0.000  0.700  0.000
+       0.000  0.000  0.000  0.000  0.700
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.00000
+     eigenvalues:
+       0.700  0.700  0.700  0.700  0.700
+     eigenvectors (columns):
+       1.000  0.000  0.000  0.000  0.000
+       0.000  1.000  0.000  0.000  0.000
+       0.000  0.000  1.000  0.000  0.000
+       0.000  0.000  0.000  1.000  0.000
+       0.000  0.000  0.000  0.000  1.000
+     occupation matrix ns (before diag.):
+       0.700  0.000  0.000  0.000  0.000
+       0.000  0.700  0.000  0.000  0.000
+       0.000  0.000  0.700  0.000  0.000
+       0.000  0.000  0.000  0.700  0.000
+       0.000  0.000  0.000  0.000  0.700
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.00000
+     eigenvalues:
+       0.700  0.700  0.700  0.700  0.700
+     eigenvectors (columns):
+       1.000  0.000  0.000  0.000  0.000
+       0.000  1.000  0.000  0.000  0.000
+       0.000  0.000  1.000  0.000  0.000
+       0.000  0.000  0.000  1.000  0.000
+       0.000  0.000  0.000  0.000  1.000
+     occupation matrix ns (before diag.):
+       0.700  0.000  0.000  0.000  0.000
+       0.000  0.700  0.000  0.000  0.000
+       0.000  0.000  0.700  0.000  0.000
+       0.000  0.000  0.000  0.700  0.000
+       0.000  0.000  0.000  0.000  0.700
+
+     Number of occupied Hubbard levels =   21.0000
+
+     Atomic wfc used for Hubbard projectors are NOT orthogonalized
+
      Starting wfcs are   60 atomic wfcs
 
      total cpu time spent up to now is       -1.0 secs
@@ -263,218 +329,972 @@
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           335 MiB given to the printing process from OS
+           340 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           995 MiB available memory on the node where the printing process lives
+          1140 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  1.00E-08,  avg # of iterations = 10.1
+     ethr =  1.00E-08,  avg # of iterations = 10.3
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.75029
+     eigenvalues:
+       0.460  0.460  0.985  0.985  0.985
+     eigenvectors (columns):
+       0.000 -0.000  0.000 -0.000 -1.000
+      -0.801  0.007  0.598  0.037 -0.000
+       0.007  0.801 -0.037  0.598 -0.000
+      -0.005 -0.599 -0.049  0.799 -0.000
+       0.599 -0.005  0.799  0.049 -0.000
+     occupation matrix ns (before diag.):
+       0.985  0.000  0.000 -0.000 -0.000
+       0.000  0.648 -0.000 -0.000  0.252
+       0.000 -0.000  0.648  0.252 -0.000
+      -0.000 -0.000  0.252  0.797  0.000
+      -0.000  0.252 -0.000  0.000  0.797
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.75029
+     eigenvalues:
+       0.460  0.460  0.985  0.985  0.985
+     eigenvectors (columns):
+       0.000  0.000 -0.000 -0.000 -1.000
+       0.801  0.015  0.592 -0.090  0.000
+       0.015 -0.801  0.090  0.592 -0.000
+      -0.011  0.599  0.121  0.792 -0.000
+      -0.599 -0.011  0.792 -0.121  0.000
+     occupation matrix ns (before diag.):
+       0.985 -0.000  0.000 -0.000  0.000
+      -0.000  0.648  0.000  0.000  0.252
+       0.000  0.000  0.648  0.252  0.000
+      -0.000  0.000  0.252  0.797 -0.000
+       0.000  0.252  0.000 -0.000  0.797
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.75020
+     eigenvalues:
+       0.460  0.460  0.985  0.985  0.985
+     eigenvectors (columns):
+      -0.000 -0.000 -0.145  0.000 -0.989
+       0.801  0.000  0.000  0.599 -0.000
+      -0.000  0.801 -0.592  0.000  0.087
+       0.000 -0.599 -0.793  0.000  0.116
+      -0.599 -0.000  0.000  0.801 -0.000
+     occupation matrix ns (before diag.):
+       0.985  0.000 -0.000 -0.000 -0.000
+       0.000  0.648 -0.000 -0.000  0.252
+      -0.000 -0.000  0.648  0.251 -0.000
+      -0.000 -0.000  0.251  0.797  0.000
+      -0.000  0.252 -0.000  0.000  0.797
+
+     Number of occupied Hubbard levels =   23.2508
+
+     HUBBARD ENERGY =    1.5618  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =   -1087.11427178 Ry
-     Harris-Foulkes estimate   =   -1088.15076302 Ry
-     estimated scf accuracy    <       1.81336785 Ry
+     total energy              =   -1086.47521689 Ry
+     Harris-Foulkes estimate   =   -1086.49592051 Ry
+     estimated scf accuracy    <       1.61767201 Ry
 
      iteration #  2     ecut=    80.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           409 MiB given to the printing process from OS
+           413 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           709 MiB available memory on the node where the printing process lives
+           857 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  1.89E-03,  avg # of iterations =  2.0
+     ethr =  1.69E-03,  avg # of iterations =  2.0
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   8.42360
+     eigenvalues:
+       0.617  0.617  0.992  0.993  0.993
+     eigenvectors (columns):
+      -0.000  0.000 -1.000  0.001 -0.000
+      -0.800 -0.001  0.000  0.007  0.600
+      -0.001  0.800  0.000  0.600 -0.007
+       0.001 -0.600  0.001  0.800 -0.010
+       0.600  0.001  0.000  0.010  0.800
+     occupation matrix ns (before diag.):
+       0.992  0.000 -0.000  0.000 -0.000
+       0.000  0.752 -0.000 -0.000  0.181
+      -0.000 -0.000  0.752  0.181 -0.000
+       0.000 -0.000  0.181  0.858  0.000
+      -0.000  0.181 -0.000  0.000  0.858
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   8.42360
+     eigenvalues:
+       0.617  0.617  0.992  0.993  0.993
+     eigenvectors (columns):
+      -0.000 -0.000 -1.000 -0.001 -0.000
+      -0.800  0.000  0.000 -0.058  0.597
+      -0.000 -0.800  0.000 -0.597 -0.058
+       0.000  0.600  0.001 -0.796 -0.078
+       0.600 -0.000  0.000 -0.078  0.796
+     occupation matrix ns (before diag.):
+       0.992 -0.000 -0.000  0.000  0.000
+      -0.000  0.752  0.000  0.000  0.181
+      -0.000  0.000  0.752  0.181  0.000
+       0.000  0.000  0.181  0.858 -0.000
+       0.000  0.181  0.000 -0.000  0.858
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   8.42369
+     eigenvalues:
+       0.617  0.617  0.992  0.993  0.993
+     eigenvectors (columns):
+      -0.000 -0.000 -1.000  0.004 -0.000
+       0.800 -0.000 -0.000  0.000  0.600
+       0.000  0.800 -0.002 -0.600  0.000
+      -0.000 -0.600 -0.003 -0.800  0.000
+      -0.600  0.000 -0.000  0.000  0.800
+     occupation matrix ns (before diag.):
+       0.992  0.000  0.000 -0.000 -0.000
+       0.000  0.752 -0.000  0.000  0.181
+       0.000 -0.000  0.752  0.181 -0.000
+      -0.000  0.000  0.181  0.858  0.000
+      -0.000  0.181 -0.000  0.000  0.858
+
+     Number of occupied Hubbard levels =   25.2709
+
+     HUBBARD ENERGY =    1.3925  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =   -1086.91336821 Ry
-     Harris-Foulkes estimate   =   -1088.51516804 Ry
-     estimated scf accuracy    <       5.27521042 Ry
+     total energy              =   -1086.45912675 Ry
+     Harris-Foulkes estimate   =   -1086.86022822 Ry
+     estimated scf accuracy    <       1.16890229 Ry
 
      iteration #  3     ecut=    80.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           409 MiB given to the printing process from OS
+           413 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           717 MiB available memory on the node where the printing process lives
+           873 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  1.89E-03,  avg # of iterations =  2.0
+     ethr =  1.22E-03,  avg # of iterations =  2.0
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.62902
+     eigenvalues:
+       0.422  0.422  0.990  0.991  0.991
+     eigenvectors (columns):
+      -0.000  0.000 -1.000  0.017 -0.000
+       0.801  0.001 -0.000  0.015  0.598
+      -0.001  0.801 -0.010 -0.598  0.015
+       0.001 -0.598 -0.014 -0.801  0.020
+      -0.598 -0.001 -0.000  0.020  0.801
+     occupation matrix ns (before diag.):
+       0.990  0.000 -0.000 -0.000 -0.000
+       0.000  0.625 -0.000 -0.000  0.273
+      -0.000 -0.000  0.625  0.273 -0.000
+      -0.000 -0.000  0.273  0.787  0.000
+      -0.000  0.273 -0.000  0.000  0.787
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.62903
+     eigenvalues:
+       0.422  0.422  0.990  0.991  0.991
+     eigenvectors (columns):
+      -0.000  0.000 -1.000 -0.015 -0.006
+      -0.801 -0.001 -0.000 -0.207  0.561
+      -0.001  0.801 -0.010  0.561  0.207
+       0.001 -0.598 -0.013  0.752  0.277
+       0.598  0.001 -0.000 -0.277  0.752
+     occupation matrix ns (before diag.):
+       0.990 -0.000 -0.000 -0.000  0.000
+      -0.000  0.625  0.000  0.000  0.273
+      -0.000  0.000  0.625  0.273  0.000
+      -0.000  0.000  0.273  0.787 -0.000
+       0.000  0.273  0.000 -0.000  0.787
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.62900
+     eigenvalues:
+       0.422  0.422  0.990  0.991  0.991
+     eigenvectors (columns):
+      -0.000 -0.000  0.985 -0.000 -0.173
+       0.801  0.000 -0.000  0.598 -0.000
+      -0.000  0.801  0.103  0.000  0.589
+       0.000 -0.598  0.139  0.000  0.789
+      -0.598 -0.000 -0.000  0.801 -0.000
+     occupation matrix ns (before diag.):
+       0.990  0.000  0.000 -0.000 -0.000
+       0.000  0.625 -0.000 -0.000  0.273
+       0.000 -0.000  0.625  0.273 -0.000
+      -0.000 -0.000  0.273  0.787  0.000
+      -0.000  0.273 -0.000  0.000  0.787
+
+     Number of occupied Hubbard levels =   22.8870
+
+     HUBBARD ENERGY =    1.0696  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =   -1087.76977054 Ry
-     Harris-Foulkes estimate   =   -1087.81550168 Ry
-     estimated scf accuracy    <       0.19293861 Ry
+     total energy              =   -1086.81308717 Ry
+     Harris-Foulkes estimate   =   -1086.82882293 Ry
+     estimated scf accuracy    <       0.63574994 Ry
 
      iteration #  4     ecut=    80.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           409 MiB given to the printing process from OS
+           413 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           730 MiB available memory on the node where the printing process lives
+           863 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  2.01E-04,  avg # of iterations =  1.8
+     ethr =  6.62E-04,  avg # of iterations =  1.1
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.79546
+     eigenvalues:
+       0.459  0.459  0.994  0.994  0.994
+     eigenvectors (columns):
+       0.000  0.000  0.047  0.000  0.999
+      -0.803 -0.001  0.000  0.596 -0.000
+       0.001 -0.803  0.595 -0.000 -0.028
+      -0.001  0.596  0.802 -0.000 -0.038
+       0.596  0.001  0.000  0.803 -0.000
+     occupation matrix ns (before diag.):
+       0.994  0.000  0.000 -0.000 -0.000
+       0.000  0.648 -0.000 -0.000  0.256
+       0.000 -0.000  0.648  0.256 -0.000
+      -0.000 -0.000  0.256  0.804  0.000
+      -0.000  0.256 -0.000  0.000  0.804
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.79539
+     eigenvalues:
+       0.459  0.459  0.994  0.994  0.994
+     eigenvectors (columns):
+       0.000 -0.000 -0.075 -0.000  0.997
+      -0.803 -0.001 -0.001  0.596 -0.000
+      -0.001  0.803 -0.594 -0.001 -0.044
+       0.001 -0.596 -0.801 -0.001 -0.060
+       0.596  0.001 -0.001  0.803 -0.000
+     occupation matrix ns (before diag.):
+       0.994 -0.000  0.000 -0.000 -0.000
+      -0.000  0.648  0.000  0.000  0.256
+       0.000  0.000  0.648  0.256  0.000
+      -0.000  0.000  0.256  0.804 -0.000
+      -0.000  0.256  0.000 -0.000  0.804
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.79539
+     eigenvalues:
+       0.459  0.459  0.994  0.994  0.994
+     eigenvectors (columns):
+      -0.000 -0.000 -0.165  0.000  0.986
+      -0.803  0.000  0.000  0.596  0.000
+       0.000  0.803 -0.588  0.000 -0.098
+      -0.000 -0.596 -0.792  0.000 -0.132
+       0.596 -0.000  0.000  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.994  0.000  0.000 -0.000  0.000
+       0.000  0.648 -0.000 -0.000  0.256
+       0.000 -0.000  0.648  0.256 -0.000
+      -0.000 -0.000  0.256  0.804  0.000
+       0.000  0.256 -0.000  0.000  0.804
+
+     Number of occupied Hubbard levels =   23.3862
+
+     HUBBARD ENERGY =    0.9044  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =   -1087.78247546 Ry
-     Harris-Foulkes estimate   =   -1087.78594716 Ry
-     estimated scf accuracy    <       0.01447472 Ry
+     total energy              =   -1086.84319990 Ry
+     Harris-Foulkes estimate   =   -1086.84384856 Ry
+     estimated scf accuracy    <       0.06271843 Ry
 
      iteration #  5     ecut=    80.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           409 MiB given to the printing process from OS
+           413 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           729 MiB available memory on the node where the printing process lives
+           927 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  1.51E-05,  avg # of iterations =  2.0
+     ethr =  6.53E-05,  avg # of iterations =  2.0
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.84775
+     eigenvalues:
+       0.470  0.470  0.994  0.994  0.995
+     eigenvectors (columns):
+       0.000  0.000 -0.000  0.003  1.000
+      -0.803  0.001  0.596  0.000  0.000
+       0.001  0.803  0.000 -0.596  0.002
+      -0.001 -0.596  0.000 -0.803  0.002
+       0.596 -0.001  0.803  0.000  0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000 -0.000  0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+      -0.000 -0.000  0.656  0.251 -0.000
+       0.000 -0.000  0.251  0.808  0.000
+      -0.000  0.251 -0.000  0.000  0.808
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.84775
+     eigenvalues:
+       0.470  0.470  0.994  0.994  0.995
+     eigenvectors (columns):
+       0.000  0.000 -0.000 -0.003  1.000
+       0.803 -0.001  0.596 -0.003  0.000
+       0.001  0.803  0.003  0.596  0.002
+      -0.001 -0.596  0.004  0.803  0.002
+      -0.596  0.001  0.803 -0.004  0.000
+     occupation matrix ns (before diag.):
+       0.995 -0.000 -0.000  0.000  0.000
+      -0.000  0.656  0.000  0.000  0.251
+      -0.000  0.000  0.656  0.251  0.000
+       0.000  0.000  0.251  0.808 -0.000
+       0.000  0.251  0.000 -0.000  0.808
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.84796
+     eigenvalues:
+       0.470  0.470  0.994  0.994  0.995
+     eigenvectors (columns):
+       0.000  0.000 -0.106  0.000 -0.994
+      -0.803 -0.000  0.000  0.596  0.000
+       0.000 -0.803 -0.593  0.000  0.063
+      -0.000  0.596 -0.798  0.000  0.085
+       0.596  0.000  0.000  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.808  0.000
+      -0.000  0.251 -0.000  0.000  0.808
+
+     Number of occupied Hubbard levels =   23.5435
+
+     HUBBARD ENERGY =    0.9014  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =   -1087.78405207 Ry
-     Harris-Foulkes estimate   =   -1087.78428699 Ry
-     estimated scf accuracy    <       0.00095371 Ry
+     total energy              =   -1086.84941052 Ry
+     Harris-Foulkes estimate   =   -1086.84938024 Ry
+     estimated scf accuracy    <       0.00130528 Ry
 
      iteration #  6     ecut=    80.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           409 MiB given to the printing process from OS
+           413 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           729 MiB available memory on the node where the printing process lives
+           864 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  9.93E-07,  avg # of iterations =  2.0
+     ethr =  1.36E-06,  avg # of iterations =  2.9
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.84461
+     eigenvalues:
+       0.469  0.469  0.995  0.995  0.995
+     eigenvectors (columns):
+       0.000 -0.000 -0.000  0.001  1.000
+      -0.803 -0.001  0.596  0.004  0.000
+       0.001 -0.803 -0.004  0.596 -0.000
+      -0.001  0.596 -0.005  0.803 -0.000
+       0.596  0.001  0.803  0.005  0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000 -0.000  0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+      -0.000 -0.000  0.656  0.251 -0.000
+       0.000 -0.000  0.251  0.808  0.000
+      -0.000  0.251 -0.000  0.000  0.808
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.84457
+     eigenvalues:
+       0.469  0.469  0.995  0.995  0.995
+     eigenvectors (columns):
+       0.000 -0.000  0.000  0.001 -1.000
+       0.803  0.003  0.596 -0.005  0.000
+       0.003 -0.803  0.005  0.596  0.000
+      -0.002  0.596  0.006  0.803  0.001
+      -0.596 -0.002  0.803 -0.006  0.000
+     occupation matrix ns (before diag.):
+       0.995 -0.000 -0.000  0.000  0.000
+      -0.000  0.656  0.000  0.000  0.251
+      -0.000  0.000  0.656  0.251  0.000
+       0.000  0.000  0.251  0.808 -0.000
+       0.000  0.251  0.000 -0.000  0.808
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.84419
+     eigenvalues:
+       0.469  0.469  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000 -0.081  0.000  0.997
+      -0.803  0.000  0.000  0.596  0.000
+       0.000  0.803 -0.594  0.000 -0.048
+      -0.000 -0.596 -0.800  0.000 -0.065
+       0.596 -0.000  0.000  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.808  0.000
+      -0.000  0.251 -0.000  0.000  0.808
+
+     Number of occupied Hubbard levels =   23.5334
+
+     HUBBARD ENERGY =    0.9055  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =   -1087.78412183 Ry
-     Harris-Foulkes estimate   =   -1087.78415811 Ry
-     estimated scf accuracy    <       0.00011773 Ry
+     total energy              =   -1086.84947343 Ry
+     Harris-Foulkes estimate   =   -1086.84949736 Ry
+     estimated scf accuracy    <       0.00044494 Ry
 
      iteration #  7     ecut=    80.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           409 MiB given to the printing process from OS
+           413 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           731 MiB available memory on the node where the printing process lives
+           939 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  1.23E-07,  avg # of iterations =  2.8
+     ethr =  4.63E-07,  avg # of iterations =  4.9
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.84671
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000 -0.000  0.000 -1.000
+       0.803  0.003  0.009  0.596 -0.000
+      -0.003  0.803 -0.596  0.009  0.000
+       0.002 -0.596 -0.803  0.013  0.000
+      -0.596 -0.002  0.013  0.803 -0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.808  0.000
+      -0.000  0.251 -0.000  0.000  0.808
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.84698
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000  0.000  0.000  0.000 -1.000
+      -0.803  0.006 -0.011  0.596  0.000
+      -0.006 -0.803 -0.596 -0.011 -0.000
+       0.005  0.596 -0.803 -0.015 -0.000
+       0.596 -0.005 -0.015  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995 -0.000  0.000 -0.000  0.000
+      -0.000  0.656  0.000  0.000  0.251
+       0.000  0.000  0.656  0.251  0.000
+      -0.000  0.000  0.251  0.808 -0.000
+       0.000  0.251  0.000 -0.000  0.808
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.84770
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000 -0.083  0.000  0.997
+      -0.803  0.000  0.000  0.596  0.000
+       0.000  0.803 -0.594  0.000 -0.049
+      -0.000 -0.596 -0.800  0.000 -0.067
+       0.596 -0.000  0.000  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.808  0.000
+      -0.000  0.251 -0.000  0.000  0.808
+
+     Number of occupied Hubbard levels =   23.5414
+
+     HUBBARD ENERGY =    0.9061  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =   -1087.78412564 Ry
-     Harris-Foulkes estimate   =   -1087.78416262 Ry
-     estimated scf accuracy    <       0.00017270 Ry
+     total energy              =   -1086.84945575 Ry
+     Harris-Foulkes estimate   =   -1086.84956305 Ry
+     estimated scf accuracy    <       0.00049862 Ry
 
      iteration #  8     ecut=    80.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           409 MiB given to the printing process from OS
+           413 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           737 MiB available memory on the node where the printing process lives
+           902 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  1.23E-07,  avg # of iterations =  2.0
+     ethr =  4.63E-07,  avg # of iterations =  4.2
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.84741
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000 -0.000 -0.000 -1.000
+       0.803  0.004  0.006  0.596 -0.000
+      -0.004  0.803 -0.596  0.006  0.000
+       0.003 -0.596 -0.803  0.008  0.000
+      -0.596 -0.003  0.008  0.803 -0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.808  0.000
+      -0.000  0.251 -0.000  0.000  0.808
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.84744
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000  0.000  0.000  0.000 -1.000
+      -0.803  0.007 -0.011  0.596  0.000
+      -0.007 -0.803 -0.596 -0.011 -0.000
+       0.005  0.596 -0.803 -0.015 -0.000
+       0.596 -0.005 -0.015  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995 -0.000  0.000 -0.000  0.000
+      -0.000  0.656  0.000  0.000  0.251
+       0.000  0.000  0.656  0.251  0.000
+      -0.000  0.000  0.251  0.808 -0.000
+       0.000  0.251  0.000 -0.000  0.808
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.84789
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000 -0.082  0.000  0.997
+      -0.803  0.000  0.000  0.596  0.000
+       0.000  0.803 -0.594  0.000 -0.049
+      -0.000 -0.596 -0.801  0.000 -0.066
+       0.596 -0.000  0.000  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.808  0.000
+      -0.000  0.251 -0.000  0.000  0.808
+
+     Number of occupied Hubbard levels =   23.5427
+
+     HUBBARD ENERGY =    0.9066  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =   -1087.78414505 Ry
-     Harris-Foulkes estimate   =   -1087.78414624 Ry
-     estimated scf accuracy    <       0.00000639 Ry
+     total energy              =   -1086.84950776 Ry
+     Harris-Foulkes estimate   =   -1086.84950998 Ry
+     estimated scf accuracy    <       0.00001175 Ry
 
      iteration #  9     ecut=    80.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           409 MiB given to the printing process from OS
+           413 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           734 MiB available memory on the node where the printing process lives
+           893 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  6.66E-09,  avg # of iterations =  2.0
+     ethr =  1.22E-08,  avg # of iterations =  2.0
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.84882
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000  0.000 -0.000 -1.000
+       0.803  0.005  0.028  0.595 -0.000
+      -0.005  0.803 -0.595  0.028 -0.000
+       0.004 -0.596 -0.802  0.038 -0.000
+      -0.596 -0.004  0.038  0.802 -0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.809  0.000
+      -0.000  0.251 -0.000  0.000  0.809
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.84871
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000  0.000  0.000  0.000 -1.000
+      -0.803  0.011 -0.024  0.595  0.000
+      -0.011 -0.803 -0.595 -0.024 -0.000
+       0.008  0.596 -0.803 -0.032 -0.000
+       0.596 -0.008 -0.032  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995 -0.000  0.000 -0.000  0.000
+      -0.000  0.656  0.000  0.000  0.251
+       0.000  0.000  0.656  0.251  0.000
+      -0.000  0.000  0.251  0.809 -0.000
+       0.000  0.251  0.000 -0.000  0.809
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.84747
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000 -0.082  0.000  0.997
+      -0.803  0.000  0.000  0.596  0.000
+       0.000  0.803 -0.594  0.000 -0.049
+      -0.000 -0.596 -0.801  0.000 -0.066
+       0.596 -0.000  0.000  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.808  0.000
+      -0.000  0.251 -0.000  0.000  0.808
+
+     Number of occupied Hubbard levels =   23.5450
+
+     HUBBARD ENERGY =    0.9068  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =   -1087.78414549 Ry
-     Harris-Foulkes estimate   =   -1087.78414626 Ry
-     estimated scf accuracy    <       0.00000342 Ry
+     total energy              =   -1086.84950934 Ry
+     Harris-Foulkes estimate   =   -1086.84950982 Ry
+     estimated scf accuracy    <       0.00000256 Ry
 
      iteration # 10     ecut=    80.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           409 MiB given to the printing process from OS
+           413 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           717 MiB available memory on the node where the printing process lives
+           889 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  3.56E-09,  avg # of iterations =  1.4
+     ethr =  2.67E-09,  avg # of iterations =  2.0
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.84821
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000  0.000 -0.000 -1.000
+       0.803  0.007  0.039  0.594 -0.000
+      -0.007  0.803 -0.594  0.039 -0.000
+       0.005 -0.596 -0.802  0.052 -0.000
+      -0.596 -0.005  0.052  0.802 -0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.809  0.000
+      -0.000  0.251 -0.000  0.000  0.809
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.84824
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000  0.000  0.000  0.000 -1.000
+      -0.803  0.014 -0.033  0.595  0.000
+      -0.014 -0.803 -0.595 -0.033 -0.000
+       0.010  0.596 -0.802 -0.045 -0.000
+       0.596 -0.010 -0.045  0.802  0.000
+     occupation matrix ns (before diag.):
+       0.995 -0.000  0.000 -0.000  0.000
+      -0.000  0.656  0.000  0.000  0.251
+       0.000  0.000  0.656  0.251  0.000
+      -0.000  0.000  0.251  0.809 -0.000
+       0.000  0.251  0.000 -0.000  0.809
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.84861
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000 -0.083  0.000  0.997
+      -0.803  0.000  0.000  0.596  0.000
+       0.000  0.803 -0.594  0.000 -0.049
+      -0.000 -0.596 -0.800  0.000 -0.067
+       0.596 -0.000  0.000  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.809  0.000
+      -0.000  0.251 -0.000  0.000  0.809
+
+     Number of occupied Hubbard levels =   23.5451
+
+     HUBBARD ENERGY =    0.9071  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =   -1087.78414571 Ry
-     Harris-Foulkes estimate   =   -1087.78414582 Ry
-     estimated scf accuracy    <       0.00000047 Ry
+     total energy              =   -1086.84950979 Ry
+     Harris-Foulkes estimate   =   -1086.84950977 Ry
+     estimated scf accuracy    <       0.00000039 Ry
 
      iteration # 11     ecut=    80.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           409 MiB given to the printing process from OS
+           413 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           730 MiB available memory on the node where the printing process lives
+           937 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  4.85E-10,  avg # of iterations =  2.0
+     ethr =  4.02E-10,  avg # of iterations =  2.0
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.84825
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000 -0.000 -0.000 -1.000
+       0.803  0.011  0.062  0.592 -0.000
+      -0.011  0.803 -0.592  0.062  0.000
+       0.008 -0.596 -0.799  0.084  0.000
+      -0.596 -0.008  0.084  0.799 -0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.809  0.000
+      -0.000  0.251 -0.000  0.000  0.809
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.84826
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000  0.000  0.000  0.000 -1.000
+      -0.803  0.023 -0.068  0.592  0.000
+      -0.023 -0.803 -0.592 -0.068 -0.000
+       0.017  0.595 -0.798 -0.091 -0.000
+       0.595 -0.017 -0.091  0.798  0.000
+     occupation matrix ns (before diag.):
+       0.995 -0.000  0.000 -0.000  0.000
+      -0.000  0.656  0.000  0.000  0.251
+       0.000  0.000  0.656  0.251  0.000
+      -0.000  0.000  0.251  0.809 -0.000
+       0.000  0.251  0.000 -0.000  0.809
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.84824
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000 -0.082  0.000  0.997
+      -0.803  0.000  0.000  0.596  0.000
+       0.000  0.803 -0.594  0.000 -0.049
+      -0.000 -0.596 -0.801  0.000 -0.066
+       0.596 -0.000  0.000  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.809  0.000
+      -0.000  0.251 -0.000  0.000  0.809
+
+     Number of occupied Hubbard levels =   23.5448
+
+     HUBBARD ENERGY =    0.9071  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =   -1087.78414577 Ry
-     Harris-Foulkes estimate   =   -1087.78414581 Ry
-     estimated scf accuracy    <       0.00000015 Ry
+     total energy              =   -1086.84950983 Ry
+     Harris-Foulkes estimate   =   -1086.84950985 Ry
+     estimated scf accuracy    <       0.00000004 Ry
 
      iteration # 12     ecut=    80.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           409 MiB given to the printing process from OS
+           413 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           752 MiB available memory on the node where the printing process lives
+           877 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  1.58E-10,  avg # of iterations =  2.0
+     ethr =  4.63E-11,  avg # of iterations =  2.0
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.84828
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000  0.000 -0.000 -1.000
+       0.803  0.014  0.054  0.593 -0.000
+      -0.014  0.803 -0.593  0.054 -0.000
+       0.010 -0.595 -0.800  0.072 -0.000
+      -0.595 -0.010  0.072  0.800 -0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.809  0.000
+      -0.000  0.251 -0.000  0.000  0.809
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.84827
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000  0.000  0.000  0.000 -1.000
+      -0.803  0.028 -0.085  0.589  0.000
+      -0.028 -0.803 -0.589 -0.085 -0.000
+       0.021  0.595 -0.795 -0.115 -0.000
+       0.595 -0.021 -0.115  0.795  0.000
+     occupation matrix ns (before diag.):
+       0.995 -0.000  0.000 -0.000  0.000
+      -0.000  0.656  0.000  0.000  0.251
+       0.000  0.000  0.656  0.251  0.000
+      -0.000  0.000  0.251  0.809 -0.000
+       0.000  0.251  0.000 -0.000  0.809
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.84825
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000 -0.082  0.000  0.997
+      -0.803  0.001  0.000  0.596  0.000
+       0.001  0.803 -0.594  0.000 -0.049
+      -0.000 -0.596 -0.801  0.000 -0.066
+       0.596 -0.000  0.000  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.809  0.000
+      -0.000  0.251 -0.000  0.000  0.809
+
+     Number of occupied Hubbard levels =   23.5448
+
+     HUBBARD ENERGY =    0.9071  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =   -1087.78414579 Ry
-     Harris-Foulkes estimate   =   -1087.78414580 Ry
-     estimated scf accuracy    <       0.00000007 Ry
+     total energy              =   -1086.84950984 Ry
+     Harris-Foulkes estimate   =   -1086.84950985 Ry
+     estimated scf accuracy    <       0.00000008 Ry
 
      iteration # 13     ecut=    80.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           409 MiB given to the printing process from OS
+           413 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-           740 MiB available memory on the node where the printing process lives
+           891 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  6.86E-11,  avg # of iterations =  1.0
+     ethr =  4.63E-11,  avg # of iterations =  2.0
+
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.84828
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000  0.000 -0.000 -1.000
+       0.803  0.016  0.079  0.590 -0.000
+      -0.016  0.803 -0.590  0.079 -0.000
+       0.012 -0.595 -0.796  0.107 -0.000
+      -0.595 -0.012  0.107  0.796 -0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.809  0.000
+      -0.000  0.251 -0.000  0.000  0.809
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.84828
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000  0.000  0.000  0.000 -1.000
+      -0.803  0.034 -0.089  0.589  0.000
+      -0.034 -0.803 -0.589 -0.089 -0.000
+       0.025  0.595 -0.794 -0.120 -0.000
+       0.595 -0.025 -0.120  0.794  0.000
+     occupation matrix ns (before diag.):
+       0.995 -0.000  0.000 -0.000  0.000
+      -0.000  0.656  0.000  0.000  0.251
+       0.000  0.000  0.656  0.251  0.000
+      -0.000  0.000  0.251  0.809 -0.000
+       0.000  0.251  0.000 -0.000  0.809
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.84827
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000 -0.082  0.000  0.997
+      -0.803  0.001  0.000  0.596  0.000
+       0.001  0.803 -0.594  0.000 -0.049
+      -0.000 -0.596 -0.801  0.000 -0.066
+       0.596 -0.000  0.000  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.809  0.000
+      -0.000  0.251 -0.000  0.000  0.809
+
+     Number of occupied Hubbard levels =   23.5448
+
+     HUBBARD ENERGY =    0.9071  (Ry)
 
      total cpu time spent up to now is       -1.0 secs
 
      End of self-consistent calculation
 
+     =================== HUBBARD OCCUPATIONS ===================
+     ------------------------ ATOM    4 ------------------------
+     Tr[ns(  4)] =   7.84828
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000  0.000 -0.000 -1.000
+       0.803  0.016  0.079  0.590 -0.000
+      -0.016  0.803 -0.590  0.079 -0.000
+       0.012 -0.595 -0.796  0.107 -0.000
+      -0.595 -0.012  0.107  0.796 -0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.809  0.000
+      -0.000  0.251 -0.000  0.000  0.809
+     ------------------------ ATOM    5 ------------------------
+     Tr[ns(  5)] =   7.84828
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000  0.000  0.000  0.000 -1.000
+      -0.803  0.034 -0.089  0.589  0.000
+      -0.034 -0.803 -0.589 -0.089 -0.000
+       0.025  0.595 -0.794 -0.120 -0.000
+       0.595 -0.025 -0.120  0.794  0.000
+     occupation matrix ns (before diag.):
+       0.995 -0.000  0.000 -0.000  0.000
+      -0.000  0.656  0.000  0.000  0.251
+       0.000  0.000  0.656  0.251  0.000
+      -0.000  0.000  0.251  0.809 -0.000
+       0.000  0.251  0.000 -0.000  0.809
+     ------------------------ ATOM    6 ------------------------
+     Tr[ns(  6)] =   7.84827
+     eigenvalues:
+       0.470  0.470  0.995  0.995  0.995
+     eigenvectors (columns):
+      -0.000 -0.000 -0.082  0.000  0.997
+      -0.803  0.001  0.000  0.596  0.000
+       0.001  0.803 -0.594  0.000 -0.049
+      -0.000 -0.596 -0.801  0.000 -0.066
+       0.596 -0.000  0.000  0.803  0.000
+     occupation matrix ns (before diag.):
+       0.995  0.000  0.000 -0.000 -0.000
+       0.000  0.656 -0.000 -0.000  0.251
+       0.000 -0.000  0.656  0.251 -0.000
+      -0.000 -0.000  0.251  0.809  0.000
+      -0.000  0.251 -0.000  0.000  0.809
+
+     Number of occupied Hubbard levels =   23.5448
+
           k = 0.0000 0.0000 0.0000 (  7749 PWs)   bands (ev):
 
-   -83.1659 -83.1658 -83.1657 -46.6989 -46.5526 -46.5526 -46.5440 -46.5440
-   -46.5440 -46.5439 -46.5439 -46.3981 -32.4711 -32.4709 -32.4708  -8.5860
-    -8.4828  -8.4827  -6.9494  -6.9493  -6.7748   4.4520   5.1833   5.1834
-     6.2563   6.2563   6.2822   6.2822   6.2822   6.2822   8.1674   8.1674
-     9.3007   9.3194   9.3194   9.3194   9.3194   9.3806   9.3806  10.5193
-    10.5194  10.5204  10.5206  10.5207  10.5207  11.4993  11.6016  11.6017
-    13.5753  13.5753  13.5941  13.5941  13.5942  13.5942  17.4155  18.2705
-    18.2705  19.2989
+   -83.1791 -83.1790 -83.1782 -46.7020 -46.5872 -46.5872 -46.5871 -46.5870
+   -46.5870 -46.5050 -46.5048 -46.3902 -32.4554 -32.4500 -32.4499  -8.5816
+    -8.5037  -8.5037  -6.8964  -6.8963  -6.7190   2.6699   3.2950   3.2951
+     5.3576   5.3576   5.3577   5.3577   5.3584   5.3584   7.7229   7.7230
+     7.7567   7.7568   7.7568   7.7569   8.0737   8.0738   9.2114   9.3578
+     9.3767   9.3767   9.3768   9.3768   9.4373   9.4373   9.6392   9.6393
+    13.6067  13.6067  13.6178  13.6178  13.6179  13.6179  17.4451  18.2792
+    18.2793  19.3270
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
@@ -488,14 +1308,14 @@
 
           k = 0.0000 0.3849 0.0000 (  7769 PWs)   bands (ev):
 
-   -83.1600 -83.1600 -83.1599 -46.7270 -46.6040 -46.6039 -46.5583 -46.5583
-   -46.5583 -46.5431 -46.5430 -46.4205 -32.4407 -32.4406 -32.4406  -7.5207
-    -7.4227  -7.4072  -6.8017  -6.7784  -6.6648   4.8228   4.8397   5.0510
-     5.1844   5.5183   5.5400   6.0590   6.4984   6.5883   6.6052   6.6335
-     6.8855   7.9607   7.9820   8.1362   8.4135   8.4937   8.5654  10.5700
-    10.5945  10.7200  11.3103  11.3373  11.3379  11.5592  11.6260  11.6942
-    12.7281  13.0696  13.1142  13.3083  13.4093  13.4651  19.2925  19.6814
-    20.5772  21.8427
+   -83.1692 -83.1691 -83.1690 -46.7408 -46.6487 -46.6486 -46.6018 -46.6017
+   -46.6017 -46.4956 -46.4955 -46.4036 -32.4239 -32.4212 -32.4202  -7.4787
+    -7.3902  -7.3655  -6.7241  -6.6934  -6.5822   3.1713   3.2009   3.2872
+     4.4119   4.8338   4.9648   5.5613   5.6616   5.8616   6.3489   6.3832
+     6.4350   6.7840   6.7906   6.8636   8.0164   8.1807   8.2876   8.5648
+     8.6956   8.7471   9.0727   9.1121   9.2274   9.2742   9.3193   9.5593
+    12.8071  13.1212  13.1599  13.4019  13.5091  13.5606  19.3087  19.7123
+    20.6204  21.8678
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
@@ -509,14 +1329,14 @@
 
           k = 0.0000-0.3849 0.0000 (  7769 PWs)   bands (ev):
 
-   -83.1600 -83.1600 -83.1599 -46.7270 -46.6040 -46.6039 -46.5583 -46.5583
-   -46.5583 -46.5431 -46.5430 -46.4205 -32.4407 -32.4406 -32.4406  -7.5207
-    -7.4227  -7.4072  -6.8017  -6.7784  -6.6648   4.8228   4.8397   5.0510
-     5.1844   5.5183   5.5400   6.0590   6.4984   6.5883   6.6052   6.6335
-     6.8855   7.9607   7.9820   8.1362   8.4135   8.4937   8.5654  10.5700
-    10.5945  10.7200  11.3103  11.3373  11.3379  11.5592  11.6260  11.6942
-    12.7281  13.0696  13.1142  13.3083  13.4093  13.4651  19.2925  19.6814
-    20.5772  21.8427
+   -83.1692 -83.1691 -83.1690 -46.7408 -46.6487 -46.6486 -46.6018 -46.6017
+   -46.6017 -46.4956 -46.4955 -46.4036 -32.4239 -32.4212 -32.4202  -7.4787
+    -7.3902  -7.3655  -6.7241  -6.6934  -6.5822   3.1713   3.2009   3.2872
+     4.4119   4.8338   4.9648   5.5613   5.6616   5.8616   6.3489   6.3832
+     6.4350   6.7840   6.7906   6.8636   8.0164   8.1807   8.2876   8.5648
+     8.6956   8.7471   9.0727   9.1121   9.2274   9.2742   9.3193   9.5593
+    12.8071  13.1212  13.1599  13.4019  13.5091  13.5606  19.3087  19.7123
+    20.6204  21.8678
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
@@ -530,14 +1350,14 @@
 
           k = 0.3333 0.1925 0.0000 (  7769 PWs)   bands (ev):
 
-   -83.1600 -83.1600 -83.1599 -46.7093 -46.6040 -46.6039 -46.5916 -46.5583
-   -46.5583 -46.5431 -46.5430 -46.4047 -32.4407 -32.4406 -32.4406  -7.5207
-    -7.4227  -7.4072  -6.8017  -6.7784  -6.6648   4.8228   4.8397   5.0510
-     5.1844   5.5183   5.5400   6.0590   6.4984   6.5883   6.6052   6.6336
-     6.8855   7.9607   7.9820   8.1361   8.4135   8.4937   8.5654  10.5701
-    10.5945  10.7201  11.3102  11.3373  11.3378  11.5592  11.6261  11.6943
-    12.7281  13.0696  13.1141  13.3083  13.4093  13.4651  19.2925  19.6814
-    20.5772  21.8427
+   -83.1692 -83.1691 -83.1690 -46.7195 -46.6487 -46.6486 -46.6341 -46.6018
+   -46.6017 -46.4956 -46.4955 -46.3926 -32.4239 -32.4212 -32.4202  -7.4787
+    -7.3902  -7.3655  -6.7241  -6.6934  -6.5822   3.1713   3.2010   3.2872
+     4.4118   4.8338   4.9647   5.5613   5.6616   5.8616   6.3490   6.3833
+     6.4350   6.7840   6.7905   6.8636   8.0164   8.1807   8.2876   8.5648
+     8.6957   8.7470   9.0727   9.1121   9.2274   9.2743   9.3192   9.5593
+    12.8071  13.1212  13.1599  13.4019  13.5091  13.5606  19.3087  19.7123
+    20.6204  21.8678
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
@@ -551,14 +1371,14 @@
 
           k = 0.3333 0.5774 0.0000 (  7752 PWs)   bands (ev):
 
-   -83.1571 -83.1570 -83.1570 -46.7225 -46.5996 -46.5996 -46.5996 -46.5996
-   -46.5996 -46.5384 -46.5383 -46.4159 -32.4256 -32.4255 -32.4255  -6.7475
-    -6.7475  -6.7475  -6.7474  -6.7474  -6.7474   5.1966   5.1969   5.1972
-     5.2358   5.2359   5.2359   5.4877   5.4881   5.4885   6.6787   6.6787
-     6.6787   7.2415   7.2416   7.2417   7.6147   7.6148   7.6149  10.8916
-    10.8920  10.8921  11.5139  11.5144  11.5150  11.5276  11.5277  11.5277
-    13.0590  13.0594  13.0598  13.0828  13.0829  13.0829  21.4418  21.4419
-    21.4420  21.5458
+   -83.1646 -83.1646 -83.1645 -46.7380 -46.6467 -46.6467 -46.6467 -46.6466
+   -46.6466 -46.4906 -46.4905 -46.3994 -32.4063 -32.4061 -32.4061  -6.6793
+    -6.6793  -6.6793  -6.6786  -6.6786  -6.6786   3.8327   3.8331   3.8332
+     3.8332   3.8333   3.8337   4.9732   4.9741   4.9749   6.7409   6.7409
+     6.7410   7.1947   7.1954   7.1961   7.5537   7.5537   7.5538   7.6064
+     7.6066   7.6069   9.1262   9.1264   9.1265   9.1642   9.1642   9.1643
+    13.1661  13.1663  13.1666  13.1870  13.1871  13.1871  21.4816  21.4817
+    21.4819  21.5712
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
@@ -572,14 +1392,14 @@
 
           k = 0.3333-0.1925 0.0000 (  7769 PWs)   bands (ev):
 
-   -83.1600 -83.1600 -83.1599 -46.7093 -46.6040 -46.6039 -46.5916 -46.5583
-   -46.5583 -46.5431 -46.5430 -46.4047 -32.4407 -32.4406 -32.4406  -7.5207
-    -7.4227  -7.4072  -6.8017  -6.7784  -6.6648   4.8228   4.8397   5.0510
-     5.1844   5.5183   5.5400   6.0590   6.4984   6.5883   6.6052   6.6336
-     6.8855   7.9607   7.9820   8.1361   8.4135   8.4937   8.5654  10.5701
-    10.5945  10.7201  11.3102  11.3373  11.3378  11.5592  11.6260  11.6943
-    12.7281  13.0696  13.1141  13.3083  13.4093  13.4651  19.2925  19.6814
-    20.5772  21.8427
+   -83.1692 -83.1691 -83.1690 -46.7195 -46.6487 -46.6486 -46.6341 -46.6018
+   -46.6017 -46.4956 -46.4955 -46.3926 -32.4239 -32.4212 -32.4202  -7.4787
+    -7.3902  -7.3655  -6.7241  -6.6934  -6.5822   3.1713   3.2010   3.2872
+     4.4118   4.8338   4.9647   5.5613   5.6616   5.8616   6.3490   6.3833
+     6.4350   6.7840   6.7905   6.8636   8.0164   8.1807   8.2876   8.5648
+     8.6957   8.7470   9.0727   9.1121   9.2274   9.2743   9.3192   9.5593
+    12.8071  13.1212  13.1599  13.4019  13.5091  13.5606  19.3087  19.7123
+    20.6204  21.8678
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
@@ -593,14 +1413,14 @@
 
           k =-0.3333-0.1925 0.0000 (  7769 PWs)   bands (ev):
 
-   -83.1600 -83.1600 -83.1599 -46.7093 -46.6040 -46.6039 -46.5916 -46.5583
-   -46.5583 -46.5431 -46.5430 -46.4047 -32.4407 -32.4406 -32.4406  -7.5207
-    -7.4227  -7.4072  -6.8017  -6.7784  -6.6648   4.8228   4.8397   5.0510
-     5.1844   5.5183   5.5400   6.0590   6.4984   6.5883   6.6052   6.6336
-     6.8855   7.9607   7.9820   8.1361   8.4135   8.4937   8.5654  10.5701
-    10.5945  10.7201  11.3102  11.3373  11.3378  11.5592  11.6260  11.6943
-    12.7281  13.0696  13.1141  13.3083  13.4093  13.4651  19.2925  19.6814
-    20.5772  21.8427
+   -83.1692 -83.1691 -83.1690 -46.7195 -46.6487 -46.6486 -46.6341 -46.6018
+   -46.6017 -46.4956 -46.4955 -46.3926 -32.4239 -32.4212 -32.4202  -7.4787
+    -7.3902  -7.3655  -6.7241  -6.6934  -6.5822   3.1713   3.2010   3.2872
+     4.4118   4.8338   4.9647   5.5613   5.6616   5.8616   6.3490   6.3833
+     6.4350   6.7840   6.7905   6.8636   8.0164   8.1807   8.2876   8.5648
+     8.6957   8.7470   9.0727   9.1121   9.2274   9.2743   9.3192   9.5593
+    12.8071  13.1212  13.1599  13.4019  13.5091  13.5606  19.3087  19.7123
+    20.6204  21.8678
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
@@ -614,14 +1434,14 @@
 
           k =-0.3333 0.1925 0.0000 (  7769 PWs)   bands (ev):
 
-   -83.1600 -83.1600 -83.1599 -46.7093 -46.6040 -46.6039 -46.5916 -46.5583
-   -46.5583 -46.5431 -46.5430 -46.4047 -32.4407 -32.4406 -32.4406  -7.5207
-    -7.4227  -7.4072  -6.8017  -6.7784  -6.6648   4.8228   4.8397   5.0510
-     5.1844   5.5183   5.5400   6.0590   6.4984   6.5883   6.6052   6.6336
-     6.8855   7.9607   7.9820   8.1361   8.4135   8.4937   8.5654  10.5701
-    10.5945  10.7201  11.3102  11.3373  11.3378  11.5592  11.6261  11.6943
-    12.7281  13.0696  13.1141  13.3083  13.4093  13.4651  19.2925  19.6814
-    20.5772  21.8427
+   -83.1692 -83.1691 -83.1690 -46.7195 -46.6487 -46.6486 -46.6341 -46.6018
+   -46.6017 -46.4956 -46.4955 -46.3926 -32.4239 -32.4212 -32.4202  -7.4787
+    -7.3902  -7.3655  -6.7241  -6.6934  -6.5822   3.1713   3.2010   3.2872
+     4.4118   4.8338   4.9647   5.5613   5.6616   5.8616   6.3490   6.3833
+     6.4350   6.7840   6.7905   6.8636   8.0164   8.1807   8.2876   8.5648
+     8.6957   8.7470   9.0727   9.1121   9.2274   9.2743   9.3192   9.5593
+    12.8071  13.1212  13.1599  13.4019  13.5091  13.5606  19.3087  19.7123
+    20.6204  21.8678
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
@@ -635,14 +1455,14 @@
 
           k =-0.3333-0.5774 0.0000 (  7752 PWs)   bands (ev):
 
-   -83.1571 -83.1570 -83.1570 -46.7225 -46.5996 -46.5996 -46.5996 -46.5996
-   -46.5996 -46.5384 -46.5383 -46.4159 -32.4256 -32.4255 -32.4255  -6.7475
-    -6.7475  -6.7475  -6.7474  -6.7474  -6.7474   5.1966   5.1969   5.1972
-     5.2358   5.2359   5.2359   5.4877   5.4881   5.4885   6.6787   6.6787
-     6.6787   7.2415   7.2416   7.2417   7.6147   7.6148   7.6149  10.8916
-    10.8920  10.8921  11.5139  11.5144  11.5150  11.5276  11.5277  11.5277
-    13.0590  13.0594  13.0598  13.0828  13.0829  13.0829  21.4418  21.4419
-    21.4420  21.5458
+   -83.1646 -83.1646 -83.1645 -46.7380 -46.6467 -46.6467 -46.6467 -46.6466
+   -46.6466 -46.4906 -46.4905 -46.3994 -32.4063 -32.4061 -32.4061  -6.6793
+    -6.6793  -6.6793  -6.6786  -6.6786  -6.6786   3.8327   3.8331   3.8332
+     3.8332   3.8333   3.8337   4.9732   4.9741   4.9749   6.7409   6.7409
+     6.7410   7.1947   7.1954   7.1961   7.5537   7.5537   7.5538   7.6064
+     7.6066   7.6069   9.1262   9.1264   9.1265   9.1642   9.1642   9.1643
+    13.1661  13.1663  13.1666  13.1870  13.1871  13.1871  21.4816  21.4817
+    21.4819  21.5712
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
@@ -654,19 +1474,20 @@
      0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
      0.0000   0.0000
 
-     the Fermi energy is    11.9982 ev
+     the Fermi energy is    12.0198 ev
 
-!    total energy              =   -1087.78414580 Ry
-     Harris-Foulkes estimate   =   -1087.78414580 Ry
-     estimated scf accuracy    <          1.3E-09 Ry
+!    total energy              =   -1086.84950985 Ry
+     Harris-Foulkes estimate   =   -1086.84950985 Ry
+     estimated scf accuracy    <          6.3E-09 Ry
      smearing contrib. (-TS)   =      -0.00000000 Ry
-     internal energy E=F+TS    =   -1087.78414580 Ry
+     internal energy E=F+TS    =   -1086.84950985 Ry
 
      The total energy is F=E-TS. E is the sum of the following terms:
-     one-electron contribution =    -601.77639472 Ry
-     hartree contribution      =     349.25685355 Ry
-     xc contribution           =    -195.90416299 Ry
+     one-electron contribution =    -601.80405479 Ry
+     hartree contribution      =     349.41145728 Ry
+     xc contribution           =    -196.00359227 Ry
      ewald contribution        =    -639.36044164 Ry
+     Hubbard energy            =       0.90712158 Ry
 
      convergence has been achieved in  13 iterations
      Computing du/dk (covariant derivative)
@@ -674,200 +1495,203 @@
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  4.0
      eigenvalues at k:
- -83.1659 -83.1658 -83.1657 -46.6989 -46.5526 -46.5526 -46.5440 -46.5440
- -46.5440 -46.5439 -46.5439 -46.3981 -32.4711 -32.4709 -32.4708  -8.5860
-  -8.4828  -8.4827  -6.9494  -6.9493  -6.7748   4.4520   5.1833   5.1834
-   6.2563   6.2563   6.2822   6.2822   6.2822   6.2822   8.1674   8.1674
-   9.3007   9.3194   9.3194   9.3194   9.3194   9.3806   9.3806  10.5193
-  10.5194  10.5204  10.5206  10.5207  10.5207  11.4993  11.6016  11.6017
-  13.5753  13.5753  13.5941  13.5941  13.5942  13.5942  17.4155  18.2705
-  18.2705  19.2989
+ -83.1791 -83.1790 -83.1782 -46.7020 -46.5872 -46.5872 -46.5871 -46.5870
+ -46.5870 -46.5050 -46.5048 -46.3902 -32.4554 -32.4500 -32.4499  -8.5816
+  -8.5037  -8.5037  -6.8964  -6.8963  -6.7190   2.6699   3.2950   3.2951
+   5.3576   5.3576   5.3577   5.3577   5.3584   5.3584   7.7229   7.7230
+   7.7567   7.7568   7.7568   7.7569   8.0737   8.0738   9.2114   9.3578
+   9.3767   9.3767   9.3768   9.3768   9.4373   9.4373   9.6392   9.6393
+  13.6067  13.6067  13.6178  13.6178  13.6179  13.6179  17.4451  18.2792
+  18.2793  19.3270
      eigenvalues at k+q:
- -83.1662 -83.1655 -83.1653 -46.6993 -46.5524 -46.5522 -46.5443 -46.5438
- -46.5438 -46.5436 -46.5436 -46.3984 -32.4713 -32.4710 -32.4707  -8.5860
-  -8.4829  -8.4825  -6.9495  -6.9492  -6.7748   4.4520   5.1832   5.1835
-   6.2563   6.2563   6.2820   6.2820   6.2824   6.2824   8.1673   8.1675
-   9.3007   9.3192   9.3192   9.3196   9.3196   9.3806   9.3806  10.5192
-  10.5194  10.5205  10.5206  10.5210  10.5210  11.4993  11.6015  11.6019
-  13.5754  13.5754  13.5940  13.5940  13.5944  13.5944  17.4156  18.2704
-  18.2706  19.2989
+ -83.1792 -83.1787 -83.1781 -46.7017 -46.5874 -46.5874 -46.5868 -46.5868
+ -46.5868 -46.5053 -46.5047 -46.3900 -32.4555 -32.4503 -32.4495  -8.5816
+  -8.5039  -8.5035  -6.8966  -6.8962  -6.7190   2.6700   3.2949   3.2953
+   5.3574   5.3574   5.3578   5.3578   5.3585   5.3585   7.7231   7.7231
+   7.7567   7.7568   7.7571   7.7572   8.0735   8.0740   9.2114   9.3578
+   9.3765   9.3765   9.3769   9.3769   9.4373   9.4373   9.6390   9.6395
+  13.6067  13.6068  13.6176  13.6177  13.6181  13.6181  17.4451  18.2791
+  18.2794  19.3270
      compute_u_kq: q = (   -0.0085,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -83.1659 -83.1658 -83.1657 -46.6989 -46.5526 -46.5526 -46.5440 -46.5440
- -46.5440 -46.5439 -46.5439 -46.3981 -32.4711 -32.4709 -32.4708  -8.5860
-  -8.4828  -8.4827  -6.9494  -6.9493  -6.7748   4.4520   5.1833   5.1834
-   6.2563   6.2563   6.2822   6.2822   6.2822   6.2822   8.1674   8.1674
-   9.3007   9.3194   9.3194   9.3194   9.3194   9.3806   9.3806  10.5193
-  10.5194  10.5204  10.5206  10.5207  10.5207  11.4993  11.6016  11.6017
-  13.5753  13.5753  13.5941  13.5941  13.5942  13.5942  17.4155  18.2705
-  18.2705  19.2989
+ -83.1791 -83.1790 -83.1782 -46.7020 -46.5872 -46.5872 -46.5871 -46.5870
+ -46.5870 -46.5050 -46.5048 -46.3902 -32.4554 -32.4500 -32.4499  -8.5816
+  -8.5037  -8.5037  -6.8964  -6.8963  -6.7190   2.6699   3.2950   3.2951
+   5.3576   5.3576   5.3577   5.3577   5.3584   5.3584   7.7229   7.7230
+   7.7567   7.7568   7.7568   7.7569   8.0737   8.0738   9.2114   9.3578
+   9.3767   9.3767   9.3768   9.3768   9.4373   9.4373   9.6392   9.6393
+  13.6067  13.6067  13.6178  13.6178  13.6179  13.6179  17.4451  18.2792
+  18.2793  19.3270
      eigenvalues at k+q:
- -83.1662 -83.1655 -83.1653 -46.6993 -46.5524 -46.5522 -46.5444 -46.5438
- -46.5438 -46.5436 -46.5436 -46.3984 -32.4712 -32.4710 -32.4707  -8.5853
-  -8.4822  -8.4819  -6.9494  -6.9491  -6.7747   4.4528   5.1837   5.1841
-   6.2551   6.2566   6.2800   6.2803   6.2827   6.2830   8.1691   8.1694
-   9.3014   9.3116   9.3117   9.3195   9.3196   9.3757   9.3782  10.5208
-  10.5209  10.5216  10.5218  10.5242  10.5244  11.4996  11.6020  11.6024
-  13.5734  13.5749  13.5906  13.5907  13.5956  13.5957  17.4178  18.2728
-  18.2731  19.3022
+ -83.1792 -83.1787 -83.1781 -46.7017 -46.5874 -46.5874 -46.5868 -46.5868
+ -46.5868 -46.5053 -46.5047 -46.3900 -32.4554 -32.4503 -32.4495  -8.5810
+  -8.5032  -8.5028  -6.8964  -6.8961  -6.7189   2.6710   3.2959   3.2962
+   5.3553   5.3557   5.3568   5.3582   5.3587   5.3593   7.7216   7.7219
+   7.7538   7.7540   7.7562   7.7563   8.0761   8.0766   9.2074   9.3587
+   9.3687   9.3691   9.3772   9.3776   9.4381   9.4397   9.6450   9.6455
+  13.6048  13.6064  13.6144  13.6145  13.6193  13.6194  17.4474  18.2816
+  18.2819  19.3303
      compute_u_kq: q = (    0.0085,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -83.1659 -83.1658 -83.1657 -46.6989 -46.5526 -46.5526 -46.5440 -46.5440
- -46.5440 -46.5439 -46.5439 -46.3981 -32.4711 -32.4709 -32.4708  -8.5860
-  -8.4828  -8.4827  -6.9494  -6.9493  -6.7748   4.4520   5.1833   5.1834
-   6.2563   6.2563   6.2822   6.2822   6.2822   6.2822   8.1674   8.1674
-   9.3007   9.3194   9.3194   9.3194   9.3194   9.3806   9.3806  10.5193
-  10.5194  10.5204  10.5206  10.5207  10.5207  11.4993  11.6016  11.6017
-  13.5753  13.5753  13.5941  13.5941  13.5942  13.5942  17.4155  18.2705
-  18.2705  19.2989
+ -83.1791 -83.1790 -83.1782 -46.7020 -46.5872 -46.5872 -46.5871 -46.5870
+ -46.5870 -46.5050 -46.5048 -46.3902 -32.4554 -32.4500 -32.4499  -8.5816
+  -8.5037  -8.5037  -6.8964  -6.8963  -6.7190   2.6699   3.2950   3.2951
+   5.3576   5.3576   5.3577   5.3577   5.3584   5.3584   7.7229   7.7230
+   7.7567   7.7568   7.7568   7.7569   8.0737   8.0738   9.2114   9.3578
+   9.3767   9.3767   9.3768   9.3768   9.4373   9.4373   9.6392   9.6393
+  13.6067  13.6067  13.6178  13.6178  13.6179  13.6179  17.4451  18.2792
+  18.2793  19.3270
      eigenvalues at k+q:
- -83.1662 -83.1655 -83.1653 -46.6993 -46.5524 -46.5522 -46.5444 -46.5438
- -46.5438 -46.5436 -46.5436 -46.3984 -32.4712 -32.4710 -32.4707  -8.5853
-  -8.4822  -8.4819  -6.9494  -6.9491  -6.7747   4.4528   5.1837   5.1841
-   6.2551   6.2566   6.2800   6.2803   6.2827   6.2830   8.1691   8.1694
-   9.3014   9.3116   9.3117   9.3195   9.3196   9.3757   9.3782  10.5208
-  10.5209  10.5216  10.5218  10.5242  10.5244  11.4996  11.6020  11.6024
-  13.5734  13.5749  13.5906  13.5907  13.5956  13.5957  17.4178  18.2728
-  18.2731  19.3022
+ -83.1792 -83.1787 -83.1781 -46.7017 -46.5874 -46.5874 -46.5868 -46.5868
+ -46.5868 -46.5053 -46.5047 -46.3900 -32.4554 -32.4503 -32.4495  -8.5810
+  -8.5032  -8.5028  -6.8964  -6.8961  -6.7189   2.6710   3.2959   3.2962
+   5.3553   5.3557   5.3568   5.3582   5.3587   5.3593   7.7216   7.7219
+   7.7538   7.7540   7.7562   7.7563   8.0761   8.0766   9.2074   9.3587
+   9.3687   9.3691   9.3772   9.3776   9.4381   9.4397   9.6450   9.6455
+  13.6048  13.6064  13.6144  13.6145  13.6193  13.6194  17.4474  18.2816
+  18.2819  19.3303
      compute_u_kq: q = (    0.0000,   -0.0085,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -83.1659 -83.1658 -83.1657 -46.6989 -46.5526 -46.5526 -46.5440 -46.5440
- -46.5440 -46.5439 -46.5439 -46.3981 -32.4711 -32.4709 -32.4708  -8.5860
-  -8.4828  -8.4827  -6.9494  -6.9493  -6.7748   4.4520   5.1833   5.1834
-   6.2563   6.2563   6.2822   6.2822   6.2822   6.2822   8.1674   8.1674
-   9.3007   9.3194   9.3194   9.3194   9.3194   9.3806   9.3806  10.5193
-  10.5194  10.5204  10.5206  10.5207  10.5207  11.4993  11.6016  11.6017
-  13.5753  13.5753  13.5941  13.5941  13.5942  13.5942  17.4155  18.2705
-  18.2705  19.2989
+ -83.1791 -83.1790 -83.1782 -46.7020 -46.5872 -46.5872 -46.5871 -46.5870
+ -46.5870 -46.5050 -46.5048 -46.3902 -32.4554 -32.4500 -32.4499  -8.5816
+  -8.5037  -8.5037  -6.8964  -6.8963  -6.7190   2.6699   3.2950   3.2951
+   5.3576   5.3576   5.3577   5.3577   5.3584   5.3584   7.7229   7.7230
+   7.7567   7.7568   7.7568   7.7569   8.0737   8.0738   9.2114   9.3578
+   9.3767   9.3767   9.3768   9.3768   9.4373   9.4373   9.6392   9.6393
+  13.6067  13.6067  13.6178  13.6178  13.6179  13.6179  17.4451  18.2792
+  18.2793  19.3270
      eigenvalues at k+q:
- -83.1662 -83.1655 -83.1653 -46.6993 -46.5524 -46.5522 -46.5443 -46.5438
- -46.5438 -46.5436 -46.5436 -46.3984 -32.4712 -32.4710 -32.4707  -8.5853
-  -8.4822  -8.4819  -6.9494  -6.9491  -6.7747   4.4528   5.1837   5.1841
-   6.2551   6.2566   6.2796   6.2813   6.2817   6.2834   8.1691   8.1694
-   9.3014   9.3106   9.3132   9.3180   9.3207   9.3757   9.3782  10.5205
-  10.5212  10.5215  10.5219  10.5240  10.5246  11.4996  11.6020  11.6024
-  13.5734  13.5749  13.5901  13.5915  13.5949  13.5962  17.4178  18.2728
-  18.2731  19.3022
+ -83.1792 -83.1787 -83.1781 -46.7017 -46.5874 -46.5874 -46.5868 -46.5868
+ -46.5868 -46.5053 -46.5047 -46.3900 -32.4554 -32.4503 -32.4495  -8.5810
+  -8.5032  -8.5028  -6.8964  -6.8961  -6.7189   2.6710   3.2959   3.2962
+   5.3550   5.3562   5.3568   5.3578   5.3589   5.3593   7.7216   7.7219
+   7.7535   7.7544   7.7557   7.7566   8.0760   8.0768   9.2074   9.3587
+   9.3682   9.3696   9.3766   9.3781   9.4381   9.4397   9.6450   9.6456
+  13.6048  13.6064  13.6138  13.6153  13.6185  13.6200  17.4474  18.2816
+  18.2819  19.3303
      compute_u_kq: q = (    0.0000,    0.0085,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -83.1659 -83.1658 -83.1657 -46.6989 -46.5526 -46.5526 -46.5440 -46.5440
- -46.5440 -46.5439 -46.5439 -46.3981 -32.4711 -32.4709 -32.4708  -8.5860
-  -8.4828  -8.4827  -6.9494  -6.9493  -6.7748   4.4520   5.1833   5.1834
-   6.2563   6.2563   6.2822   6.2822   6.2822   6.2822   8.1674   8.1674
-   9.3007   9.3194   9.3194   9.3194   9.3194   9.3806   9.3806  10.5193
-  10.5194  10.5204  10.5206  10.5207  10.5207  11.4993  11.6016  11.6017
-  13.5753  13.5753  13.5941  13.5941  13.5942  13.5942  17.4155  18.2705
-  18.2705  19.2989
+ -83.1791 -83.1790 -83.1782 -46.7020 -46.5872 -46.5872 -46.5871 -46.5870
+ -46.5870 -46.5050 -46.5048 -46.3902 -32.4554 -32.4500 -32.4499  -8.5816
+  -8.5037  -8.5037  -6.8964  -6.8963  -6.7190   2.6699   3.2950   3.2951
+   5.3576   5.3576   5.3577   5.3577   5.3584   5.3584   7.7229   7.7230
+   7.7567   7.7568   7.7568   7.7569   8.0737   8.0738   9.2114   9.3578
+   9.3767   9.3767   9.3768   9.3768   9.4373   9.4373   9.6392   9.6393
+  13.6067  13.6067  13.6178  13.6178  13.6179  13.6179  17.4451  18.2792
+  18.2793  19.3270
      eigenvalues at k+q:
- -83.1662 -83.1655 -83.1653 -46.6993 -46.5524 -46.5522 -46.5443 -46.5438
- -46.5438 -46.5436 -46.5436 -46.3984 -32.4712 -32.4710 -32.4707  -8.5853
-  -8.4822  -8.4819  -6.9494  -6.9491  -6.7747   4.4528   5.1837   5.1841
-   6.2551   6.2566   6.2796   6.2813   6.2817   6.2834   8.1691   8.1694
-   9.3014   9.3106   9.3132   9.3180   9.3207   9.3757   9.3782  10.5205
-  10.5212  10.5215  10.5219  10.5240  10.5246  11.4996  11.6020  11.6024
-  13.5734  13.5749  13.5901  13.5915  13.5949  13.5962  17.4178  18.2728
-  18.2731  19.3022
+ -83.1792 -83.1787 -83.1781 -46.7017 -46.5874 -46.5874 -46.5868 -46.5868
+ -46.5868 -46.5053 -46.5047 -46.3900 -32.4554 -32.4503 -32.4495  -8.5810
+  -8.5032  -8.5028  -6.8964  -6.8961  -6.7189   2.6710   3.2959   3.2962
+   5.3550   5.3562   5.3568   5.3578   5.3589   5.3593   7.7216   7.7219
+   7.7535   7.7544   7.7558   7.7566   8.0763   8.0765   9.2074   9.3587
+   9.3682   9.3696   9.3766   9.3781   9.4381   9.4397   9.6450   9.6455
+  13.6048  13.6064  13.6138  13.6153  13.6185  13.6200  17.4474  18.2816
+  18.2819  19.3303
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0085)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -83.1659 -83.1658 -83.1657 -46.6989 -46.5526 -46.5526 -46.5440 -46.5440
- -46.5440 -46.5439 -46.5439 -46.3981 -32.4711 -32.4709 -32.4708  -8.5860
-  -8.4828  -8.4827  -6.9494  -6.9493  -6.7748   4.4520   5.1833   5.1834
-   6.2563   6.2563   6.2822   6.2822   6.2822   6.2822   8.1674   8.1674
-   9.3007   9.3194   9.3194   9.3194   9.3194   9.3806   9.3806  10.5193
-  10.5194  10.5204  10.5206  10.5207  10.5207  11.4993  11.6016  11.6017
-  13.5753  13.5753  13.5941  13.5941  13.5942  13.5942  17.4155  18.2705
-  18.2705  19.2989
+ -83.1791 -83.1790 -83.1782 -46.7020 -46.5872 -46.5872 -46.5871 -46.5870
+ -46.5870 -46.5050 -46.5048 -46.3902 -32.4554 -32.4500 -32.4499  -8.5816
+  -8.5037  -8.5037  -6.8964  -6.8963  -6.7190   2.6699   3.2950   3.2951
+   5.3576   5.3576   5.3577   5.3577   5.3584   5.3584   7.7229   7.7230
+   7.7567   7.7568   7.7568   7.7569   8.0737   8.0738   9.2114   9.3578
+   9.3767   9.3767   9.3768   9.3768   9.4373   9.4373   9.6392   9.6393
+  13.6067  13.6067  13.6178  13.6178  13.6179  13.6179  17.4451  18.2792
+  18.2793  19.3270
      eigenvalues at k+q:
- -83.1662 -83.1655 -83.1653 -46.6993 -46.5524 -46.5522 -46.5443 -46.5438
- -46.5438 -46.5436 -46.5436 -46.3984 -32.4713 -32.4710 -32.4707  -8.5857
-  -8.4886  -8.4771  -6.9585  -6.9399  -6.7752   4.4536   5.1353   5.2308
-   6.2564   6.2564   6.2809   6.2809   6.2835   6.2836   8.1036   8.2329
-   9.2979   9.3164   9.3164   9.3225   9.3225   9.3805   9.3805  10.5192
-  10.5194  10.5205  10.5206  10.5210  10.5210  11.4998  11.5990  11.6041
-  13.5754  13.5754  13.5932  13.5932  13.5952  13.5952  17.4175  18.2179
-  18.3219  19.3001
+ -83.1792 -83.1787 -83.1781 -46.7017 -46.5874 -46.5874 -46.5868 -46.5868
+ -46.5868 -46.5053 -46.5047 -46.3900 -32.4554 -32.4504 -32.4495  -8.5815
+  -8.5080  -8.4996  -6.9052  -6.8872  -6.7195   2.6714   3.2588   3.3301
+   5.3574   5.3574   5.3578   5.3578   5.3585   5.3585   7.7232   7.7232
+   7.7551   7.7551   7.7587   7.7587   8.0258   8.1241   9.2029   9.3642
+   9.3736   9.3736   9.3799   9.3799   9.4371   9.4371   9.6364   9.6417
+  13.6068  13.6068  13.6172  13.6172  13.6184  13.6185  17.4470  18.2285
+  18.3288  19.3281
      compute_u_kq: q = (    0.0000,    0.0000,    0.0085)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -83.1659 -83.1658 -83.1657 -46.6989 -46.5526 -46.5526 -46.5440 -46.5440
- -46.5440 -46.5439 -46.5439 -46.3981 -32.4711 -32.4709 -32.4708  -8.5860
-  -8.4828  -8.4827  -6.9494  -6.9493  -6.7748   4.4520   5.1833   5.1834
-   6.2563   6.2563   6.2822   6.2822   6.2822   6.2822   8.1674   8.1674
-   9.3007   9.3194   9.3194   9.3194   9.3194   9.3806   9.3806  10.5193
-  10.5194  10.5204  10.5206  10.5207  10.5207  11.4993  11.6016  11.6017
-  13.5753  13.5753  13.5941  13.5941  13.5942  13.5942  17.4155  18.2705
-  18.2705  19.2989
+ -83.1791 -83.1790 -83.1782 -46.7020 -46.5872 -46.5872 -46.5871 -46.5870
+ -46.5870 -46.5050 -46.5048 -46.3902 -32.4554 -32.4500 -32.4499  -8.5816
+  -8.5037  -8.5037  -6.8964  -6.8963  -6.7190   2.6699   3.2950   3.2951
+   5.3576   5.3576   5.3577   5.3577   5.3584   5.3584   7.7229   7.7230
+   7.7567   7.7568   7.7568   7.7569   8.0737   8.0738   9.2114   9.3578
+   9.3767   9.3767   9.3768   9.3768   9.4373   9.4373   9.6392   9.6393
+  13.6067  13.6067  13.6178  13.6178  13.6179  13.6179  17.4451  18.2792
+  18.2793  19.3270
      eigenvalues at k+q:
- -83.1662 -83.1655 -83.1653 -46.6993 -46.5524 -46.5522 -46.5443 -46.5438
- -46.5438 -46.5436 -46.5436 -46.3984 -32.4713 -32.4710 -32.4707  -8.5857
-  -8.4886  -8.4771  -6.9585  -6.9399  -6.7752   4.4536   5.1353   5.2308
-   6.2564   6.2564   6.2809   6.2809   6.2835   6.2836   8.1036   8.2329
-   9.2979   9.3164   9.3164   9.3225   9.3225   9.3805   9.3805  10.5192
-  10.5194  10.5205  10.5206  10.5210  10.5210  11.4998  11.5990  11.6041
-  13.5754  13.5754  13.5932  13.5932  13.5952  13.5952  17.4175  18.2179
-  18.3219  19.3001
+ -83.1792 -83.1787 -83.1781 -46.7017 -46.5874 -46.5874 -46.5868 -46.5868
+ -46.5868 -46.5053 -46.5047 -46.3900 -32.4554 -32.4504 -32.4495  -8.5815
+  -8.5080  -8.4996  -6.9052  -6.8872  -6.7195   2.6714   3.2588   3.3301
+   5.3574   5.3574   5.3578   5.3578   5.3585   5.3585   7.7232   7.7232
+   7.7551   7.7551   7.7587   7.7587   8.0258   8.1241   9.2029   9.3642
+   9.3736   9.3736   9.3799   9.3799   9.4371   9.4371   9.6364   9.6417
+  13.6068  13.6068  13.6172  13.6172  13.6184  13.6185  17.4470  18.2285
+  18.3288  19.3281
      done with du/dk   q_gipaw = 0.010000
 
      Computing the orbital magnetization (bohr mag/cell):
-BC: k-point:    1  pool:   1        0.006068    0.000000   -0.000000
-LC: k-point:    1  pool:   1        0.004678   -0.000000    0.000000
-IC: k-point:    1  pool:   1        0.003027    0.000000    0.000000
+BC: k-point:    1  pool:   1        0.003807   -0.000000   -0.000000
+LC: k-point:    1  pool:   1        0.002713    0.000000    0.000000
+IC: k-point:    1  pool:   1        0.001760    0.000000    0.000000
 
      SPIN-ORBIT:
      lambda_so          =       0.000000      0.000000      0.000000
 
-     Berry curvature    =      -0.042119     -0.000000      0.000000
-     Fermi energy       =       0.881853 rydberg
+     Berry curvature    =      -0.005010      0.000000     -0.000000
+     Fermi energy       =       0.883438 rydberg
 
      NUCLEAR DIPOLE ON ATOM   6:
      m_0                =       4.242641      0.000000      0.000000
 
      (without Berry curvature term)
-     M_LC               =       0.044716     -0.000000      0.000000
-     M_IC               =       0.010851     -0.000000      0.000000
-     Delta_M_bare       =      -0.024198     -0.000000     -0.000000
-     Delta_M_para       =       0.003576     -0.000000     -0.000000
+     M_LC               =       0.024045      0.000000     -0.000000
+     M_IC               =       0.010479      0.000000     -0.000000
+     Delta_M_bare       =      -0.009288      0.000000     -0.000000
+     Delta_M_hubbard        =      -0.000059     -0.000000     -0.000000
+     Delta_M_para       =       0.003505     -0.000000      0.000000
      Delta_M_dia        =      -0.000542      0.000000      0.000000
-     M_tot              =       0.034403     -0.000000      0.000000
+     M_tot              =       0.028140      0.000000     -0.000000
 
      (with Berry curvature term)
-     M_LC               =       0.081858     -0.000000     -0.000000
-     M_IC               =       0.047994      0.000000     -0.000000
-     Delta_M            =      -0.021164     -0.000000     -0.000000
-     M_tot              =       0.108688     -0.000000     -0.000000
+     M_LC               =       0.028471      0.000000     -0.000000
+     M_IC               =       0.014905     -0.000000     -0.000000
+     Delta_M_bare       =      -0.009288      0.000000     -0.000000
+     Delta_M_hubbard        =      -0.000059     -0.000000     -0.000000
+     Delta_M            =      -0.006384      0.000000     -0.000000
+     M_tot              =       0.036993      0.000000     -0.000000
 
      NUCLEAR DIPOLE ON ATOM   6 (Co ):
      m_0                =       4.242641      0.000000      0.000000
-     Chemical shift (ppm):   -18114.6855        0.0009        0.0003
+     Chemical shift (ppm):    -6165.4295       -0.0042        0.0019
      Core shift     (ppm):     1772.5663
 
-     QE-CONVERSE  :   1m35.31s CPU   1m37.18s WALL
+     QE-CONVERSE  :   1m43.46s CPU   1m45.60s WALL
 
 
-   This run was terminated on:  14:16:53  21Apr2026            
+   This run was terminated on:  15:11:52  21Apr2026            
 
 =------------------------------------------------------------------------------=
    JOB DONE.
 =------------------------------------------------------------------------------=
      Initialization:
 
-     read_file    :      1.25s CPU      1.30s WALL (       1 calls)
-     gipaw_setup  :      0.77s CPU      0.78s WALL (       1 calls)
-     wfcinit      :      1.23s CPU      1.25s WALL (       1 calls)
-     hinit0       :      0.45s CPU      0.45s WALL (       1 calls)
-     potinit      :      0.34s CPU      0.35s WALL (       1 calls)
+     read_file    :      1.28s CPU      1.32s WALL (       1 calls)
+     gipaw_setup  :      0.82s CPU      0.83s WALL (       1 calls)
+     wfcinit      :      1.25s CPU      1.29s WALL (       1 calls)
+     hinit0       :      0.51s CPU      0.52s WALL (       1 calls)
+     potinit      :      0.37s CPU      0.39s WALL (       1 calls)
 
      SCF calculation:
 
-     electrons    :     34.04s CPU     34.74s WALL (       1 calls)
-     h_psi        :     71.84s CPU     72.73s WALL (     466 calls)
+     electrons    :     37.61s CPU     38.46s WALL (       1 calls)
+     h_psi        :     77.79s CPU     78.92s WALL (     468 calls)
 
      g-tensor:
 
-     compute_dudk :     41.35s CPU     42.02s WALL (       1 calls)
-     orbital_magn :     15.86s CPU     16.27s WALL (       1 calls)
+     compute_dudk :     45.91s CPU     46.79s WALL (       1 calls)
+     orbital_magn :     15.67s CPU     15.97s WALL (       1 calls)

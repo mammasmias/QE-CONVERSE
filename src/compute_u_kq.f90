@@ -28,7 +28,8 @@ SUBROUTINE compute_u_kq(ik, q)
   USE gvecw,                ONLY : gcutw
   USE control_flags,        ONLY : ethr, io_level, lscf, istep, max_cg_iter
   USE control_flags,        ONLY : cntrl_isolve => isolve, iverbosity
-  USE ldaU,                 ONLY : lda_plus_u, wfcU
+  USE ldaU,                 ONLY : lda_plus_u, wfcU, Hubbard_projectors
+  USE basis,                ONLY : natomwfc, wfcatom, swfcatom
   USE lsda_mod,             ONLY : current_spin, lsda, isk
   USE noncollin_module,     ONLY : noncolin, npol
   USE wavefunctions,        ONLY : evc  
@@ -132,8 +133,13 @@ SUBROUTINE compute_u_kq(ik, q)
   ! read in wavefunctions from the previous iteration
   CALL get_buffer( evc, nwordwfc, iunwfc, ik)
 
-  ! Needed for LDA+U
-!  IF ( lda_plus_u ) CALL get_buffer( wfcU, nwordwfcU, iunhub, ik )
+  ! Needed for LDA+U: compute orthogonalized wfcU exactly at k+q.
+  ! xk(:,ik) is already shifted to k+q here; vkb is already initialized at k+q.
+  IF ( lda_plus_u .AND. Hubbard_projectors /= 'pseudo' ) THEN
+     ALLOCATE( wfcatom(npwx*npol, natomwfc), swfcatom(npwx*npol, natomwfc) )
+     CALL orthoUwfc_k( ik, .FALSE. )
+     DEALLOCATE( wfcatom, swfcatom )
+  END IF
 
   ! randomize a little bit in case of CG diagonalization
 !  if ( isolve == 1 ) then
