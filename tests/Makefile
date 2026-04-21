@@ -19,7 +19,7 @@ ifneq ($(QE_SRC_DIR),)
   export PW := $(abspath $(QE_SRC_DIR)/bin/pw.x)
 endif
 
-INTEGRATION_TESTS := integration/CO+ integration/quartz integration/nacl_nmr integration/CO+_kpools integration/nacl_nmr_kpool
+INTEGRATION_TESTS := integration/CO+ integration/quartz integration/nacl_nmr integration/CO+_kpools integration/nacl_nmr_kpool integration/licoo2_U
 
 all: unit integration
 
