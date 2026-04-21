@@ -9,4 +9,4 @@ mpirun --oversubscribe -np 9 $QECONVERSE -nk 9 < li1x.in > li1x.out
 
 mpirun --oversubscribe -np 9 $QECONVERSE -nk 9 < co6z.in > co6z.out
 
-python3 ../check_nmr.py --files li1x.out co7x.out --refdir reference
+python3 ../check_nmr.py --files li1x.out co6z.out --refdir reference
