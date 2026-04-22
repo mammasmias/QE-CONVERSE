@@ -390,15 +390,17 @@
     USE constants,        ONLY : tpi
     USE cell_base,        ONLY : tpiba
     USE ions_base,        ONLY : nat, ityp, tau
-    USE ldaU,             ONLY : nwfcU, wfcU, offsetU, is_hubbard, Hubbard_l
+    USE ldaU,             ONLY : nwfcU, wfcU, offsetU, is_hubbard, Hubbard_l, &
+                                  copy_U_wfc
     USE basis,            ONLY : natomwfc, wfcatom, swfcatom
-    USE noncollin_module, ONLY : npol
+    USE noncollin_module, ONLY : npol, noncolin
     USE uspp_init,        ONLY : init_us_2
+    USE uspp_param,       ONLY : upf
     USE becmod,           ONLY : deallocate_bec_type, allocate_bec_type, calbec
     USE mp,               ONLY : mp_sum
     USE mp_bands,         ONLY : intra_bgrp_comm
     implicit none
-    integer     :: ipol, sig, na, nt, m, ihubst
+    integer     :: ipol, sig, na, nt, m, ihubst, na2, nt2, istart, nwfc_na2
     real(dp)    :: kq(3), arg, xk_save(3)
     complex(dp) :: phase_na
     complex(dp), allocatable :: proj(:,:), wfcU_save(:,:)
@@ -419,27 +421,53 @@
         kq(:)      = xk_save(:)
         kq(ipol)   = kq(ipol) + sig * delta_k
 
-        ! Compute vkb and wfcU (full-phase, S-orth) at displaced k
         xk(:,ik) = kq(:)
         call init_us_2( npw, igk_k(1,ik), kq, vkb )
         allocate( wfcatom(npwx*npol, natomwfc), swfcatom(npwx*npol, natomwfc) )
-        call orthoUwfc_k( ik, .FALSE. )   ! wfcU = O^{-1/2} S phi at kq (full phase)
+
+        if ( Hubbard_projectors == 'ortho-atomic' ) then
+          ! Orthogonalize in the no-phase basis so that inter-atom mixing in
+          ! O^{-1/2} does not introduce spurious k-dependent phase factors.
+          ! Strip e^{-ik·tau} from every atomic wfc BEFORE Löwdin, then the
+          ! Löwdin matrix and the resulting wfcU are already in the no-phase
+          ! convention; no further stripping is needed after this block.
+          call atomic_wfc( ik, wfcatom )
+          istart = 1
+          do na2 = 1, nat
+            nt2 = ityp(na2)
+            arg = tpi * dot_product( kq(:), tau(:,na2) )
+            phase_na = cmplx( cos(arg), +sin(arg), kind=dp )
+            nwfc_na2 = upf(nt2)%nwfc
+            wfcatom(1:npw, istart:istart+nwfc_na2-1) = &
+                wfcatom(1:npw, istart:istart+nwfc_na2-1) * phase_na
+            istart = istart + nwfc_na2
+          enddo
+          ! norm-conserving: S=1, swfcatom = wfcatom
+          swfcatom(1:npw, 1:natomwfc) = wfcatom(1:npw, 1:natomwfc)
+          call ortho_swfc( npw, .false., natomwfc, wfcatom, swfcatom, .false. )
+          call copy_U_wfc( swfcatom, noncolin )
+        else
+          ! atomic: no inter-atom Löwdin mixing, each atom's phase factors out
+          ! cleanly; orthoUwfc_k + per-Hubbard-atom stripping below is correct.
+          call orthoUwfc_k( ik, .FALSE. )
+        endif
+
         deallocate( wfcatom, swfcatom )
 
-        ! Convert full-phase -> no-phase: multiply each orbital of atom na
-        ! Multiply by e^{+i kq.tau_na} to cancel the k-part of the structure
-        ! factor: wfcU_full(G) = e^{-i(kq+G)tau} F(kq+G), so multiplying by
-        ! e^{+ikq.tau} leaves e^{-iG.tau} F, matching init_us_2_no_phase.
-        do na = 1, nat
-          nt = ityp(na)
-          if ( .not. is_hubbard(nt) ) cycle
-          arg      = tpi * dot_product( kq(:), tau(:,na) )
-          phase_na = cmplx( cos(arg), +sin(arg), kind=dp )
-          do m = 1, 2*Hubbard_l(nt) + 1
-            ihubst = offsetU(na) + m
-            wfcU(1:npw, ihubst) = wfcU(1:npw, ihubst) * phase_na
+        ! For atomic projectors: strip e^{-ik·tau} per Hubbard atom.
+        ! For ortho-atomic: wfcU is already no-phase; skip.
+        if ( Hubbard_projectors /= 'ortho-atomic' ) then
+          do na = 1, nat
+            nt = ityp(na)
+            if ( .not. is_hubbard(nt) ) cycle
+            arg      = tpi * dot_product( kq(:), tau(:,na) )
+            phase_na = cmplx( cos(arg), +sin(arg), kind=dp )
+            do m = 1, 2*Hubbard_l(nt) + 1
+              ihubst = offsetU(na) + m
+              wfcU(1:npw, ihubst) = wfcU(1:npw, ihubst) * phase_na
+            enddo
           enddo
-        enddo
+        endif
 
         ! proj(m,n) = <wfcU^{NP}(kq) | u_n(k)>
         call ZGEMM( 'C', 'N', nwfcU, nbnd, npw, &
