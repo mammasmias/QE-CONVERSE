@@ -117,7 +117,7 @@ SUBROUTINE c_bands_gipaw ( iter )
      !
      ! ... Needed for DFT+Hubbard
      !
-     IF ( nks > 1 .AND. lda_plus_u .AND. (Hubbard_projectors.NE.'pseudo') ) THEN
+     IF ( lda_plus_u .AND. (Hubbard_projectors.NE.'pseudo') ) THEN
         CALL get_buffer ( wfcU, nwordwfcU, iunhub, ik )
         !$acc update device(wfcU)
      END IF
@@ -809,7 +809,7 @@ SUBROUTINE c_bands_nscf_gipaw( )
      !
      ! ... Needed for DFT+Hubbard
      !
-     IF ( nks > 1 .AND. lda_plus_u .AND. (Hubbard_projectors.NE.'pseudo') ) THEN
+     IF ( lda_plus_u .AND. (Hubbard_projectors.NE.'pseudo') ) THEN
         CALL get_buffer ( wfcU, nwordwfcU, iunhub, ik )
         !$acc update device(wfcU)
      END IF
