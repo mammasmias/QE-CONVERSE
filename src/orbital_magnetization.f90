@@ -21,6 +21,7 @@ MODULE orbital_magnetization
   COMPLEX(dp), ALLOCATABLE :: dbecp(:,:,:)
   COMPLEX(dp), ALLOCATABLE :: paw_dbecp(:,:,:)
   COMPLEX(dp), ALLOCATABLE :: dhubbecp(:,:,:)  ! no-phase k-deriv of Hubbard projectors
+  COMPLEX(dp), ALLOCATABLE :: hubbecp_0(:,:)   ! no-phase Hubbard overlap at k (DFT+U+V)
   INTEGER, ALLOCATABLE :: igk(:,:)
   real(dp) :: delta_k
   CHARACTER(len=1)            :: lambda_0_dir = '_'
