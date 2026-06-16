@@ -1,7 +1,7 @@
 &control
     prefix = 'CO+'
     calculation = 'scf'
-    pseudo_dir = '../../pseudo/'
+    pseudo_dir = '../../test_pseudos/'
     outdir = './scratch/'
     tstress = .false.
     tprnfor = .false.

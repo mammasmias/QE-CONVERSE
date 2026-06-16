@@ -1,5 +1,5 @@
 
-     Program QE-CONVERSE v.7.5 starts on  5Mar2026 at  9:37:57 
+     Program QE-CONVERSE v.7.5 starts on 15Jun2026 at 10:39: 9 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -13,7 +13,7 @@
      Parallel version (MPI), running on     1 processors
 
      MPI processes distributed on     1 nodes
-     5457 MiB available memory on the printing compute node when the environment starts
+     1171 MiB available memory on the printing compute node when the environment starts
 
 
      Reading xml data from directory:
@@ -203,11 +203,9 @@ A      1.00
      Message from routine init_vloc:
      Interpolation table for Vloc re-allocated
 
-     Initial potential from superposition of free atoms
+     The initial density is read from file :
+     ./scratch/CO+.save/charge-density
 
-     starting charge      10.0000, renormalised to       9.0000
-
-     negative rho (up, down):  5.316E-03 5.316E-03
      Starting wfcs are   16 atomic wfcs
 
      total cpu time spent up to now is       -1.0 secs
@@ -218,43 +216,39 @@ A      1.00
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           214 MiB given to the printing process from OS
+           215 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-          5442 MiB available memory on the node where the printing process lives
+          1158 MiB available memory on the node where the printing process lives
 ------------------
      ethr =  1.00E-08,  avg # of iterations =  8.0
 
-     negative rho (up, down):  2.386E-03 2.470E-03
-
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =     -41.58225938 Ry
-     Harris-Foulkes estimate   =     -42.08887927 Ry
-     estimated scf accuracy    <       0.92791842 Ry
+     total energy              =     -41.86372319 Ry
+     Harris-Foulkes estimate   =     -41.86372105 Ry
+     estimated scf accuracy    <       0.00000024 Ry
 
      total magnetization       =     1.00 Bohr mag/cell
-     absolute magnetization    =     1.00 Bohr mag/cell
+     absolute magnetization    =     1.19 Bohr mag/cell
 
      iteration #  2     ecut=    30.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           227 MiB given to the printing process from OS
+           228 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-          5426 MiB available memory on the node where the printing process lives
+          1162 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  1.00E-02,  avg # of iterations =  3.0
-
-     negative rho (up, down):  1.664E-03 1.749E-03
+     ethr =  2.71E-09,  avg # of iterations =  2.4
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =     -41.66076183 Ry
-     Harris-Foulkes estimate   =     -41.99175521 Ry
-     estimated scf accuracy    <       0.90432111 Ry
+     total energy              =     -41.86372389 Ry
+     Harris-Foulkes estimate   =     -41.86372325 Ry
+     estimated scf accuracy    <       0.00000008 Ry
 
      total magnetization       =     1.00 Bohr mag/cell
-     absolute magnetization    =     1.05 Bohr mag/cell
+     absolute magnetization    =     1.19 Bohr mag/cell
 
      iteration #  3     ecut=    30.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
@@ -262,167 +256,28 @@ A      1.00
 ---- Real-time Memory Report at c_bands before calling an iterative solver
            229 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-          5426 MiB available memory on the node where the printing process lives
+          1163 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  1.00E-02,  avg # of iterations =  2.4
-
-     negative rho (up, down):  3.269E-04 3.826E-04
+     ethr =  8.75E-10,  avg # of iterations =  2.8
 
      total cpu time spent up to now is       -1.0 secs
 
-     total energy              =     -41.84987090 Ry
-     Harris-Foulkes estimate   =     -41.86107215 Ry
-     estimated scf accuracy    <       0.06938087 Ry
-
-     total magnetization       =     1.00 Bohr mag/cell
-     absolute magnetization    =     1.04 Bohr mag/cell
-
-     iteration #  4     ecut=    30.00 Ry     beta= 0.50
-     Davidson diagonalization with overlap
-
----- Real-time Memory Report at c_bands before calling an iterative solver
-           230 MiB given to the printing process from OS
-             0 MiB allocation reported by mallinfo(arena+hblkhd)
-          5426 MiB available memory on the node where the printing process lives
-------------------
-     ethr =  7.71E-04,  avg # of iterations =  2.0
-
-     negative rho (up, down):  3.222E-05 4.462E-05
-
-     total cpu time spent up to now is       -1.0 secs
-
-     total energy              =     -41.86203630 Ry
-     Harris-Foulkes estimate   =     -41.85958498 Ry
-     estimated scf accuracy    <       0.00238324 Ry
-
-     total magnetization       =     1.00 Bohr mag/cell
-     absolute magnetization    =     1.09 Bohr mag/cell
-
-     iteration #  5     ecut=    30.00 Ry     beta= 0.50
-     Davidson diagonalization with overlap
-
----- Real-time Memory Report at c_bands before calling an iterative solver
-           232 MiB given to the printing process from OS
-             0 MiB allocation reported by mallinfo(arena+hblkhd)
-          5426 MiB available memory on the node where the printing process lives
-------------------
-     ethr =  2.65E-05,  avg # of iterations =  3.2
-
-     negative rho (up, down):  8.512E-08 2.007E-07
-
-     total cpu time spent up to now is       -1.0 secs
-
-     total energy              =     -41.86343046 Ry
-     Harris-Foulkes estimate   =     -41.86285056 Ry
-     estimated scf accuracy    <       0.00032214 Ry
-
-     total magnetization       =     1.00 Bohr mag/cell
-     absolute magnetization    =     1.13 Bohr mag/cell
-
-     iteration #  6     ecut=    30.00 Ry     beta= 0.50
-     Davidson diagonalization with overlap
-
----- Real-time Memory Report at c_bands before calling an iterative solver
-           233 MiB given to the printing process from OS
-             0 MiB allocation reported by mallinfo(arena+hblkhd)
-          5427 MiB available memory on the node where the printing process lives
-------------------
-     ethr =  3.58E-06,  avg # of iterations =  2.5
-
-     total cpu time spent up to now is       -1.0 secs
-
-     total energy              =     -41.86361371 Ry
-     Harris-Foulkes estimate   =     -41.86354494 Ry
-     estimated scf accuracy    <       0.00006756 Ry
-
-     total magnetization       =     1.00 Bohr mag/cell
-     absolute magnetization    =     1.15 Bohr mag/cell
-
-     iteration #  7     ecut=    30.00 Ry     beta= 0.50
-     Davidson diagonalization with overlap
-
----- Real-time Memory Report at c_bands before calling an iterative solver
-           234 MiB given to the printing process from OS
-             0 MiB allocation reported by mallinfo(arena+hblkhd)
-          5429 MiB available memory on the node where the printing process lives
-------------------
-     ethr =  7.51E-07,  avg # of iterations =  2.5
-
-     total cpu time spent up to now is       -1.0 secs
-
-     total energy              =     -41.86369774 Ry
-     Harris-Foulkes estimate   =     -41.86369727 Ry
-     estimated scf accuracy    <       0.00007869 Ry
-
-     total magnetization       =     1.00 Bohr mag/cell
-     absolute magnetization    =     1.17 Bohr mag/cell
-
-     iteration #  8     ecut=    30.00 Ry     beta= 0.50
-     Davidson diagonalization with overlap
-
----- Real-time Memory Report at c_bands before calling an iterative solver
-           236 MiB given to the printing process from OS
-             0 MiB allocation reported by mallinfo(arena+hblkhd)
-          5429 MiB available memory on the node where the printing process lives
-------------------
-     ethr =  7.51E-07,  avg # of iterations =  2.0
-
-     total cpu time spent up to now is       -1.0 secs
-
-     total energy              =     -41.86371293 Ry
-     Harris-Foulkes estimate   =     -41.86370882 Ry
-     estimated scf accuracy    <       0.00001182 Ry
-
-     total magnetization       =     1.00 Bohr mag/cell
-     absolute magnetization    =     1.18 Bohr mag/cell
-
-     iteration #  9     ecut=    30.00 Ry     beta= 0.50
-     Davidson diagonalization with overlap
-
----- Real-time Memory Report at c_bands before calling an iterative solver
-           237 MiB given to the printing process from OS
-             0 MiB allocation reported by mallinfo(arena+hblkhd)
-          5427 MiB available memory on the node where the printing process lives
-------------------
-     ethr =  1.31E-07,  avg # of iterations =  3.0
-
-     total cpu time spent up to now is       -1.0 secs
-
-     total energy              =     -41.86372249 Ry
-     Harris-Foulkes estimate   =     -41.86372312 Ry
-     estimated scf accuracy    <       0.00000248 Ry
-
-     total magnetization       =     1.00 Bohr mag/cell
-     absolute magnetization    =     1.19 Bohr mag/cell
-
-     iteration # 10     ecut=    30.00 Ry     beta= 0.50
-     Davidson diagonalization with overlap
-
----- Real-time Memory Report at c_bands before calling an iterative solver
-           238 MiB given to the printing process from OS
-             0 MiB allocation reported by mallinfo(arena+hblkhd)
-          5425 MiB available memory on the node where the printing process lives
-------------------
-     ethr =  2.76E-08,  avg # of iterations =  3.0
-
-     total cpu time spent up to now is       -1.0 secs
-
-     total energy              =     -41.86372412 Ry
-     Harris-Foulkes estimate   =     -41.86372410 Ry
+     total energy              =     -41.86372411 Ry
+     Harris-Foulkes estimate   =     -41.86372391 Ry
      estimated scf accuracy    <       0.00000004 Ry
 
      total magnetization       =     1.00 Bohr mag/cell
      absolute magnetization    =     1.19 Bohr mag/cell
 
-     iteration # 11     ecut=    30.00 Ry     beta= 0.50
+     iteration #  4     ecut=    30.00 Ry     beta= 0.50
      Davidson diagonalization with overlap
 
 ---- Real-time Memory Report at c_bands before calling an iterative solver
-           238 MiB given to the printing process from OS
+           231 MiB given to the printing process from OS
              0 MiB allocation reported by mallinfo(arena+hblkhd)
-          5425 MiB available memory on the node where the printing process lives
+          1163 MiB available memory on the node where the printing process lives
 ------------------
-     ethr =  4.76E-10,  avg # of iterations =  2.5
+     ethr =  4.03E-10,  avg # of iterations =  2.0
 
      total cpu time spent up to now is       -1.0 secs
 
@@ -433,42 +288,42 @@ A      1.00
 
           k = 0.0000 0.0000 0.0000 (  2777 PWs)   bands (ev):
 
-   -32.9160 -16.6655 -13.3749 -13.3746 -13.2608  -3.9928
+   -32.9161 -16.6656 -13.3748 -13.3745 -13.2606  -3.9924
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   0.0000
 
           k = 0.0000 0.0000-0.5000 (  2762 PWs)   bands (ev):
 
-   -32.8988 -16.6706 -13.3730 -13.3727 -13.1419  -4.0391
+   -32.8988 -16.6707 -13.3729 -13.3726 -13.1417  -4.0387
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   0.0000
 
           k = 0.0000-0.5000-0.5000 (  2752 PWs)   bands (ev):
 
-   -32.9039 -16.6777 -13.3326 -13.3224 -13.1524  -4.0951
+   -32.9039 -16.6777 -13.3326 -13.3223 -13.1522  -4.0948
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   0.0000
 
           k =-0.5000-0.5000-0.5000 (  2800 PWs)   bands (ev):
 
-   -32.9135 -16.7041 -13.3972 -13.3969 -13.1951  -4.1163
+   -32.9136 -16.7041 -13.3971 -13.3968 -13.1949  -4.1160
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   0.0000
 
           k =-0.5000 0.0000 0.0000 (  2762 PWs)   bands (ev):
 
-   -32.9120 -16.6624 -13.3439 -13.3399 -13.2432  -4.0245
+   -32.9121 -16.6624 -13.3438 -13.3398 -13.2430  -4.0242
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   0.0000
 
           k =-0.5000 0.5000 0.0000 (  2752 PWs)   bands (ev):
 
-   -32.9047 -16.6460 -13.3727 -13.3724 -13.2188  -3.9849
+   -32.9048 -16.6460 -13.3726 -13.3723 -13.2186  -3.9845
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   1.0000   0.0000
@@ -478,615 +333,615 @@ A      1.00
 
           k = 0.0000 0.0000 0.0000 (  2777 PWs)   bands (ev):
 
-   -32.7679 -15.8674 -13.1472 -13.1466  -9.2283  -2.6608
+   -32.7677 -15.8670 -13.1470 -13.1464  -9.2288  -2.6611
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   0.0000   0.0000
 
           k = 0.0000 0.0000-0.5000 (  2762 PWs)   bands (ev):
 
-   -32.7516 -15.8374 -13.1473 -13.1466  -9.1132  -2.7081
+   -32.7513 -15.8370 -13.1471 -13.1464  -9.1136  -2.7085
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   0.0000   0.0000
 
           k = 0.0000-0.5000-0.5000 (  2752 PWs)   bands (ev):
 
-   -32.7563 -15.8505 -13.1048 -13.0961  -9.1068  -2.7966
+   -32.7560 -15.8502 -13.1046 -13.0959  -9.1072  -2.7969
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   0.0000   0.0000
 
           k =-0.5000-0.5000-0.5000 (  2800 PWs)   bands (ev):
 
-   -32.7653 -15.8952 -13.1743 -13.1737  -9.1182  -2.8096
+   -32.7651 -15.8949 -13.1741 -13.1735  -9.1186  -2.8100
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   0.0000   0.0000
 
           k =-0.5000 0.0000 0.0000 (  2762 PWs)   bands (ev):
 
-   -32.7640 -15.8592 -13.1163 -13.1120  -9.2026  -2.6870
+   -32.7637 -15.8589 -13.1161 -13.1118  -9.2030  -2.6874
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   0.0000   0.0000
 
           k =-0.5000 0.5000 0.0000 (  2752 PWs)   bands (ev):
 
-   -32.7572 -15.8353 -13.1408 -13.1401  -9.1735  -2.6788
+   -32.7569 -15.8350 -13.1406 -13.1400  -9.1739  -2.6791
 
      occupation numbers 
      1.0000   1.0000   1.0000   1.0000   0.0000   0.0000
 
-     highest occupied, lowest unoccupied level (ev):   -13.0961   -9.2283
+     highest occupied, lowest unoccupied level (ev):   -13.0959   -9.2288
 
 !    total energy              =     -41.86372413 Ry
-     Harris-Foulkes estimate   =     -41.86372413 Ry
-     estimated scf accuracy    <          3.8E-09 Ry
+     Harris-Foulkes estimate   =     -41.86372412 Ry
+     estimated scf accuracy    <          5.8E-10 Ry
 
      The total energy is the sum of the following terms:
-     one-electron contribution =     -54.30917479 Ry
-     hartree contribution      =      27.14370984 Ry
-     xc contribution           =      -9.29894536 Ry
+     one-electron contribution =     -54.30913071 Ry
+     hartree contribution      =      27.14364256 Ry
+     xc contribution           =      -9.29892217 Ry
      ewald contribution        =      -5.39931382 Ry
 
      total magnetization       =     1.00 Bohr mag/cell
      absolute magnetization    =     1.19 Bohr mag/cell
 
-     convergence has been achieved in  11 iterations
+     convergence has been achieved in   4 iterations
      Computing du/dk (covariant derivative)
      k-point:   1    occ=  5
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  5.0
      eigenvalues at k:
- -32.9160 -16.6655 -13.3749 -13.3746 -13.2608  -3.9928
+ -32.9161 -16.6656 -13.3748 -13.3745 -13.2606  -3.9924
      eigenvalues at k+q:
- -32.9157 -16.6654 -13.3746 -13.3743 -13.2606  -3.9924
+ -32.9159 -16.6655 -13.3747 -13.3744 -13.2606  -3.9924
      compute_u_kq: q = (   -0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9160 -16.6655 -13.3749 -13.3746 -13.2608  -3.9928
+ -32.9161 -16.6656 -13.3748 -13.3745 -13.2606  -3.9924
      eigenvalues at k+q:
- -32.9157 -16.6653 -13.3745 -13.3743 -13.2606  -3.9924
+ -32.9159 -16.6655 -13.3746 -13.3744 -13.2606  -3.9924
      compute_u_kq: q = (    0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9160 -16.6655 -13.3749 -13.3746 -13.2608  -3.9928
+ -32.9161 -16.6656 -13.3748 -13.3745 -13.2606  -3.9924
      eigenvalues at k+q:
- -32.9157 -16.6654 -13.3746 -13.3743 -13.2605  -3.9924
+ -32.9159 -16.6655 -13.3747 -13.3744 -13.2606  -3.9924
      compute_u_kq: q = (    0.0000,   -0.0159,    0.0000)
-     ethr =  1.00E-13,  avg # of iterations =  9.0
+     ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9160 -16.6655 -13.3749 -13.3746 -13.2608  -3.9928
+ -32.9161 -16.6656 -13.3748 -13.3745 -13.2606  -3.9924
      eigenvalues at k+q:
- -32.9157 -16.6654 -13.3746 -13.3743 -13.2605  -3.9925
+ -32.9159 -16.6655 -13.3747 -13.3744 -13.2606  -3.9925
      compute_u_kq: q = (    0.0000,    0.0159,    0.0000)
-     ethr =  1.00E-13,  avg # of iterations =  9.0
+     ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9160 -16.6655 -13.3749 -13.3746 -13.2608  -3.9928
+ -32.9161 -16.6656 -13.3748 -13.3745 -13.2606  -3.9924
      eigenvalues at k+q:
- -32.9157 -16.6654 -13.3746 -13.3743 -13.2605  -3.9925
+ -32.9159 -16.6655 -13.3747 -13.3744 -13.2606  -3.9925
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0159)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.9160 -16.6655 -13.3749 -13.3746 -13.2608  -3.9928
+ -32.9161 -16.6656 -13.3748 -13.3745 -13.2606  -3.9924
      eigenvalues at k+q:
- -32.9157 -16.6654 -13.3746 -13.3743 -13.2603  -3.9925
+ -32.9159 -16.6655 -13.3746 -13.3744 -13.2604  -3.9925
      compute_u_kq: q = (    0.0000,    0.0000,    0.0159)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.9160 -16.6655 -13.3749 -13.3746 -13.2608  -3.9928
+ -32.9161 -16.6656 -13.3748 -13.3745 -13.2606  -3.9924
      eigenvalues at k+q:
- -32.9157 -16.6654 -13.3746 -13.3743 -13.2603  -3.9925
+ -32.9159 -16.6655 -13.3746 -13.3744 -13.2604  -3.9925
      k-point:   2    occ=  5
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  5.0
      eigenvalues at k:
- -32.8988 -16.6706 -13.3730 -13.3727 -13.1419  -4.0391
+ -32.8988 -16.6707 -13.3729 -13.3726 -13.1417  -4.0387
      eigenvalues at k+q:
- -32.8985 -16.6705 -13.3727 -13.3724 -13.1417  -4.0387
+ -32.8986 -16.6706 -13.3728 -13.3725 -13.1418  -4.0387
      compute_u_kq: q = (   -0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.8988 -16.6706 -13.3730 -13.3727 -13.1419  -4.0391
+ -32.8988 -16.6707 -13.3729 -13.3726 -13.1417  -4.0387
      eigenvalues at k+q:
- -32.8985 -16.6704 -13.3727 -13.3724 -13.1417  -4.0387
+ -32.8986 -16.6706 -13.3727 -13.3725 -13.1418  -4.0387
      compute_u_kq: q = (    0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.8988 -16.6706 -13.3730 -13.3727 -13.1419  -4.0391
+ -32.8988 -16.6707 -13.3729 -13.3726 -13.1417  -4.0387
      eigenvalues at k+q:
- -32.8985 -16.6705 -13.3727 -13.3724 -13.1416  -4.0387
+ -32.8986 -16.6706 -13.3728 -13.3725 -13.1417  -4.0387
      compute_u_kq: q = (    0.0000,   -0.0159,    0.0000)
-     ethr =  1.00E-13,  avg # of iterations =  9.0
+     ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.8988 -16.6706 -13.3730 -13.3727 -13.1419  -4.0391
+ -32.8988 -16.6707 -13.3729 -13.3726 -13.1417  -4.0387
      eigenvalues at k+q:
- -32.8985 -16.6705 -13.3727 -13.3724 -13.1417  -4.0388
+ -32.8986 -16.6706 -13.3728 -13.3725 -13.1417  -4.0388
      compute_u_kq: q = (    0.0000,    0.0159,    0.0000)
-     ethr =  1.00E-13,  avg # of iterations =  9.0
+     ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.8988 -16.6706 -13.3730 -13.3727 -13.1419  -4.0391
+ -32.8988 -16.6707 -13.3729 -13.3726 -13.1417  -4.0387
      eigenvalues at k+q:
- -32.8985 -16.6705 -13.3727 -13.3724 -13.1417  -4.0388
+ -32.8986 -16.6706 -13.3728 -13.3725 -13.1417  -4.0388
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0159)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.8988 -16.6706 -13.3730 -13.3727 -13.1419  -4.0391
+ -32.8988 -16.6707 -13.3729 -13.3726 -13.1417  -4.0387
      eigenvalues at k+q:
- -32.8985 -16.6704 -13.3727 -13.3724 -13.1418  -4.0386
+ -32.8986 -16.6705 -13.3728 -13.3725 -13.1419  -4.0386
      compute_u_kq: q = (    0.0000,    0.0000,    0.0159)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.8988 -16.6706 -13.3730 -13.3727 -13.1419  -4.0391
+ -32.8988 -16.6707 -13.3729 -13.3726 -13.1417  -4.0387
      eigenvalues at k+q:
- -32.8985 -16.6704 -13.3727 -13.3724 -13.1418  -4.0386
+ -32.8986 -16.6705 -13.3728 -13.3725 -13.1419  -4.0386
      k-point:   3    occ=  5
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  5.0
      eigenvalues at k:
- -32.9039 -16.6777 -13.3326 -13.3224 -13.1524  -4.0951
+ -32.9039 -16.6777 -13.3326 -13.3223 -13.1522  -4.0948
      eigenvalues at k+q:
- -32.9036 -16.6775 -13.3324 -13.3221 -13.1522  -4.0948
+ -32.9037 -16.6777 -13.3325 -13.3222 -13.1523  -4.0948
      compute_u_kq: q = (   -0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9039 -16.6777 -13.3326 -13.3224 -13.1524  -4.0951
+ -32.9039 -16.6777 -13.3326 -13.3223 -13.1522  -4.0948
      eigenvalues at k+q:
- -32.9036 -16.6775 -13.3323 -13.3221 -13.1522  -4.0948
+ -32.9037 -16.6776 -13.3324 -13.3221 -13.1522  -4.0948
      compute_u_kq: q = (    0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9039 -16.6777 -13.3326 -13.3224 -13.1524  -4.0951
+ -32.9039 -16.6777 -13.3326 -13.3223 -13.1522  -4.0948
      eigenvalues at k+q:
- -32.9036 -16.6775 -13.3323 -13.3221 -13.1521  -4.0948
+ -32.9037 -16.6776 -13.3324 -13.3222 -13.1522  -4.0948
      compute_u_kq: q = (    0.0000,   -0.0159,    0.0000)
-     ethr =  1.00E-13,  avg # of iterations =  9.0
+     ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9039 -16.6777 -13.3326 -13.3224 -13.1524  -4.0951
+ -32.9039 -16.6777 -13.3326 -13.3223 -13.1522  -4.0948
      eigenvalues at k+q:
- -32.9036 -16.6775 -13.3323 -13.3221 -13.1521  -4.0946
+ -32.9037 -16.6776 -13.3324 -13.3222 -13.1522  -4.0947
      compute_u_kq: q = (    0.0000,    0.0159,    0.0000)
-     ethr =  1.00E-13,  avg # of iterations =  9.0
+     ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9039 -16.6777 -13.3326 -13.3224 -13.1524  -4.0951
+ -32.9039 -16.6777 -13.3326 -13.3223 -13.1522  -4.0948
      eigenvalues at k+q:
- -32.9036 -16.6775 -13.3323 -13.3221 -13.1521  -4.0946
+ -32.9037 -16.6776 -13.3324 -13.3222 -13.1522  -4.0947
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0159)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.9039 -16.6777 -13.3326 -13.3224 -13.1524  -4.0951
+ -32.9039 -16.6777 -13.3326 -13.3223 -13.1522  -4.0948
      eigenvalues at k+q:
- -32.9036 -16.6774 -13.3323 -13.3221 -13.1523  -4.0946
+ -32.9037 -16.6775 -13.3325 -13.3222 -13.1524  -4.0947
      compute_u_kq: q = (    0.0000,    0.0000,    0.0159)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.9039 -16.6777 -13.3326 -13.3224 -13.1524  -4.0951
+ -32.9039 -16.6777 -13.3326 -13.3223 -13.1522  -4.0948
      eigenvalues at k+q:
- -32.9036 -16.6774 -13.3323 -13.3221 -13.1523  -4.0946
+ -32.9037 -16.6775 -13.3325 -13.3222 -13.1524  -4.0947
      k-point:   4    occ=  5
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  5.0
      eigenvalues at k:
- -32.9135 -16.7041 -13.3972 -13.3969 -13.1951  -4.1163
+ -32.9136 -16.7041 -13.3971 -13.3968 -13.1949  -4.1160
      eigenvalues at k+q:
- -32.9132 -16.7039 -13.3969 -13.3966 -13.1948  -4.1160
+ -32.9134 -16.7041 -13.3970 -13.3967 -13.1949  -4.1160
      compute_u_kq: q = (   -0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9135 -16.7041 -13.3972 -13.3969 -13.1951  -4.1163
+ -32.9136 -16.7041 -13.3971 -13.3968 -13.1949  -4.1160
      eigenvalues at k+q:
- -32.9132 -16.7039 -13.3968 -13.3966 -13.1948  -4.1160
+ -32.9134 -16.7040 -13.3969 -13.3967 -13.1949  -4.1160
      compute_u_kq: q = (    0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9135 -16.7041 -13.3972 -13.3969 -13.1951  -4.1163
+ -32.9136 -16.7041 -13.3971 -13.3968 -13.1949  -4.1160
      eigenvalues at k+q:
- -32.9132 -16.7039 -13.3969 -13.3966 -13.1948  -4.1160
+ -32.9134 -16.7040 -13.3969 -13.3967 -13.1948  -4.1160
      compute_u_kq: q = (    0.0000,   -0.0159,    0.0000)
-     ethr =  1.00E-13,  avg # of iterations =  9.0
+     ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9135 -16.7041 -13.3972 -13.3969 -13.1951  -4.1163
+ -32.9136 -16.7041 -13.3971 -13.3968 -13.1949  -4.1160
      eigenvalues at k+q:
- -32.9132 -16.7039 -13.3969 -13.3966 -13.1948  -4.1158
+ -32.9134 -16.7040 -13.3969 -13.3967 -13.1949  -4.1158
      compute_u_kq: q = (    0.0000,    0.0159,    0.0000)
-     ethr =  1.00E-13,  avg # of iterations =  9.0
+     ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9135 -16.7041 -13.3972 -13.3969 -13.1951  -4.1163
+ -32.9136 -16.7041 -13.3971 -13.3968 -13.1949  -4.1160
      eigenvalues at k+q:
- -32.9132 -16.7039 -13.3969 -13.3966 -13.1948  -4.1158
+ -32.9134 -16.7040 -13.3969 -13.3967 -13.1949  -4.1158
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0159)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.9135 -16.7041 -13.3972 -13.3969 -13.1951  -4.1163
+ -32.9136 -16.7041 -13.3971 -13.3968 -13.1949  -4.1160
      eigenvalues at k+q:
- -32.9132 -16.7038 -13.3969 -13.3966 -13.1949  -4.1158
+ -32.9134 -16.7039 -13.3970 -13.3967 -13.1950  -4.1159
      compute_u_kq: q = (    0.0000,    0.0000,    0.0159)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.9135 -16.7041 -13.3972 -13.3969 -13.1951  -4.1163
+ -32.9136 -16.7041 -13.3971 -13.3968 -13.1949  -4.1160
      eigenvalues at k+q:
- -32.9132 -16.7038 -13.3969 -13.3966 -13.1949  -4.1158
+ -32.9134 -16.7039 -13.3970 -13.3967 -13.1950  -4.1159
      k-point:   5    occ=  5
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  5.0
      eigenvalues at k:
- -32.9120 -16.6624 -13.3439 -13.3399 -13.2432  -4.0245
+ -32.9121 -16.6624 -13.3438 -13.3398 -13.2430  -4.0242
      eigenvalues at k+q:
- -32.9117 -16.6622 -13.3436 -13.3396 -13.2429  -4.0242
+ -32.9119 -16.6623 -13.3437 -13.3397 -13.2430  -4.0242
      compute_u_kq: q = (   -0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9120 -16.6624 -13.3439 -13.3399 -13.2432  -4.0245
+ -32.9121 -16.6624 -13.3438 -13.3398 -13.2430  -4.0242
      eigenvalues at k+q:
- -32.9117 -16.6622 -13.3435 -13.3396 -13.2430  -4.0242
+ -32.9119 -16.6623 -13.3436 -13.3397 -13.2431  -4.0242
      compute_u_kq: q = (    0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9120 -16.6624 -13.3439 -13.3399 -13.2432  -4.0245
+ -32.9121 -16.6624 -13.3438 -13.3398 -13.2430  -4.0242
      eigenvalues at k+q:
- -32.9117 -16.6622 -13.3436 -13.3396 -13.2428  -4.0242
+ -32.9119 -16.6623 -13.3437 -13.3397 -13.2429  -4.0242
      compute_u_kq: q = (    0.0000,   -0.0159,    0.0000)
-     ethr =  1.00E-13,  avg # of iterations =  9.0
+     ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9120 -16.6624 -13.3439 -13.3399 -13.2432  -4.0245
+ -32.9121 -16.6624 -13.3438 -13.3398 -13.2430  -4.0242
      eigenvalues at k+q:
- -32.9117 -16.6622 -13.3436 -13.3396 -13.2429  -4.0242
+ -32.9119 -16.6623 -13.3437 -13.3397 -13.2430  -4.0243
      compute_u_kq: q = (    0.0000,    0.0159,    0.0000)
-     ethr =  1.00E-13,  avg # of iterations =  9.0
+     ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9120 -16.6624 -13.3439 -13.3399 -13.2432  -4.0245
+ -32.9121 -16.6624 -13.3438 -13.3398 -13.2430  -4.0242
      eigenvalues at k+q:
- -32.9117 -16.6622 -13.3436 -13.3396 -13.2429  -4.0242
+ -32.9119 -16.6623 -13.3437 -13.3397 -13.2430  -4.0243
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0159)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.9120 -16.6624 -13.3439 -13.3399 -13.2432  -4.0245
+ -32.9121 -16.6624 -13.3438 -13.3398 -13.2430  -4.0242
      eigenvalues at k+q:
- -32.9117 -16.6623 -13.3436 -13.3396 -13.2427  -4.0243
+ -32.9119 -16.6624 -13.3436 -13.3397 -13.2428  -4.0243
      compute_u_kq: q = (    0.0000,    0.0000,    0.0159)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.9120 -16.6624 -13.3439 -13.3399 -13.2432  -4.0245
+ -32.9121 -16.6624 -13.3438 -13.3398 -13.2430  -4.0242
      eigenvalues at k+q:
- -32.9117 -16.6623 -13.3436 -13.3396 -13.2427  -4.0243
+ -32.9119 -16.6624 -13.3436 -13.3397 -13.2428  -4.0243
      k-point:   6    occ=  5
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  5.0
      eigenvalues at k:
- -32.9047 -16.6460 -13.3727 -13.3724 -13.2188  -3.9849
+ -32.9048 -16.6460 -13.3726 -13.3723 -13.2186  -3.9845
      eigenvalues at k+q:
- -32.9044 -16.6458 -13.3724 -13.3721 -13.2185  -3.9845
+ -32.9046 -16.6459 -13.3725 -13.3722 -13.2186  -3.9846
      compute_u_kq: q = (   -0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9047 -16.6460 -13.3727 -13.3724 -13.2188  -3.9849
+ -32.9048 -16.6460 -13.3726 -13.3723 -13.2186  -3.9845
      eigenvalues at k+q:
- -32.9044 -16.6458 -13.3723 -13.3721 -13.2186  -3.9845
+ -32.9046 -16.6459 -13.3724 -13.3722 -13.2186  -3.9846
      compute_u_kq: q = (    0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9047 -16.6460 -13.3727 -13.3724 -13.2188  -3.9849
+ -32.9048 -16.6460 -13.3726 -13.3723 -13.2186  -3.9845
      eigenvalues at k+q:
- -32.9044 -16.6458 -13.3724 -13.3721 -13.2185  -3.9845
+ -32.9046 -16.6459 -13.3725 -13.3722 -13.2185  -3.9846
      compute_u_kq: q = (    0.0000,   -0.0159,    0.0000)
-     ethr =  1.00E-13,  avg # of iterations =  8.0
+     ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9047 -16.6460 -13.3727 -13.3724 -13.2188  -3.9849
+ -32.9048 -16.6460 -13.3726 -13.3723 -13.2186  -3.9845
      eigenvalues at k+q:
- -32.9044 -16.6458 -13.3724 -13.3720 -13.2185  -3.9844
+ -32.9046 -16.6459 -13.3725 -13.3721 -13.2186  -3.9844
      compute_u_kq: q = (    0.0000,    0.0159,    0.0000)
-     ethr =  1.00E-13,  avg # of iterations =  8.0
+     ethr =  1.00E-13,  avg # of iterations = 10.0
      eigenvalues at k:
- -32.9047 -16.6460 -13.3727 -13.3724 -13.2188  -3.9849
+ -32.9048 -16.6460 -13.3726 -13.3723 -13.2186  -3.9845
      eigenvalues at k+q:
- -32.9044 -16.6458 -13.3724 -13.3720 -13.2185  -3.9844
+ -32.9046 -16.6459 -13.3725 -13.3721 -13.2186  -3.9844
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0159)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.9047 -16.6460 -13.3727 -13.3724 -13.2188  -3.9849
+ -32.9048 -16.6460 -13.3726 -13.3723 -13.2186  -3.9845
      eigenvalues at k+q:
- -32.9044 -16.6459 -13.3724 -13.3720 -13.2183  -3.9847
+ -32.9046 -16.6460 -13.3724 -13.3722 -13.2184  -3.9847
      compute_u_kq: q = (    0.0000,    0.0000,    0.0159)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.9047 -16.6460 -13.3727 -13.3724 -13.2188  -3.9849
+ -32.9048 -16.6460 -13.3726 -13.3723 -13.2186  -3.9845
      eigenvalues at k+q:
- -32.9044 -16.6459 -13.3724 -13.3720 -13.2183  -3.9847
+ -32.9046 -16.6460 -13.3724 -13.3722 -13.2184  -3.9847
      k-point:   7    occ=  4
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  5.0
      eigenvalues at k:
- -32.7679 -15.8674 -13.1472 -13.1466  -9.2283  -2.6608
+ -32.7677 -15.8670 -13.1470 -13.1464  -9.2288  -2.6611
      eigenvalues at k+q:
- -32.7675 -15.8668 -13.1468 -13.1463  -9.2285  -2.6608
+ -32.7675 -15.8669 -13.1469 -13.1463  -9.2288  -2.6611
      compute_u_kq: q = (   -0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.7679 -15.8674 -13.1472 -13.1466  -9.2283  -2.6608
+ -32.7677 -15.8670 -13.1470 -13.1464  -9.2288  -2.6611
      eigenvalues at k+q:
- -32.7675 -15.8668 -13.1468 -13.1462  -9.2285  -2.6607
+ -32.7675 -15.8669 -13.1469 -13.1463  -9.2287  -2.6610
      compute_u_kq: q = (    0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.7679 -15.8674 -13.1472 -13.1466  -9.2283  -2.6608
+ -32.7677 -15.8670 -13.1470 -13.1464  -9.2288  -2.6611
      eigenvalues at k+q:
- -32.7675 -15.8668 -13.1468 -13.1462  -9.2285  -2.6607
+ -32.7675 -15.8668 -13.1469 -13.1463  -9.2287  -2.6610
      compute_u_kq: q = (    0.0000,   -0.0159,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7679 -15.8674 -13.1472 -13.1466  -9.2283  -2.6608
+ -32.7677 -15.8670 -13.1470 -13.1464  -9.2288  -2.6611
      eigenvalues at k+q:
- -32.7675 -15.8668 -13.1468 -13.1462  -9.2285  -2.6609
+ -32.7675 -15.8668 -13.1469 -13.1463  -9.2287  -2.6612
      compute_u_kq: q = (    0.0000,    0.0159,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7679 -15.8674 -13.1472 -13.1466  -9.2283  -2.6608
+ -32.7677 -15.8670 -13.1470 -13.1464  -9.2288  -2.6611
      eigenvalues at k+q:
- -32.7675 -15.8668 -13.1468 -13.1462  -9.2285  -2.6609
+ -32.7675 -15.8668 -13.1469 -13.1463  -9.2287  -2.6612
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0159)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7679 -15.8674 -13.1472 -13.1466  -9.2283  -2.6608
+ -32.7677 -15.8670 -13.1470 -13.1464  -9.2288  -2.6611
      eigenvalues at k+q:
- -32.7674 -15.8668 -13.1468 -13.1462  -9.2283  -2.6609
+ -32.7675 -15.8669 -13.1469 -13.1463  -9.2285  -2.6612
      compute_u_kq: q = (    0.0000,    0.0000,    0.0159)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7679 -15.8674 -13.1472 -13.1466  -9.2283  -2.6608
+ -32.7677 -15.8670 -13.1470 -13.1464  -9.2288  -2.6611
      eigenvalues at k+q:
- -32.7674 -15.8668 -13.1468 -13.1462  -9.2283  -2.6609
+ -32.7675 -15.8669 -13.1469 -13.1463  -9.2285  -2.6612
      k-point:   8    occ=  4
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  5.0
      eigenvalues at k:
- -32.7516 -15.8374 -13.1473 -13.1466  -9.1132  -2.7081
+ -32.7513 -15.8370 -13.1471 -13.1464  -9.1136  -2.7085
      eigenvalues at k+q:
- -32.7511 -15.8368 -13.1469 -13.1463  -9.1134  -2.7081
+ -32.7512 -15.8369 -13.1470 -13.1463  -9.1137  -2.7084
      compute_u_kq: q = (   -0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.7516 -15.8374 -13.1473 -13.1466  -9.1132  -2.7081
+ -32.7513 -15.8370 -13.1471 -13.1464  -9.1136  -2.7085
      eigenvalues at k+q:
- -32.7511 -15.8368 -13.1469 -13.1462  -9.1133  -2.7081
+ -32.7512 -15.8369 -13.1470 -13.1463  -9.1136  -2.7084
      compute_u_kq: q = (    0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.7516 -15.8374 -13.1473 -13.1466  -9.1132  -2.7081
+ -32.7513 -15.8370 -13.1471 -13.1464  -9.1136  -2.7085
      eigenvalues at k+q:
- -32.7511 -15.8368 -13.1469 -13.1462  -9.1133  -2.7081
+ -32.7512 -15.8369 -13.1470 -13.1463  -9.1136  -2.7084
      compute_u_kq: q = (    0.0000,   -0.0159,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7516 -15.8374 -13.1473 -13.1466  -9.1132  -2.7081
+ -32.7513 -15.8370 -13.1471 -13.1464  -9.1136  -2.7085
      eigenvalues at k+q:
- -32.7511 -15.8368 -13.1469 -13.1462  -9.1133  -2.7083
+ -32.7512 -15.8369 -13.1470 -13.1463  -9.1136  -2.7086
      compute_u_kq: q = (    0.0000,    0.0159,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7516 -15.8374 -13.1473 -13.1466  -9.1132  -2.7081
+ -32.7513 -15.8370 -13.1471 -13.1464  -9.1136  -2.7085
      eigenvalues at k+q:
- -32.7511 -15.8368 -13.1469 -13.1462  -9.1133  -2.7083
+ -32.7512 -15.8369 -13.1470 -13.1463  -9.1136  -2.7086
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0159)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7516 -15.8374 -13.1473 -13.1466  -9.1132  -2.7081
+ -32.7513 -15.8370 -13.1471 -13.1464  -9.1136  -2.7085
      eigenvalues at k+q:
- -32.7511 -15.8367 -13.1469 -13.1462  -9.1136  -2.7079
+ -32.7512 -15.8368 -13.1470 -13.1463  -9.1138  -2.7082
      compute_u_kq: q = (    0.0000,    0.0000,    0.0159)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7516 -15.8374 -13.1473 -13.1466  -9.1132  -2.7081
+ -32.7513 -15.8370 -13.1471 -13.1464  -9.1136  -2.7085
      eigenvalues at k+q:
- -32.7511 -15.8367 -13.1469 -13.1462  -9.1136  -2.7079
+ -32.7512 -15.8368 -13.1470 -13.1463  -9.1138  -2.7082
      k-point:   9    occ=  4
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  5.0
      eigenvalues at k:
- -32.7563 -15.8505 -13.1048 -13.0961  -9.1068  -2.7966
+ -32.7560 -15.8502 -13.1046 -13.0959  -9.1072  -2.7969
      eigenvalues at k+q:
- -32.7558 -15.8500 -13.1044 -13.0957  -9.1070  -2.7966
+ -32.7558 -15.8501 -13.1045 -13.0958  -9.1073  -2.7969
      compute_u_kq: q = (   -0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.7563 -15.8505 -13.1048 -13.0961  -9.1068  -2.7966
+ -32.7560 -15.8502 -13.1046 -13.0959  -9.1072  -2.7969
      eigenvalues at k+q:
- -32.7558 -15.8500 -13.1044 -13.0957  -9.1069  -2.7965
+ -32.7558 -15.8500 -13.1045 -13.0957  -9.1072  -2.7968
      compute_u_kq: q = (    0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.7563 -15.8505 -13.1048 -13.0961  -9.1068  -2.7966
+ -32.7560 -15.8502 -13.1046 -13.0959  -9.1072  -2.7969
      eigenvalues at k+q:
- -32.7558 -15.8500 -13.1044 -13.0957  -9.1069  -2.7965
+ -32.7558 -15.8500 -13.1045 -13.0958  -9.1072  -2.7968
      compute_u_kq: q = (    0.0000,   -0.0159,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7563 -15.8505 -13.1048 -13.0961  -9.1068  -2.7966
+ -32.7560 -15.8502 -13.1046 -13.0959  -9.1072  -2.7969
      eigenvalues at k+q:
- -32.7558 -15.8500 -13.1044 -13.0957  -9.1070  -2.7963
+ -32.7558 -15.8500 -13.1044 -13.0958  -9.1073  -2.7966
      compute_u_kq: q = (    0.0000,    0.0159,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7563 -15.8505 -13.1048 -13.0961  -9.1068  -2.7966
+ -32.7560 -15.8502 -13.1046 -13.0959  -9.1072  -2.7969
      eigenvalues at k+q:
- -32.7558 -15.8500 -13.1044 -13.0957  -9.1070  -2.7963
+ -32.7558 -15.8500 -13.1044 -13.0958  -9.1073  -2.7966
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0159)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7563 -15.8505 -13.1048 -13.0961  -9.1068  -2.7966
+ -32.7560 -15.8502 -13.1046 -13.0959  -9.1072  -2.7969
      eigenvalues at k+q:
- -32.7558 -15.8499 -13.1044 -13.0957  -9.1072  -2.7964
+ -32.7558 -15.8500 -13.1045 -13.0958  -9.1074  -2.7967
      compute_u_kq: q = (    0.0000,    0.0000,    0.0159)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7563 -15.8505 -13.1048 -13.0961  -9.1068  -2.7966
+ -32.7560 -15.8502 -13.1046 -13.0959  -9.1072  -2.7969
      eigenvalues at k+q:
- -32.7558 -15.8499 -13.1044 -13.0957  -9.1072  -2.7964
+ -32.7558 -15.8500 -13.1045 -13.0958  -9.1074  -2.7967
      k-point:  10    occ=  4
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  5.0
      eigenvalues at k:
- -32.7653 -15.8952 -13.1743 -13.1737  -9.1182  -2.8096
+ -32.7651 -15.8949 -13.1741 -13.1735  -9.1186  -2.8100
      eigenvalues at k+q:
- -32.7649 -15.8947 -13.1739 -13.1733  -9.1184  -2.8096
+ -32.7649 -15.8947 -13.1740 -13.1734  -9.1187  -2.8099
      compute_u_kq: q = (   -0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.7653 -15.8952 -13.1743 -13.1737  -9.1182  -2.8096
+ -32.7651 -15.8949 -13.1741 -13.1735  -9.1186  -2.8100
      eigenvalues at k+q:
- -32.7649 -15.8947 -13.1738 -13.1733  -9.1184  -2.8096
+ -32.7649 -15.8947 -13.1739 -13.1734  -9.1187  -2.8099
      compute_u_kq: q = (    0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.7653 -15.8952 -13.1743 -13.1737  -9.1182  -2.8096
+ -32.7651 -15.8949 -13.1741 -13.1735  -9.1186  -2.8100
      eigenvalues at k+q:
- -32.7649 -15.8947 -13.1738 -13.1733  -9.1184  -2.8096
+ -32.7649 -15.8947 -13.1739 -13.1734  -9.1187  -2.8099
      compute_u_kq: q = (    0.0000,   -0.0159,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7653 -15.8952 -13.1743 -13.1737  -9.1182  -2.8096
+ -32.7651 -15.8949 -13.1741 -13.1735  -9.1186  -2.8100
      eigenvalues at k+q:
- -32.7649 -15.8947 -13.1739 -13.1732  -9.1184  -2.8094
+ -32.7649 -15.8947 -13.1740 -13.1733  -9.1187  -2.8097
      compute_u_kq: q = (    0.0000,    0.0159,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7653 -15.8952 -13.1743 -13.1737  -9.1182  -2.8096
+ -32.7651 -15.8949 -13.1741 -13.1735  -9.1186  -2.8100
      eigenvalues at k+q:
- -32.7649 -15.8947 -13.1739 -13.1732  -9.1184  -2.8094
+ -32.7649 -15.8947 -13.1740 -13.1733  -9.1187  -2.8097
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0159)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7653 -15.8952 -13.1743 -13.1737  -9.1182  -2.8096
+ -32.7651 -15.8949 -13.1741 -13.1735  -9.1186  -2.8100
      eigenvalues at k+q:
- -32.7648 -15.8946 -13.1739 -13.1733  -9.1185  -2.8094
+ -32.7649 -15.8946 -13.1740 -13.1734  -9.1188  -2.8097
      compute_u_kq: q = (    0.0000,    0.0000,    0.0159)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7653 -15.8952 -13.1743 -13.1737  -9.1182  -2.8096
+ -32.7651 -15.8949 -13.1741 -13.1735  -9.1186  -2.8100
      eigenvalues at k+q:
- -32.7648 -15.8946 -13.1739 -13.1733  -9.1185  -2.8094
+ -32.7649 -15.8946 -13.1740 -13.1734  -9.1188  -2.8097
      k-point:  11    occ=  4
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  5.0
      eigenvalues at k:
- -32.7640 -15.8592 -13.1163 -13.1120  -9.2026  -2.6870
+ -32.7637 -15.8589 -13.1161 -13.1118  -9.2030  -2.6874
      eigenvalues at k+q:
- -32.7635 -15.8587 -13.1159 -13.1116  -9.2027  -2.6870
+ -32.7636 -15.8588 -13.1160 -13.1117  -9.2030  -2.6873
      compute_u_kq: q = (   -0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.7640 -15.8592 -13.1163 -13.1120  -9.2026  -2.6870
+ -32.7637 -15.8589 -13.1161 -13.1118  -9.2030  -2.6874
      eigenvalues at k+q:
- -32.7635 -15.8587 -13.1159 -13.1115  -9.2028  -2.6870
+ -32.7636 -15.8587 -13.1160 -13.1116  -9.2030  -2.6873
      compute_u_kq: q = (    0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.7640 -15.8592 -13.1163 -13.1120  -9.2026  -2.6870
+ -32.7637 -15.8589 -13.1161 -13.1118  -9.2030  -2.6874
      eigenvalues at k+q:
- -32.7635 -15.8587 -13.1159 -13.1115  -9.2028  -2.6870
+ -32.7636 -15.8587 -13.1160 -13.1116  -9.2031  -2.6873
      compute_u_kq: q = (    0.0000,   -0.0159,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7640 -15.8592 -13.1163 -13.1120  -9.2026  -2.6870
+ -32.7637 -15.8589 -13.1161 -13.1118  -9.2030  -2.6874
      eigenvalues at k+q:
- -32.7635 -15.8587 -13.1159 -13.1116  -9.2027  -2.6871
+ -32.7636 -15.8587 -13.1160 -13.1117  -9.2030  -2.6874
      compute_u_kq: q = (    0.0000,    0.0159,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7640 -15.8592 -13.1163 -13.1120  -9.2026  -2.6870
+ -32.7637 -15.8589 -13.1161 -13.1118  -9.2030  -2.6874
      eigenvalues at k+q:
- -32.7635 -15.8587 -13.1159 -13.1116  -9.2027  -2.6871
+ -32.7636 -15.8587 -13.1160 -13.1117  -9.2030  -2.6874
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0159)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7640 -15.8592 -13.1163 -13.1120  -9.2026  -2.6870
+ -32.7637 -15.8589 -13.1161 -13.1118  -9.2030  -2.6874
      eigenvalues at k+q:
- -32.7635 -15.8587 -13.1159 -13.1116  -9.2025  -2.6871
+ -32.7636 -15.8588 -13.1160 -13.1117  -9.2028  -2.6874
      compute_u_kq: q = (    0.0000,    0.0000,    0.0159)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7640 -15.8592 -13.1163 -13.1120  -9.2026  -2.6870
+ -32.7637 -15.8589 -13.1161 -13.1118  -9.2030  -2.6874
      eigenvalues at k+q:
- -32.7635 -15.8587 -13.1159 -13.1116  -9.2025  -2.6871
+ -32.7636 -15.8588 -13.1160 -13.1117  -9.2028  -2.6874
      k-point:  12    occ=  4
      compute_u_kq: q = (    0.0000,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  5.0
      eigenvalues at k:
- -32.7572 -15.8353 -13.1408 -13.1401  -9.1735  -2.6788
+ -32.7569 -15.8350 -13.1406 -13.1400  -9.1739  -2.6791
      eigenvalues at k+q:
- -32.7567 -15.8348 -13.1405 -13.1398  -9.1737  -2.6788
+ -32.7568 -15.8348 -13.1405 -13.1399  -9.1740  -2.6791
      compute_u_kq: q = (   -0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.7572 -15.8353 -13.1408 -13.1401  -9.1735  -2.6788
+ -32.7569 -15.8350 -13.1406 -13.1400  -9.1739  -2.6791
      eigenvalues at k+q:
- -32.7567 -15.8348 -13.1404 -13.1398  -9.1737  -2.6788
+ -32.7567 -15.8348 -13.1404 -13.1398  -9.1740  -2.6791
      compute_u_kq: q = (    0.0159,    0.0000,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  9.0
      eigenvalues at k:
- -32.7572 -15.8353 -13.1408 -13.1401  -9.1735  -2.6788
+ -32.7569 -15.8350 -13.1406 -13.1400  -9.1739  -2.6791
      eigenvalues at k+q:
- -32.7567 -15.8348 -13.1404 -13.1398  -9.1737  -2.6788
+ -32.7568 -15.8348 -13.1405 -13.1398  -9.1740  -2.6791
      compute_u_kq: q = (    0.0000,   -0.0159,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7572 -15.8353 -13.1408 -13.1401  -9.1735  -2.6788
+ -32.7569 -15.8350 -13.1406 -13.1400  -9.1739  -2.6791
      eigenvalues at k+q:
- -32.7567 -15.8348 -13.1404 -13.1397  -9.1737  -2.6786
+ -32.7567 -15.8348 -13.1405 -13.1398  -9.1740  -2.6789
      compute_u_kq: q = (    0.0000,    0.0159,    0.0000)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7572 -15.8353 -13.1408 -13.1401  -9.1735  -2.6788
+ -32.7569 -15.8350 -13.1406 -13.1400  -9.1739  -2.6791
      eigenvalues at k+q:
- -32.7567 -15.8348 -13.1404 -13.1397  -9.1737  -2.6786
+ -32.7567 -15.8348 -13.1405 -13.1398  -9.1740  -2.6789
      compute_u_kq: q = (    0.0000,    0.0000,   -0.0159)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7572 -15.8353 -13.1408 -13.1401  -9.1735  -2.6788
+ -32.7569 -15.8350 -13.1406 -13.1400  -9.1739  -2.6791
      eigenvalues at k+q:
- -32.7567 -15.8348 -13.1404 -13.1397  -9.1734  -2.6789
+ -32.7567 -15.8348 -13.1405 -13.1398  -9.1737  -2.6792
      compute_u_kq: q = (    0.0000,    0.0000,    0.0159)
      ethr =  1.00E-13,  avg # of iterations =  8.0
      eigenvalues at k:
- -32.7572 -15.8353 -13.1408 -13.1401  -9.1735  -2.6788
+ -32.7569 -15.8350 -13.1406 -13.1400  -9.1739  -2.6791
      eigenvalues at k+q:
- -32.7567 -15.8348 -13.1404 -13.1397  -9.1734  -2.6789
+ -32.7567 -15.8348 -13.1405 -13.1398  -9.1737  -2.6792
      done with du/dk   q_gipaw = 0.010000
 
      Computing the orbital magnetization (bohr mag/cell):
-BC: k-point:    1  pool:   1       -0.000000    0.000020    0.000000
+BC: k-point:    1  pool:   1        0.000000    0.000019    0.000000
 LC: k-point:    1  pool:   1        0.000000   -0.000161    0.000000
-IC: k-point:    1  pool:   1        0.000000    0.000005   -0.000000
+IC: k-point:    1  pool:   1       -0.000000    0.000005   -0.000000
 BC: k-point:    2  pool:   1        0.000000    0.000008    0.000000
-LC: k-point:    2  pool:   1        0.000000   -0.000161    0.000000
+LC: k-point:    2  pool:   1       -0.000000   -0.000160    0.000000
 IC: k-point:    2  pool:   1       -0.000000    0.000010   -0.000000
-BC: k-point:    3  pool:   1       -0.000000    0.000017    0.000000
-LC: k-point:    3  pool:   1        0.000000   -0.000322    0.000000
-IC: k-point:    3  pool:   1        0.000000    0.000020   -0.000000
-BC: k-point:    4  pool:   1       -0.000000    0.000013    0.000000
-LC: k-point:    4  pool:   1        0.000000   -0.000164    0.000000
-IC: k-point:    4  pool:   1        0.000000    0.000008   -0.000000
-BC: k-point:    5  pool:   1       -0.000000    0.000049   -0.000000
-LC: k-point:    5  pool:   1        0.000000   -0.000324    0.000000
-IC: k-point:    5  pool:   1        0.000000    0.000005   -0.000000
-BC: k-point:    6  pool:   1       -0.000000    0.000025   -0.000000
-LC: k-point:    6  pool:   1        0.000000   -0.000162    0.000000
-IC: k-point:    6  pool:   1        0.000000    0.000002   -0.000000
+BC: k-point:    3  pool:   1        0.000000    0.000016    0.000000
+LC: k-point:    3  pool:   1       -0.000000   -0.000321   -0.000000
+IC: k-point:    3  pool:   1       -0.000000    0.000019   -0.000000
+BC: k-point:    4  pool:   1        0.000000    0.000013    0.000000
+LC: k-point:    4  pool:   1        0.000000   -0.000163   -0.000000
+IC: k-point:    4  pool:   1       -0.000000    0.000008   -0.000000
+BC: k-point:    5  pool:   1        0.000000    0.000049   -0.000000
+LC: k-point:    5  pool:   1       -0.000000   -0.000322   -0.000000
+IC: k-point:    5  pool:   1       -0.000000    0.000005   -0.000000
+BC: k-point:    6  pool:   1        0.000000    0.000024   -0.000000
+LC: k-point:    6  pool:   1       -0.000000   -0.000161   -0.000000
+IC: k-point:    6  pool:   1       -0.000000    0.000002    0.000000
 BC: k-point:    7  pool:   1       -0.000000    0.000010    0.000000
-LC: k-point:    7  pool:   1        0.000000    0.000035   -0.000000
+LC: k-point:    7  pool:   1        0.000000    0.000035    0.000000
 IC: k-point:    7  pool:   1        0.000000   -0.000039   -0.000000
 BC: k-point:    8  pool:   1        0.000000   -0.000019    0.000000
 LC: k-point:    8  pool:   1       -0.000000    0.000045    0.000000
 IC: k-point:    8  pool:   1       -0.000000   -0.000025   -0.000000
-BC: k-point:    9  pool:   1       -0.000000   -0.000043   -0.000000
-LC: k-point:    9  pool:   1       -0.000000    0.000092    0.000000
-IC: k-point:    9  pool:   1        0.000000   -0.000048    0.000000
-BC: k-point:   10  pool:   1       -0.000000   -0.000034   -0.000000
-LC: k-point:   10  pool:   1        0.000000    0.000051   -0.000000
-IC: k-point:   10  pool:   1        0.000000   -0.000019    0.000000
-BC: k-point:   11  pool:   1        0.000000   -0.000014   -0.000000
-LC: k-point:   11  pool:   1       -0.000000    0.000081    0.000000
-IC: k-point:   11  pool:   1       -0.000000   -0.000062    0.000000
+BC: k-point:    9  pool:   1        0.000000   -0.000042   -0.000000
+LC: k-point:    9  pool:   1        0.000000    0.000092    0.000000
+IC: k-point:    9  pool:   1       -0.000000   -0.000048    0.000000
+BC: k-point:   10  pool:   1        0.000000   -0.000033    0.000000
+LC: k-point:   10  pool:   1        0.000000    0.000051    0.000000
+IC: k-point:   10  pool:   1       -0.000000   -0.000019   -0.000000
+BC: k-point:   11  pool:   1       -0.000000   -0.000014    0.000000
+LC: k-point:   11  pool:   1        0.000000    0.000081    0.000000
+IC: k-point:   11  pool:   1        0.000000   -0.000062   -0.000000
 BC: k-point:   12  pool:   1       -0.000000   -0.000006    0.000000
 LC: k-point:   12  pool:   1        0.000000    0.000040    0.000000
 IC: k-point:   12  pool:   1        0.000000   -0.000031   -0.000000
@@ -1094,69 +949,63 @@ IC: k-point:   12  pool:   1        0.000000   -0.000031   -0.000000
      SPIN-ORBIT:
      lambda_so          =       0.000000      1.000000      0.000000
 
-     Berry curvature    =      -0.000000      0.000026      0.000000
-     Fermi energy       =      -0.820407 rydberg
+     Berry curvature    =       0.000000      0.000025      0.000000
+     Fermi energy       =      -0.820416 rydberg
 
      NUCLEAR DIPOLE ON ATOM   1:
      m_0                =       0.000000      0.000000      0.000000
 
      (without Berry curvature term)
-     M_LC               =       0.000000     -0.001901      0.000000
-     M_IC               =       0.000000     -0.000349     -0.000000
-     Delta_M_bare       =      -0.000000     -0.000191      0.000000
+     M_LC               =       0.000000     -0.001888      0.000000
+     M_IC               =      -0.000000     -0.000348     -0.000000
+     Delta_M_bare       =       0.000000     -0.000189     -0.000000
+     Delta_M_hubbard        =       0.000000      0.000000      0.000000
      Delta_M_para       =       0.000000     -0.000005      0.000000
      Delta_M_dia        =       0.000000      0.000008      0.000000
-     M_tot              =       0.000000     -0.002437      0.000000
+     M_tot              =      -0.000000     -0.002422     -0.000000
 
      (with Berry curvature term)
-     M_LC               =      -0.000000     -0.001879      0.000000
-     M_IC               =       0.000000     -0.000327     -0.000000
-     Delta_M            =      -0.000000     -0.000187      0.000000
-     M_tot              =      -0.000000     -0.002394      0.000000
+     M_LC               =       0.000000     -0.001867      0.000000
+     M_IC               =      -0.000000     -0.000328     -0.000000
+     Delta_M_bare       =       0.000000     -0.000189     -0.000000
+     Delta_M_hubbard        =       0.000000      0.000000      0.000000
+     Delta_M            =       0.000000     -0.000186     -0.000000
+     M_tot              =       0.000000     -0.002381      0.000000
 
      SPIN-ORBIT:
      lambda_so          =       0.000000      1.000000      0.000000
      unpaired electrons =          1
      Contributions to the g-tensor (ppm):
-     delta_g RMC        =      -119.8221
-     delta_g RMC(GIPAW) =       -59.6320
-     delta_g SO         =        -0.0000    -2394.0877        0.0000
+     delta_g RMC        =      -119.8330
+     delta_g RMC(GIPAW) =       -59.6267
+     delta_g SO         =         0.0000    -2380.8571        0.0000
 
-     delta_g total      =        -0.0000    -2573.5418        0.0000
+     delta_g total      =         0.0000    -2560.3168        0.0000
 
-     QE-CONVERSE  :      6.70s CPU      6.89s WALL
+     QE-CONVERSE  :      5.64s CPU      5.77s WALL
 
 
-   This run was terminated on:   9:38: 4   5Mar2026            
+   This run was terminated on:  10:39:15  15Jun2026            
 
 =------------------------------------------------------------------------------=
    JOB DONE.
 =------------------------------------------------------------------------------=
      Initialization:
 
-     read_file    :      0.38s CPU      0.39s WALL (       1 calls)
-     gipaw_setup  :      0.16s CPU      0.16s WALL (       1 calls)
-     wfcinit      :      0.36s CPU      0.37s WALL (       1 calls)
+     read_file    :      0.40s CPU      0.40s WALL (       1 calls)
+     gipaw_setup  :      0.17s CPU      0.17s WALL (       1 calls)
+     wfcinit      :      0.36s CPU      0.36s WALL (       1 calls)
      hinit0       :      0.03s CPU      0.03s WALL (       1 calls)
-     potinit      :      0.04s CPU      0.04s WALL (       1 calls)
+     potinit      :      0.02s CPU      0.02s WALL (       1 calls)
 
      SCF calculation:
 
-     electrons    :      2.24s CPU      2.29s WALL (       1 calls)
-     h_psi        :      5.19s CPU      5.31s WALL (    1656 calls)
-     add_so_valen :      1.99s CPU      2.06s WALL (    6094 calls)
-     add_so_Fnl   :      1.62s CPU      1.64s WALL (    1656 calls)
+     electrons    :      1.01s CPU      1.03s WALL (       1 calls)
+     h_psi        :      4.38s CPU      4.46s WALL (    1358 calls)
+     add_so_valen :      1.66s CPU      1.71s WALL (    4822 calls)
+     add_so_Fnl   :      1.39s CPU      1.40s WALL (    1358 calls)
 
      g-tensor:
 
-     compute_dudk :      2.91s CPU      3.03s WALL (       1 calls)
-     orbital_magn :      0.56s CPU      0.57s WALL (       1 calls)
-     om_alloc     :      0.00s CPU      0.00s WALL (       1 calls)
-     om_setdvrs   :      0.00s CPU      0.00s WALL (       1 calls)
-     om_setup     :      0.01s CPU      0.01s WALL (      12 calls)
-     om_dbecp     :      0.07s CPU      0.07s WALL (      12 calls)
-     om_dudk_io   :      0.00s CPU      0.00s WALL (      36 calls)
-     om_bands     :      0.47s CPU      0.47s WALL (      36 calls)
-     om_gipaw     :      0.00s CPU      0.00s WALL (      36 calls)
-     om_ik_post   :      0.00s CPU      0.00s WALL (      12 calls)
-     om_pool_sum  :      0.00s CPU      0.00s WALL (       1 calls)
+     compute_dudk :      3.05s CPU      3.14s WALL (       1 calls)
+     orbital_magn :      0.59s CPU      0.60s WALL (       1 calls)

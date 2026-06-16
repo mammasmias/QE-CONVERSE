@@ -36,7 +36,7 @@ SUBROUTINE newscf
   USE lsda_mod,   ONLY: nspin, current_spin
   USE orbital_magnetization, ONLY : dvrs
   USE wvfct,    ONLY : g2kin, nbndx, nbnd
-  USE gipaw_module, ONLY : conv_threshold, assume_isolated
+  USE gipaw_module, ONLY : conv_threshold, assume_isolated, start_from_gs_potential
   USE mp_pools,        ONLY : intra_pool_comm, inter_pool_comm
   USE ener,                 ONLY : ef, ef_up, ef_dw, ef_cond
   USE martyna_tuckerman, ONLY : do_comp_mt
@@ -65,11 +65,20 @@ SUBROUTINE newscf
   doublegrid=.false.
   lmovecell=.false.
   iprint=10000
-!  read wfc and potential from preav scf. Generally is not suggested
-!  starting_wfc='file'  ! read wfc from preav. scf
-!  starting_pot='file'  ! read potential from preav scf
-! Initialization of wfc
-  starting_wfc='atomic'
+! Wavefunctions are always rebuilt from the atomic guess (concurrency-safe:
+! never deletes the shared .wfc files that sibling directional runs read).
+  starting_wfc = 'atomic'
+! The starting potential is controlled by start_from_gs_potential:
+!   .true.  -> read the converged ground-state potential from the pw.x run.
+!              Removes the dependence of the converged state on
+!              starting_magnetization (DFT+U / multi-minimum systems) and makes
+!              the SO perturbation gradient (dvrs) consistent with the GS.
+!   .false. -> original behaviour: rebuild the potential from atomic superposition.
+  if ( start_from_gs_potential ) then
+     starting_pot = 'file'
+  else
+     starting_pot = 'atomic'
+  end if
   report=0
   CALL check_stop_init()
   CALL setup_para ( dfftp%nr3, 1, nbnd )

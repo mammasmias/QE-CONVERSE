@@ -138,6 +138,12 @@ Description: If \texttt{.true.}, temporary du/dk files (wavefunction k-derivativ
 \item[dudk\_in\_memory] (type: logical, default: \texttt{.false.})\\
 Description: If \texttt{.true.}, du/dk gradients (wavefunction k-derivatives) are stored in memory rather than written to disk. This is useful when there is enough memory to store these gradients.
 
+\item[lhub\_magnetization] (type: logical, default: \texttt{.true.})\\
+Description: If \texttt{.true.}, the nonlocal Hubbard (DFT+U) contribution is included in the orbital magnetization. This term must be included to obtain correct results for DFT+U calculations; setting it to \texttt{.false.} gives wrong results and is intended for debugging only.
+
+\item[start\_from\_gs\_potential] (type: logical, default: \texttt{.true.})\\
+Description: Controls the starting potential of the converse SCF. If \texttt{.true.}, the converged ground-state potential of the preceding \texttt{pw.x} run is read from file; if \texttt{.false.}, the potential is rebuilt from the atomic superposition.
+
 
 \end{description}
 

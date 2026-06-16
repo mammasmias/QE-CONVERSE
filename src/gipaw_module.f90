@@ -64,6 +64,11 @@ MODULE gipaw_module
   ! if true, include the nonlocal Hubbard (DFT+U) contribution to the orbital magnetization
   LOGICAL :: lhub_magnetization
 
+  ! if true, the converse SCF starts from the converged ground-state potential
+  ! (read from the preceding pw.x run) instead of rebuilding it from the atomic
+  ! superposition.
+  LOGICAL :: start_from_gs_potential
+
 
 
   ! max CPU time, in s
