@@ -20,7 +20,7 @@
   USE gipaw_module,          ONLY : lambda_so, dudk_method, lhub_magnetization
   USE paw_gipaw,             ONLY : paw_vkb, paw_nkb, paw_becp
   USE ener,                  ONLY : ef
-  USE ldaU,                 ONLY : lda_plus_u, wfcU, Hubbard_projectors, nwfcU
+  USE ldaU,                 ONLY : lda_plus_u, wfcU, Hubbard_projectors, nwfcU, lda_plus_u_kind
   USE io_files,             ONLY : nwordwfcU, iunhub
   USE buffers,               ONLY : get_buffer
   USE scf,                   ONLY : vrs
@@ -88,7 +88,8 @@
   orb_magn_LC = 0.d0
   orb_magn_IC = 0.d0
   delta_M_bare = 0.d0
-  delta_M_hub  = 0.d0
+  delta_M_hub_U  = 0.d0
+  delta_M_hub_V  = 0.d0
   delta_M_para = 0.d0
   delta_M_dia = 0.d0
 
@@ -96,8 +97,11 @@
   call allocate_bec_type(nkb, nbnd, becp)
   allocate(dbecp(nkb,nbnd,3), paw_dbecp(paw_nkb,nbnd,3))
   allocate(vkb_save(npwx,nkb), aux(nkb,nbnd))
-  if (lhub_magnetization .and. lda_plus_u .and. Hubbard_projectors /= 'pseudo') &
+  if (lhub_magnetization .and. lda_plus_u .and. &
+      Hubbard_projectors /= 'pseudo') then
     allocate(dhubbecp(nwfcU,nbnd,3))
+    if (lda_plus_u_kind == 2) allocate(hubbecp_0(nwfcU,nbnd))
+  endif
 #define __USE_BARRIER
 
   CALL set_dvrs( dvrs, vrs, dfftp%nnr, nspin )
@@ -114,6 +118,13 @@
     current_k = ik
     current_spin = 1
     if (lsda) current_spin = isk(ik)
+
+    ! Needed by vhpsi_UV
+    IF (lda_plus_u .AND. lda_plus_u_kind == 2) THEN
+      CALL phase_factor(ik)
+    ENDIF
+
+
      CALL gk_sort( xk(1,ik), ngm, g, gcutw, ngk(ik), igk_k(1,ik), g2kin )
      g2kin(1:ngk(ik)) = g2kin(1:ngk(ik)) * tpiba2
     call get_buffer(evc, nwordwfc, iunwfc, ik)
@@ -133,7 +144,8 @@
 
     call compute_dbecp  ! for deltaM bare (KB pseudopotential)
     call compute_paw_dbecp ! for delta_M_para_so
-    if (lhub_magnetization .and. lda_plus_u .and. Hubbard_projectors /= 'pseudo') call compute_dhubbecp
+    if (lhub_magnetization .and. lda_plus_u .and. &
+        Hubbard_projectors /= 'pseudo') call compute_dhubbecp
 
     ! loop over the magnetization directions
     do kk =  1, 3
@@ -176,7 +188,11 @@
       enddo
      ! compute the GIPAW corrections
       call calc_delta_M_bare
-      if (lhub_magnetization .and. lda_plus_u .and. Hubbard_projectors /= 'pseudo') call calc_delta_M_hub
+      if (lhub_magnetization .and. lda_plus_u .and. &
+          Hubbard_projectors /= 'pseudo') then
+        if (lda_plus_u_kind /= 2) call calc_delta_M_hub
+        if (lda_plus_u_kind == 2) call calc_delta_M_hub_V
+      endif
       if (any(lambda_so /= 0.d0)) call calc_delta_M_para_so
       if (any(m_0 /= 0.d0))       call calc_delta_M_para_nmr
     enddo ! kk
@@ -208,7 +224,8 @@
   call mp_sum(orb_magn_IC, inter_pool_comm )
   call mp_sum(berry_curvature, inter_pool_comm )
   call mp_sum(delta_M_bare, inter_pool_comm )
-  call mp_sum(delta_M_hub,  inter_pool_comm )
+  call mp_sum(delta_M_hub_U,  inter_pool_comm )
+  call mp_sum(delta_M_hub_V,  inter_pool_comm )
   call mp_sum(delta_M_para, inter_pool_comm )
   call mp_sum(delta_M_dia, inter_pool_comm )
 #endif
@@ -232,7 +249,7 @@
   endif
 
   orb_magn_tot = orb_magn_LC + orb_magn_IC + &
-                 delta_M_bare + delta_M_hub + delta_M_dia + delta_M_para
+                 delta_M_bare + delta_M_hub_U + delta_M_hub_V + delta_M_dia + delta_M_para
 
   write(stdout,*)
  ! print results
@@ -253,7 +270,8 @@
     write(stdout,'(5X,''M_LC               = '',3(F14.6))') orb_magn_LC
     write(stdout,'(5X,''M_IC               = '',3(F14.6))') orb_magn_IC
     write(stdout,'(5X,''Delta_M_bare       = '',3(F14.6))') delta_M_bare
-    write(stdout,'(5X,''Delta_M_hubbard        = '',3(F14.6))') delta_M_hub
+    write(stdout,'(5X,''Delta_M_hubbard_U        = '',3(F14.6))') delta_M_hub_U
+    write(stdout,'(5X,''Delta_M_hubbard_(U+V)        = '',3(F14.6))') delta_M_hub_V
     write(stdout,'(5X,''Delta_M_para       = '',3(F14.6))') delta_M_para
     write(stdout,'(5X,''Delta_M_dia        = '',3(F14.6))') delta_M_dia
     write(stdout,'(5X,''M_tot              = '',3(F14.6))') orb_magn_tot
@@ -266,15 +284,17 @@
   write(stdout,'(5X,''M_LC               = '',3(F14.6))') orb_magn_LC
   write(stdout,'(5X,''M_IC               = '',3(F14.6))') orb_magn_IC
   write(stdout,'(5X,''Delta_M_bare       = '',3(F14.6))') delta_M_bare
-  write(stdout,'(5X,''Delta_M_hubbard        = '',3(F14.6))') delta_M_hub
+  write(stdout,'(5X,''Delta_M_hubbard_U        = '',3(F14.6))') delta_M_hub_U
+  write(stdout,'(5X,''Delta_M_hubbard_(U+V)        = '',3(F14.6))') delta_M_hub_V
   write(stdout,'(5X,''Delta_M            = '',3(F14.6))') &
-        delta_M_bare + delta_M_hub + delta_M_para + delta_M_dia
+        delta_M_bare + delta_M_hub_U + delta_M_hub_V + delta_M_para + delta_M_dia
   write(stdout,'(5X,''M_tot              = '',3(F14.6))') orb_magn_tot
 
   ! free memory
   CALL deallocate_bec_type ( becp )
   deallocate( dudk_bra, dudk_ket, hpsi )
-  if (lhub_magnetization .and. allocated(dhubbecp)) deallocate(dhubbecp)
+  if (lhub_magnetization .and. allocated(dhubbecp))  deallocate(dhubbecp)
+  if (lhub_magnetization .and. allocated(hubbecp_0)) deallocate(hubbecp_0)
 
   call stop_clock ('orbital_magnetization')
   ! go on, reporting the g-tensor
@@ -401,7 +421,7 @@
     integer     :: ipol, sig, na, nt, m, ihubst
     real(dp)    :: kq(3), arg, xk_save(3)
     complex(dp) :: phase_na
-    complex(dp), allocatable :: proj(:,:), wfcU_save(:,:)
+    complex(dp), allocatable :: proj(:,:), wfcU_save(:,:), proj_0(:,:)
 
     allocate( proj(nwfcU, nbnd), wfcU_save(npwx*npol, nwfcU) )
     wfcU_save(:,:) = wfcU(:,:)
@@ -409,6 +429,30 @@
     xk_save(:)     = xk(:,ik)
 
     dhubbecp(:,:,:) = (0.d0, 0.d0)
+
+    ! For DFT+U+V: compute the zero-order no-phase overlap at the original k.
+    ! wfcU currently holds the S-orthogonalized full-phase projectors at xk_save.
+    ! Phase-strip a temporary copy (multiply by e^{+ik·tau_na} per atom) then
+    ! project onto evc to get hubbecp_0(m,n) = <phi_tilde^{NP}(k)|u_n(k)>.
+    if (lda_plus_u_kind == 2) then
+      allocate( proj_0(npwx*npol, nwfcU) )
+      proj_0(:,:) = wfcU(:,:)
+      do na = 1, nat
+        nt = ityp(na)
+        if (.not. is_hubbard(nt)) cycle
+        arg      = tpi * dot_product(xk_save(:), tau(:,na))
+        phase_na = cmplx(cos(arg), +sin(arg), kind=dp)
+        do m = 1, 2*Hubbard_l(nt) + 1
+          ihubst = offsetU(na) + m
+          proj_0(1:npw, ihubst) = proj_0(1:npw, ihubst) * phase_na
+        enddo
+      enddo
+      call ZGEMM('C', 'N', nwfcU, nbnd, npw, &
+                 (1.d0,0.d0), proj_0, npwx, evc, npwx, &
+                 (0.d0,0.d0), hubbecp_0, nwfcU)
+      call mp_sum(hubbecp_0, intra_bgrp_comm)
+      deallocate(proj_0)
+    endif
 
     ! orthoUwfc_k allocates becp internally as (nkb, natomwfc).
     ! Deallocate the outer (nkb, nbnd) becp first to avoid double-alloc crash.
@@ -498,8 +542,134 @@
         enddo
       enddo
     enddo
-    delta_M_hub(kk) = delta_M_hub(kk) - 2.d0*imag(hub_tmp)
+    delta_M_hub_U(kk) = delta_M_hub_U(kk) - 2.d0*imag(hub_tmp)
     END SUBROUTINE calc_delta_M_hub
+
+    !------------------------------------------------------------------
+    ! DFT+U+V contribution to delta_M_hub  (lda_plus_u_kind == 2)
+    !
+    ! Part A (derivative-derivative, identical structure to U case):
+    !   ΔM_A(kk) -= 2 Im Σ_{I,J,m1,m2,n} wg v_nsg(m1,m2,viz,I,σ)
+    !               conjg(dhubbecp(m1_I,n,ii)) dhubbecp(m2_J,n,jj)
+    !
+    ! Part B (derivative-overlap, inter-site only):
+    !   ΔM_B(kk) -= Re Σ v_nsg * (d^{IJ}_{jj} conjg(dhubbecp(m1_I,n,ii))
+    !               - d^{IJ}_{ii} conjg(dhubbecp(m1_I,n,jj))) * hubbecp_0(m2_J,n)
+    !
+    ! d^{IJ} = alat*(tau_J + n·a - tau_I)  in bohr; vanishes for J=I so
+    ! Part B is automatically zero for the self-site neighbor.
+    !------------------------------------------------------------------
+    SUBROUTINE calc_delta_M_hub_V
+    USE constants, ONLY : tpi
+    USE ions_base, ONLY : nat, ityp, tau
+    USE cell_base, ONLY : at, alat
+    USE ldaU,      ONLY : is_hubbard, ldim_u, nwfcU, offsetU, &
+                          neighood, at_sc, v_nsg
+    implicit none
+    complex(dp) :: tmp_A, tmp_B
+    complex(dp) :: tmp_A_form, tmp_B_form
+    complex(dp) :: prod_ii, prod_jj
+    complex(dp) :: prod_I_ii_J, prod_I_jj_J
+    complex(dp) :: prod_J_ii_I, prod_J_jj_I
+    complex(dp) :: phase_IJ, vij, term_B
+    integer     :: jbnd_h, na1, na2, equiv_na2, nt1, nt2, m1, m2, viz
+    integer     :: ihubst1, ihubst2, ldim1, ldim2, off1, off2, j
+    real(dp)    :: d_IJ(3), d_IJ_red(3), arg
+
+    if (nwfcU == 0) return
+
+    tmp_A = (0.d0, 0.d0)
+!    tmp_A_form = (0.d0, 0.d0)
+    tmp_B = (0.d0, 0.d0)
+!    tmp_B_form = (0.d0, 0.d0)
+
+    do na1 = 1, nat
+      nt1 = ityp(na1)
+      if (.not. is_hubbard(nt1)) cycle
+      ldim1 = ldim_u(nt1)
+      off1  = offsetU(na1)
+
+      do viz = 1, neighood(na1)%num_neigh
+        na2      = neighood(na1)%neigh(viz)
+        equiv_na2 = at_sc(na2)%at
+        nt2      = ityp(equiv_na2)
+        if (.not. is_hubbard(nt2)) cycle
+        if (.not. any(v_nsg(:,:,viz,na1,current_spin) /= (0.d0,0.d0))) cycle
+        ldim2 = ldim_u(nt2)
+        off2  = offsetU(equiv_na2)
+
+        ! displacement d^{IJ} in bohr
+        d_IJ_red(:) = tau(:,equiv_na2) - tau(:,na1)
+        do j = 1, 3
+          d_IJ_red(:) = d_IJ_red(:) + dble(at_sc(na2)%n(j)) * at(:,j)
+        enddo
+        arg = tpi * dot_product(xk(:,ik), d_IJ_red(:))
+        phase_IJ = cmplx(cos(arg), sin(arg), kind=dp)
+      
+        d_IJ(:) = alat * d_IJ_red(:)
+
+        do m1 = 1, ldim1
+          ihubst1 = off1 + m1
+          do m2 = 1, ldim2
+            ihubst2 = off2 + m2
+
+
+            vij = v_nsg(m2,m1,viz,na1,current_spin)
+
+            do jbnd_h = 1, occ
+              ! Part A: derivative-derivative
+
+                tmp_A = tmp_A + 0.5d0 * wg(jbnd_h,ik) * ( &
+                 phase_IJ * conjg(vij) * &
+                 conjg(dhubbecp(ihubst1,jbnd_h,ii)) * &
+                       dhubbecp(ihubst2,jbnd_h,jj) &
+                 + &
+                 conjg(phase_IJ) * vij * &
+                 conjg(dhubbecp(ihubst2,jbnd_h,ii)) * &
+                       dhubbecp(ihubst1,jbnd_h,jj) )
+
+!              tmp_A_form = tmp_A_form + wg(jbnd_h,ik) * v_nsg(m1,m2,viz,na1,current_spin) * &
+!                      conjg(dhubbecp(ihubst1,jbnd_h,ii)) * dhubbecp(ihubst2,jbnd_h,jj)
+              ! Part B: derivative-overlap, cyclic pair: d_jj*conjg(dhubbecp(ii)) - d_ii*conjg(dhubbecp(jj))
+!              prod_ii = conjg(dhubbecp(ihubst1,jbnd_h,ii)) * hubbecp_0(ihubst2,jbnd_h)
+!              prod_jj = conjg(dhubbecp(ihubst1,jbnd_h,jj)) * hubbecp_0(ihubst2,jbnd_h)
+!              tmp_B_form = tmp_B_form + wg(jbnd_h,ik) * v_nsg(m1,m2,viz,na1,current_spin) * &
+!                             (d_IJ(jj) * prod_ii - d_IJ(ii) * prod_jj)
+             ! First branch: I -> J
+             prod_I_ii_J = conjg(dhubbecp(ihubst1,jbnd_h,ii)) * &
+                           hubbecp_0(ihubst2,jbnd_h)
+
+             prod_I_jj_J = conjg(dhubbecp(ihubst1,jbnd_h,jj)) * &
+                           hubbecp_0(ihubst2,jbnd_h)
+
+             ! Hermitian branch: J -> I
+             prod_J_ii_I = conjg(dhubbecp(ihubst2,jbnd_h,ii)) * &
+                           hubbecp_0(ihubst1,jbnd_h)
+
+             prod_J_jj_I = conjg(dhubbecp(ihubst2,jbnd_h,jj)) * &
+                           hubbecp_0(ihubst1,jbnd_h)
+
+         term_B = 0.5d0 * wg(jbnd_h,ik) * ( &
+         phase_IJ * conjg(vij) * &
+         ( d_IJ(jj) * prod_I_ii_J - &
+           d_IJ(ii) * prod_I_jj_J ) &
+         - &
+         conjg(phase_IJ) * vij * &
+         ( d_IJ(jj) * prod_J_ii_I - &
+           d_IJ(ii) * prod_J_jj_I ) )
+
+            tmp_B = tmp_B + term_B
+            enddo
+          enddo
+        enddo
+      enddo
+    enddo
+    
+!    print*, 'tmp_A, tmp_A_form', tmp_A, tmp_A_form
+!    print*, 'tmp_B, tmp_B_form', tmp_B, tmp_B_form
+
+    delta_M_hub_V(kk) = delta_M_hub_V(kk) - 2.d0*imag(tmp_A) - real(tmp_B)
+    END SUBROUTINE calc_delta_M_hub_V
 
     !------------------------------------------------------------------
     ! GIPAW correction (Delta_M_para), SO case

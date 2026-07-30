@@ -28,7 +28,7 @@ SUBROUTINE compute_u_kq(ik, q)
   USE gvecw,                ONLY : gcutw
   USE control_flags,        ONLY : ethr, io_level, lscf, istep, max_cg_iter
   USE control_flags,        ONLY : cntrl_isolve => isolve, iverbosity
-  USE ldaU,                 ONLY : lda_plus_u, wfcU, Hubbard_projectors
+  USE ldaU,                 ONLY : lda_plus_u, wfcU, Hubbard_projectors, lda_plus_u_kind
   USE basis,                ONLY : natomwfc, wfcatom, swfcatom
   USE lsda_mod,             ONLY : current_spin, lsda, isk
   USE noncollin_module,     ONLY : noncolin, npol
@@ -118,6 +118,11 @@ SUBROUTINE compute_u_kq(ik, q)
   ! set the k-point
   xkold(:) = xk(:,ik)
   xk(:,ik) = xk(:,ik) + q(:)
+
+  IF (lda_plus_u .AND. lda_plus_u_kind == 2) THEN
+   CALL phase_factor(ik)
+  ENDIF
+  
   g2kin(1:npw) = ( ( xk(1,ik) + g(1,igk_k(1:npw,ik)) )**2 + &
                    ( xk(2,ik) + g(2,igk_k(1:npw,ik)) )**2 + &
                    ( xk(3,ik) + g(3,igk_k(1:npw,ik)) )**2 ) * tpiba2
@@ -192,6 +197,8 @@ SUBROUTINE compute_u_kq(ik, q)
   ! restore the k-point and eigenvalues
   xk(:,ik) = xkold(:)
   et(:,ik) = et_old(:)
+  IF (lda_plus_u .AND. lda_plus_u_kind == 2) &
+   CALL phase_factor(ik)
   deallocate(et_old)
 
 
