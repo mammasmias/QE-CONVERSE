@@ -135,7 +135,7 @@ SUBROUTINE h_psi_gipaw_ ( lda, n, m, psi, hpsi )
        USE orbital_magnetization,  ONLY : dvrs
        USE wvfct,    ONLY : g2kin, nbndx, nbnd
        USE nmr_mod
-       USE ldaU,                 ONLY: lda_plus_u, Hubbard_projectors
+       USE ldaU,                 ONLY: lda_plus_u, Hubbard_projectors, lda_plus_u_kind
        USE noncollin_module,     ONLY: noncolin
 
        !
