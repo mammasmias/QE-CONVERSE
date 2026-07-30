@@ -33,6 +33,4 @@ run ```./qe-converse.x``` for NMR shifts / EPR g-tensor, or ```./qe-efg.x``` for
 ```/benchmarking/``` : Contains the input files used to benchmark the code. Concerns the EPR g tensor calculation of diatomic paramagnetic radicals.
 ```/applications/```: Contains the EPR and NMR calculations.
 ```/tests/```: Contains integration and unit tests.
- ## Authors and contributors
-S. Fioccola, L. Giacomazzi, D. Ceresoli, N. Richard, A. Hemeryck, L. Martin-Samos
 
