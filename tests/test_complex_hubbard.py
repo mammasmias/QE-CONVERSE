@@ -52,6 +52,22 @@ class ComplexHubbardTests(unittest.TestCase):
         self.assertAlmostEqual(energy(nr, 4), energy(n, 4))
         np.testing.assert_allclose(potential(nr, 4), q.conj().T @ potential(n, 4) @ q, atol=1e-13)
 
+    def test_starting_eigenvalue_adjustment_preserves_complex_eigenvectors(self):
+        n = self.hermitian(5)
+        values, vectors = np.linalg.eigh(n)
+        values[0] = 0.25
+        rebuilt = (vectors * values) @ vectors.conj().T
+        # nsg stores the transpose of the matrix diagonalized by cdiagh.
+        nsg = np.empty_like(n)
+        for m1 in range(5):
+            for m2 in range(m1, 5):
+                temp = sum(vectors[m1, i] * values[i] * vectors[m2, i].conjugate() for i in range(5))
+                nsg[m2, m1] = temp
+                nsg[m1, m2] = temp.conjugate()
+        np.testing.assert_allclose(nsg.T @ vectors, vectors * values, atol=1e-13)
+        np.testing.assert_allclose(nsg.T, rebuilt, atol=1e-13)
+        self.assertGreater(np.max(abs(nsg.imag)), 1e-3)
+
     def test_intersite_energy_derivative_with_phase(self):
         # A directed I-J pair and its conjugate J-I partner are counted once.
         p = self.rng.normal(size=3) + 1j * self.rng.normal(size=3)
