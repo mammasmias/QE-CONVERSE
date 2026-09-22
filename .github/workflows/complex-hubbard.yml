@@ -1,0 +1,63 @@
+name: Complex Hubbard regression
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['fix/complex-hubbard-occupations']
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'tests/test_complex_hubbard.py'
+      - 'tests/integration/check_complex_hubbard.py'
+      - '.github/workflows/complex-hubbard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      OMP_NUM_THREADS: 1
+      OMPI_ALLOW_RUN_AS_ROOT: 1
+      OMPI_ALLOW_RUN_AS_ROOT_CONFIRM: 1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gfortran libopenmpi-dev openmpi-bin libopenblas-dev libfftw3-dev python3-numpy
+      - name: Algebraic regressions
+        run: python3 tests/test_complex_hubbard.py
+      - uses: actions/cache@v4
+        id: qe
+        with:
+          path: ~/q-e
+          key: qe-7.5-${{ runner.os }}-gfortran-v1
+      - name: Build QE 7.5
+        if: steps.qe.outputs.cache-hit != 'true'
+        run: |
+          wget -q https://gitlab.com/QEF/q-e/-/archive/qe-7.5/q-e-qe-7.5.tar.gz
+          tar xf q-e-qe-7.5.tar.gz
+          mv q-e-qe-7.5 ~/q-e
+          cd ~/q-e
+          ./configure --with-scalapack=no MPIF90=mpif90
+          make -j2 all
+      - name: Build CONVERSE
+        run: |
+          ./configure --with-qe-source="$HOME/q-e"
+          make -j2
+          # The patched occupation object must supply the symbol itself.
+          nm src/new_nsg.o | grep -E ' [Tt] new_nsg_$'
+      - name: U and U+V serial and MPI regressions
+        run: |
+          export PW="$HOME/q-e/bin/pw.x"
+          export QECONVERSE="$GITHUB_WORKSPACE/bin/qe-converse.x"
+          python3 tests/integration/check_complex_hubbard.py
+      - name: Upload Hubbard regression outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: complex-hubbard-outputs
+          path: /tmp/qe-complex-hubbard-*/**/*.*
