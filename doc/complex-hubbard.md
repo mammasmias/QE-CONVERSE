@@ -15,6 +15,12 @@ links this object before `libpw.a`. The noncollinear implementation is
 unchanged and is not enabled by this patch. The separate EFG executable
 continues to link the upstream QE implementation.
 
+`src/nsg_adj.f90` also overrides its QE 7.5 counterpart. When user-specified
+`starting_ns` eigenvalues are applied, it reconstructs the full complex
+matrix with the correct eigenvector conjugation and Hermitian partner.
+Taking `DBLE` here, or retaining the real-case conjugation order, would lose
+or conjugate the initial imaginary off-diagonal entries.
+
 For U+V, QE already stores `nsg`, the potential `v_nsg`, and the Broyden
 history as complex arrays. Its mixing norm intentionally takes the real
 part of a Hermitian product; this does not discard imaginary residuals.
@@ -96,9 +102,10 @@ validation, not a benchmark for a particular material. Outputs are kept
 in the printed temporary directory. The dedicated GitHub Actions workflow
 builds against QE 7.5 and runs these tests.
 
-At branch preparation, full QE compilation and serial/MPI runs were not
-available in the Windows editing environment. Treat binary validation as
-pending until the workflow or the above commands pass. Existing Hubbard
-reference values must not be regenerated just to hide discrepancies.
+Full QE compilation and serial/MPI validation are performed by the Linux
+GitHub Actions runner; the Windows editing environment only runs the
+algebraic and syntax checks. Check the workflow result for the exact commit
+being used. Existing Hubbard reference values must not be regenerated just
+to hide discrepancies.
 Passing these tests does not independently establish the completeness of
 the Hubbard orbital-magnetization theory or convergence for Co compounds.
