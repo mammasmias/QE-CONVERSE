@@ -124,3 +124,12 @@ jobs:
 
       - name: Run integration tests
         run: make test-integration
+
+      - name: Preserve integration outputs for reference review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-outputs
+          path: |
+            tests/integration/*/*.out
+            tests/integration/*/*.in
