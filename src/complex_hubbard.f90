@@ -99,30 +99,84 @@ CONTAINS
     WRITE(stdout,'(/5X,A)') 'Complex Hubbard: on-site U initialized in the U+V representation (intersite V=0).'
   END SUBROUTINE prepare_complex_hubbard
 
-  SUBROUTINE report_complex_hubbard()
-    USE ldaU, ONLY : lda_plus_u, lda_plus_u_kind, nsg, ldim_u, is_hubbard
-    USE ions_base, ONLY : nat, ityp
-    USE lsda_mod, ONLY : nspin
-    USE io_global, ONLY : stdout
-    IMPLICIT NONE
-    INTEGER :: na, is, ld, viz
-    REAL(DP) :: hermitian_error
-    INTEGER, EXTERNAL :: find_viz
-    IF (.NOT. lda_plus_u) RETURN
-    IF (lda_plus_u_kind /= 2) RETURN
-    hermitian_error = 0._DP
-    DO na = 1, nat
-      IF (.NOT. is_hubbard(ityp(na))) CYCLE
-      ld = ldim_u(ityp(na))
-      viz = find_viz(na,na)
-      DO is = 1, nspin
-        hermitian_error = MAX(hermitian_error, MAXVAL(ABS(nsg(1:ld,1:ld,viz,na,is) - &
-          CONJG(TRANSPOSE(nsg(1:ld,1:ld,viz,na,is))))))
+SUBROUTINE report_complex_hubbard()
+  USE ldaU, ONLY : lda_plus_u, lda_plus_u_kind, nsg, ldim_u, is_hubbard
+  USE ions_base, ONLY : nat, ityp
+  USE lsda_mod, ONLY : nspin
+  USE io_global, ONLY : stdout
+  IMPLICIT NONE
+
+  INTEGER :: na, is, ld, viz
+  INTEGER :: m1, m2
+  REAL(DP) :: hermitian_error
+  REAL(DP) :: max_real, max_imag
+  INTEGER, EXTERNAL :: find_viz
+
+  IF (.NOT. lda_plus_u) RETURN
+  IF (lda_plus_u_kind /= 2) RETURN
+
+  hermitian_error = 0._DP
+  max_real = 0._DP
+  max_imag = 0._DP
+
+  DO na = 1, nat
+
+    IF (.NOT. is_hubbard(ityp(na))) CYCLE
+
+    ld = ldim_u(ityp(na))
+    viz = find_viz(na,na)
+
+    DO is = 1, nspin
+
+      ! ----------------------------------------------------------
+      ! Hermiticity check
+      ! ----------------------------------------------------------
+      hermitian_error = MAX( hermitian_error, &
+           MAXVAL( ABS( nsg(1:ld,1:ld,viz,na,is) - &
+                        CONJG(TRANSPOSE(nsg(1:ld,1:ld,viz,na,is))) ) ) )
+
+      ! ----------------------------------------------------------
+      ! Maximum absolute real / imaginary component
+      ! ----------------------------------------------------------
+      max_real = MAX( max_real, &
+           MAXVAL( ABS(REAL(nsg(1:ld,1:ld,viz,na,is),KIND=DP)) ) )
+
+      max_imag = MAX( max_imag, &
+           MAXVAL( ABS(AIMAG(nsg(1:ld,1:ld,viz,na,is))) ) )
+
+      ! ----------------------------------------------------------
+      ! Full onsite occupation matrix
+      ! ----------------------------------------------------------
+      WRITE(stdout,'(/5X,A,I5,A,I3)') &
+           'Complex Hubbard occupation matrix: atom ', na, ', spin ', is
+
+      WRITE(stdout,'(5X,A)') 'Real part Re[n]:'
+      DO m1 = 1, ld
+        WRITE(stdout,'(5X,20(1X,ES14.6))') &
+             (REAL(nsg(m1,m2,viz,na,is),KIND=DP), m2=1,ld)
       ENDDO
+
+      WRITE(stdout,'(5X,A)') 'Imaginary part Im[n]:'
+      DO m1 = 1, ld
+        WRITE(stdout,'(5X,20(1X,ES14.6))') &
+             (AIMAG(nsg(m1,m2,viz,na,is)), m2=1,ld)
+      ENDDO
+
     ENDDO
-    WRITE(stdout,'(5X,A,ES16.8)') 'Complex Hubbard: max |Im n| = ', MAXVAL(ABS(AIMAG(nsg)))
-    WRITE(stdout,'(5X,A,ES16.8)') 'Complex Hubbard: onsite Hermiticity error = ', hermitian_error
-    IF (hermitian_error > 1.e-10_DP) &
-      CALL errore('complex_hubbard', 'Non-Hermitian on-site occupations after SCF', 1)
-  END SUBROUTINE report_complex_hubbard
+  ENDDO
+
+  WRITE(stdout,'(/5X,A,ES16.8)') &
+       'Complex Hubbard: max |Re n| = ', max_real
+
+  WRITE(stdout,'(5X,A,ES16.8)') &
+       'Complex Hubbard: max |Im n| = ', max_imag
+
+  WRITE(stdout,'(5X,A,ES16.8)') &
+       'Complex Hubbard: onsite Hermiticity error = ', hermitian_error
+
+  IF (hermitian_error > 1.e-10_DP) &
+       CALL errore('complex_hubbard', &
+       'Non-Hermitian on-site occupations after SCF', 1)
+
+END SUBROUTINE report_complex_hubbard
 END MODULE complex_hubbard
