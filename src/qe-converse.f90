@@ -59,6 +59,7 @@ PROGRAM qe_converse
   USE cellmd,           ONLY : cell_factor
   USE nmr_mod
   USE dudk_storage,     ONLY : dudk_in_memory
+  USE complex_hubbard,  ONLY : check_complex_hubbard
 
   IMPLICIT NONE
 
@@ -150,6 +151,7 @@ if (.not. ionode .or. my_image_id > 0) goto 400
   !read ground state wavefunctions  
   CALL read_file ( )
   call stop_clock ('read_file')
+  CALL check_complex_hubbard()
   call gipaw_setup ( )
   if (any(m_0 /= 0.d0)) then
      call init_nmr

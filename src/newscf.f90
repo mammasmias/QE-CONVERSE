@@ -41,6 +41,7 @@ SUBROUTINE newscf
   USE ener,                 ONLY : ef, ef_up, ef_dw, ef_cond
   USE martyna_tuckerman, ONLY : do_comp_mt
   USE nmr_mod,    ONLY : m_0
+  USE complex_hubbard, ONLY : prepare_complex_hubbard, report_complex_hubbard
   !
   IMPLICIT NONE
   !
@@ -121,12 +122,14 @@ SUBROUTINE newscf
   call summary ( )
   call hinit0 ( )
   call potinit ( )
+  call prepare_complex_hubbard ( )
   
   CALL set_dvrs( dvrs, vrs, dfftp%nnr, nspin )
 
   call newd ( )
   call wfcinit_gipaw ( )
   CALL electrons_gipaw ( )
+  CALL report_complex_hubbard ( )
   ! 
   ! WARNING in NMR calculation : for non-metallic system (occupation='fixed') at least 1 unoccupied of Kohn-Sham states (nbnd) must be added
   !

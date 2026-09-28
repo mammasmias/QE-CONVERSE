@@ -35,6 +35,9 @@ EFG_OBJS = efg_module.o \
            qe-efg.o
 
 CONVERSE_OBJS = electrons_gipaw.o \
+		complex_hubbard.o \
+		new_nsg.o \
+		nsg_adj.o \
 		set_dvrs.o \
                 efg_module.o \
                 efg.o \

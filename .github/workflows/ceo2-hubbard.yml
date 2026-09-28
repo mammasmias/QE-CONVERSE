@@ -1,0 +1,75 @@
+name: CeO2 Hubbard controlled comparison
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['fix/complex-hubbard-occupations']
+    paths:
+      - 'tests/integration/ceo2_hubbard.py'
+      - '.github/workflows/ceo2-hubbard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [A, B, C]
+    env:
+      OMP_NUM_THREADS: 1
+      OPENBLAS_NUM_THREADS: 1
+      OMPI_ALLOW_RUN_AS_ROOT: 1
+      OMPI_ALLOW_RUN_AS_ROOT_CONFIRM: 1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gfortran libopenmpi-dev openmpi-bin libopenblas-dev libfftw3-dev
+      - uses: actions/cache@v4
+        id: qe
+        with:
+          path: ~/q-e
+          key: qe-7.5-${{ runner.os }}-gfortran-v1
+      - name: Build QE if cache is unavailable
+        if: steps.qe.outputs.cache-hit != 'true'
+        run: |
+          wget -q https://gitlab.com/QEF/q-e/-/archive/qe-7.5/q-e-qe-7.5.tar.gz
+          tar xf q-e-qe-7.5.tar.gz
+          mv q-e-qe-7.5 ~/q-e
+          cd ~/q-e
+          ./configure --with-scalapack=no MPIF90=mpif90
+          make -j2 all
+      - name: Build pinned variant and run CeO2
+        run: python3 tests/integration/ceo2_hubbard.py run --variant ${{ matrix.variant }} --qe "$HOME/q-e" --root "$RUNNER_TEMP/ceo2"
+      - name: Preserve inputs, logs and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ceo2-${{ matrix.variant }}
+          path: |
+            ${{ runner.temp }}/ceo2/${{ matrix.variant }}/results.json
+            ${{ runner.temp }}/ceo2/${{ matrix.variant }}/B-only-change.txt
+            ${{ runner.temp }}/ceo2/${{ matrix.variant }}/U*/*/*.in
+            ${{ runner.temp }}/ceo2/${{ matrix.variant }}/U*/*/*.out
+  compare:
+    if: always()
+    needs: experiment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: ceo2-*
+          path: ceo2-results
+      - name: Compare variants and amplitude dependence
+        run: python3 tests/integration/ceo2_hubbard.py compare --root ceo2-results
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ceo2-comparison
+          path: ceo2-results/comparison.md
