@@ -198,9 +198,11 @@ SUBROUTINE new_nsg()
   !
   IF (nspin.EQ.1) nrg = 0.5d0 * nrg
   !
-  ! impose hermiticity of n_{m1,m2}
+  ! Enforce n^{IJ,sigma} = [n^{JI,sigma}]^dagger for every spin channel.
+  ! This post-MPI cleanup is independent of the last k-point spin and does not
+  ! need a band loop.
   !
-  DO ibnd = 1,nbnd
+  DO is = 1, nspin
      DO na1 = 1, nat
         nt1 = ityp(na1)
         IF (ldim_u(nt1).GT.0) THEN
@@ -213,11 +215,11 @@ SUBROUTINE new_nsg()
                  ldim2 = ldim_u(nt2)
                  DO m1 = 1, ldim1
                     DO m2 = 1, ldim2
-                       nrg(m2,m1,viz,na1,current_spin) = &
-                       ( nrg(m2,m1,viz,na1,current_spin) + &
-                       CONJG(nrg(m1,m2,find_viz(na2,na1),na2,current_spin)) )*0.5d0
-                       nrg(m1,m2,find_viz(na2,na1),na2,current_spin) =  &
-                       CONJG(nrg(m2,m1,viz,na1,current_spin))
+                       nrg(m2,m1,viz,na1,is) = &
+                       ( nrg(m2,m1,viz,na1,is) + &
+                       CONJG(nrg(m1,m2,find_viz(na2,na1),na2,is)) )*0.5d0
+                       nrg(m1,m2,find_viz(na2,na1),na2,is) =  &
+                       CONJG(nrg(m2,m1,viz,na1,is))
                     ENDDO
                  ENDDO
               ENDIF
