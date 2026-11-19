@@ -113,7 +113,17 @@ Description: verbosity level (allowed values: \texttt{'low'}, \texttt{'medium'},
 Description: the small wave-vector for the covariant finite difference formula.
 
 \item[dudk\_method] (type: string, default: \texttt{'covariant'})\\
-Description: k-point derivative method (only allowed values: \texttt{'covariant'} )
+Description: k-point derivative method: \texttt{'covariant'},
+\texttt{'singlepoint'}, or \texttt{'kdotp'}.
+The \texttt{'kdotp'} method solves the projected Sternheimer equation using
+QE's conjugate-gradient solver and the full GIPAW Hamiltonian. Its Hamiltonian
+derivative is evaluated by central differences with step \texttt{q\_gipaw};
+step convergence must therefore still be checked. It uses the same occupied-band
+subspace as \texttt{'covariant'}, including the occupation cutoff for smeared
+calculations. It requires complex, collinear, norm-conserving wavefunctions.
+The linear-system residual tolerance is the smaller of
+$\sqrt{\mathtt{conv\_threshold}}$ and $10^{-8}$ (Rydberg units).
+A failure of the linear solver terminates the calculation.
 
 \item[diag\_thr\_init] (type: real, default: 10$^{-7}$, units: Ry$^2$)\\
 Description: Convergence threshold (ethr) for iterative diagonalization.

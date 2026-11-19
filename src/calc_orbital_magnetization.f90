@@ -49,6 +49,8 @@
   complex(dp), allocatable :: vkb_save(:,:), aux(:,:)
   complex(dp) :: braket
   real(dp) :: kp_berry(3), kp_berry2(3), kp_M_LC(3), kp_M_IC(3), tmp1(3), tmp2(3)
+  ! Debug decomposition of the extended Hubbard correction
+  real(dp) :: delta_M_hub_V_A(3), delta_M_hub_V_B(3)
   integer :: ik, ibnd, jbnd, kk, ii, jj, occ, nrxxs, nr1, nr2, nr3
   real(dp) :: tmp(3), emin, emax
   ! index for the cross product
@@ -90,6 +92,8 @@
   delta_M_bare = 0.d0
   delta_M_hub_U  = 0.d0
   delta_M_hub_V  = 0.d0
+  delta_M_hub_V_A = 0.d0
+  delta_M_hub_V_B = 0.d0
   delta_M_para = 0.d0
   delta_M_dia = 0.d0
 
@@ -224,8 +228,10 @@
   call mp_sum(orb_magn_IC, inter_pool_comm )
   call mp_sum(berry_curvature, inter_pool_comm )
   call mp_sum(delta_M_bare, inter_pool_comm )
-  call mp_sum(delta_M_hub_U,  inter_pool_comm )
-  call mp_sum(delta_M_hub_V,  inter_pool_comm )
+  call mp_sum(delta_M_hub_U,   inter_pool_comm )
+  call mp_sum(delta_M_hub_V_A, inter_pool_comm )
+  call mp_sum(delta_M_hub_V_B, inter_pool_comm )
+  call mp_sum(delta_M_hub_V,   inter_pool_comm )
   call mp_sum(delta_M_para, inter_pool_comm )
   call mp_sum(delta_M_dia, inter_pool_comm )
 #endif
@@ -270,8 +276,12 @@
     write(stdout,'(5X,''M_LC               = '',3(F14.6))') orb_magn_LC
     write(stdout,'(5X,''M_IC               = '',3(F14.6))') orb_magn_IC
     write(stdout,'(5X,''Delta_M_bare       = '',3(F14.6))') delta_M_bare
-    write(stdout,'(5X,''Delta_M_hubbard_U        = '',3(F14.6))') delta_M_hub_U
-    write(stdout,'(5X,''Delta_M_hubbard_(U+V)        = '',3(F14.6))') delta_M_hub_V
+    write(stdout,'(5X,''Delta_M_hubbard_U        = '',3(ES20.10))') delta_M_hub_U
+    write(stdout,'(5X,''Delta_M_hubbard_V_A      = '',3(ES20.10))') delta_M_hub_V_A
+    write(stdout,'(5X,''Delta_M_hubbard_V_B      = '',3(ES20.10))') delta_M_hub_V_B
+    write(stdout,'(5X,''Delta_M_hubbard_V        = '',3(ES20.10))') delta_M_hub_V
+    write(stdout,'(5X,''Delta_M_hubbard_(U+V)    = '',3(ES20.10))') &
+                  delta_M_hub_U + delta_M_hub_V
     write(stdout,'(5X,''Delta_M_para       = '',3(F14.6))') delta_M_para
     write(stdout,'(5X,''Delta_M_dia        = '',3(F14.6))') delta_M_dia
     write(stdout,'(5X,''M_tot              = '',3(F14.6))') orb_magn_tot
@@ -284,8 +294,12 @@
   write(stdout,'(5X,''M_LC               = '',3(F14.6))') orb_magn_LC
   write(stdout,'(5X,''M_IC               = '',3(F14.6))') orb_magn_IC
   write(stdout,'(5X,''Delta_M_bare       = '',3(F14.6))') delta_M_bare
-  write(stdout,'(5X,''Delta_M_hubbard_U        = '',3(F14.6))') delta_M_hub_U
-  write(stdout,'(5X,''Delta_M_hubbard_(U+V)        = '',3(F14.6))') delta_M_hub_V
+  write(stdout,'(5X,''Delta_M_hubbard_U        = '',3(ES20.10))') delta_M_hub_U
+  write(stdout,'(5X,''Delta_M_hubbard_V_A      = '',3(ES20.10))') delta_M_hub_V_A
+  write(stdout,'(5X,''Delta_M_hubbard_V_B      = '',3(ES20.10))') delta_M_hub_V_B
+  write(stdout,'(5X,''Delta_M_hubbard_V        = '',3(ES20.10))') delta_M_hub_V
+  write(stdout,'(5X,''Delta_M_hubbard_(U+V)    = '',3(ES20.10))') &
+                delta_M_hub_U + delta_M_hub_V
   write(stdout,'(5X,''Delta_M            = '',3(F14.6))') &
         delta_M_bare + delta_M_hub_U + delta_M_hub_V + delta_M_para + delta_M_dia
   write(stdout,'(5X,''M_tot              = '',3(F14.6))') orb_magn_tot
@@ -546,7 +560,8 @@
     END SUBROUTINE calc_delta_M_hub
 
     !------------------------------------------------------------------
-    ! DFT+U+V contribution to delta_M_hub  (lda_plus_u_kind == 2)
+    ! DFT+U+V contribution, decomposed into on-site U and inter-site V
+    ! (lda_plus_u_kind == 2)
     !
     ! Part A (derivative-derivative, identical structure to U case):
     !   ΔM_A(kk) -= 2 Im Σ_{I,J,m1,m2,n} wg v_nsg(m1,m2,viz,I,σ)
@@ -566,22 +581,22 @@
     USE ldaU,      ONLY : is_hubbard, ldim_u, nwfcU, offsetU, &
                           neighood, at_sc, v_nsg
     implicit none
-    complex(dp) :: tmp_A, tmp_B
-    complex(dp) :: tmp_A_form, tmp_B_form
-    complex(dp) :: prod_ii, prod_jj
+    complex(dp) :: tmp_A_U, tmp_A_V, tmp_B_V
+    complex(dp) :: term_A, term_B
+    real(dp)    :: dm_U, dm_V_A, dm_V_B
     complex(dp) :: prod_I_ii_J, prod_I_jj_J
     complex(dp) :: prod_J_ii_I, prod_J_jj_I
-    complex(dp) :: phase_IJ, vij, term_B
+    complex(dp) :: phase_IJ, vij
     integer     :: jbnd_h, na1, na2, equiv_na2, nt1, nt2, m1, m2, viz
     integer     :: ihubst1, ihubst2, ldim1, ldim2, off1, off2, j
     real(dp)    :: d_IJ(3), d_IJ_red(3), arg
+    logical     :: is_onsite_U
 
     if (nwfcU == 0) return
 
-    tmp_A = (0.d0, 0.d0)
-!    tmp_A_form = (0.d0, 0.d0)
-    tmp_B = (0.d0, 0.d0)
-!    tmp_B_form = (0.d0, 0.d0)
+    tmp_A_U = (0.d0, 0.d0)
+    tmp_A_V = (0.d0, 0.d0)
+    tmp_B_V = (0.d0, 0.d0)
 
     do na1 = 1, nat
       nt1 = ityp(na1)
@@ -595,6 +610,11 @@
         nt2      = ityp(equiv_na2)
         if (.not. is_hubbard(nt2)) cycle
         if (.not. any(v_nsg(:,:,viz,na1,current_spin) /= (0.d0,0.d0))) cycle
+
+        ! QE stores the on-site U as the central self-neighbor V_II.
+        ! Use the supercell index, not only equiv_na2, so that a periodic
+        ! image of the same atom remains classified as an inter-site V term.
+        is_onsite_U = (na2 == na1)
         ldim2 = ldim_u(nt2)
         off2  = offsetU(equiv_na2)
 
@@ -619,7 +639,7 @@
             do jbnd_h = 1, occ
               ! Part A: derivative-derivative
 
-                tmp_A = tmp_A + 0.5d0 * wg(jbnd_h,ik) * ( &
+                term_A = 0.5d0 * wg(jbnd_h,ik) * ( &
                  phase_IJ * conjg(vij) * &
                  conjg(dhubbecp(ihubst1,jbnd_h,ii)) * &
                        dhubbecp(ihubst2,jbnd_h,jj) &
@@ -628,13 +648,13 @@
                  conjg(dhubbecp(ihubst2,jbnd_h,ii)) * &
                        dhubbecp(ihubst1,jbnd_h,jj) )
 
-!              tmp_A_form = tmp_A_form + wg(jbnd_h,ik) * v_nsg(m1,m2,viz,na1,current_spin) * &
-!                      conjg(dhubbecp(ihubst1,jbnd_h,ii)) * dhubbecp(ihubst2,jbnd_h,jj)
+                if (is_onsite_U) then
+                  tmp_A_U = tmp_A_U + term_A
+                else
+                  tmp_A_V = tmp_A_V + term_A
+                endif
+
               ! Part B: derivative-overlap, cyclic pair: d_jj*conjg(dhubbecp(ii)) - d_ii*conjg(dhubbecp(jj))
-!              prod_ii = conjg(dhubbecp(ihubst1,jbnd_h,ii)) * hubbecp_0(ihubst2,jbnd_h)
-!              prod_jj = conjg(dhubbecp(ihubst1,jbnd_h,jj)) * hubbecp_0(ihubst2,jbnd_h)
-!              tmp_B_form = tmp_B_form + wg(jbnd_h,ik) * v_nsg(m1,m2,viz,na1,current_spin) * &
-!                             (d_IJ(jj) * prod_ii - d_IJ(ii) * prod_jj)
              ! First branch: I -> J
              prod_I_ii_J = conjg(dhubbecp(ihubst1,jbnd_h,ii)) * &
                            hubbecp_0(ihubst2,jbnd_h)
@@ -658,17 +678,30 @@
          ( d_IJ(jj) * prod_J_ii_I - &
            d_IJ(ii) * prod_J_jj_I ) )
 
-            tmp_B = tmp_B + term_B
+            ! Part B is purely inter-site. For the central self-neighbor
+            ! d_IJ=0 analytically, but exclude it explicitly for debugging.
+            if (.not. is_onsite_U) tmp_B_V = tmp_B_V + term_B
             enddo
           enddo
         enddo
       enddo
     enddo
     
-!    print*, 'tmp_A, tmp_A_form', tmp_A, tmp_A_form
-!    print*, 'tmp_B, tmp_B_form', tmp_B, tmp_B_form
+    dm_U   = -2.d0 * imag(tmp_A_U)
+    dm_V_A = -2.d0 * imag(tmp_A_V)
+    dm_V_B = -real(tmp_B_V)
 
-    delta_M_hub_V(kk) = delta_M_hub_V(kk) - 2.d0*imag(tmp_A) - real(tmp_B)
+    delta_M_hub_U(kk)   = delta_M_hub_U(kk)   + dm_U
+    delta_M_hub_V_A(kk) = delta_M_hub_V_A(kk) + dm_V_A
+    delta_M_hub_V_B(kk) = delta_M_hub_V_B(kk) + dm_V_B
+    delta_M_hub_V(kk)   = delta_M_hub_V(kk)   + dm_V_A + dm_V_B
+
+    if (iverbosity > 1 .and. me_pool == root_pool) then
+      write(stdout,9010) ik, kk, dm_U, dm_V_A, dm_V_B, dm_V_A + dm_V_B
+    endif
+9010 format(5X,'HUB DEBUG: ik=',I5,' dir=',I2, &
+            '  dM_U=',ES16.8,'  dM_VA=',ES16.8, &
+            '  dM_VB=',ES16.8,'  dM_V=',ES16.8)
     END SUBROUTINE calc_delta_M_hub_V
 
     !------------------------------------------------------------------

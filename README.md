@@ -34,3 +34,10 @@ run ```./qe-converse.x``` for NMR shifts / EPR g-tensor, or ```./qe-efg.x``` for
 ```/applications/```: Contains the EPR and NMR calculations.
 ```/tests/```: Contains integration and unit tests.
 
+
+### k·p derivatives
+
+Set `dudk_method = 'kdotp'` in `&input_qeconverse` to solve the projected
+Sternheimer equation using the QE 7.5 conjugate-gradient solver. See
+[the implementation notes](doc/kdotp.md) for the algorithm, supported cases,
+convergence parameters and numerical tests.

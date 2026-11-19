@@ -170,6 +170,7 @@ communicator. This improves scalability for large supercell calculations.
 | `rotate_wfc_gipaw.f90` | Dispatcher for wavefunction rotation (subspace diagonalisation): routes to serial or parallel, Γ-point or k-point routines. |
 | `rotate_wfc_k_gipaw.f90` | Serial and parallel subspace Hamiltonian diagonalisation in the k-point basis; computes H and S matrices. |
 | `compute_dudk_new.f90` | Computes covariant du/dk: calls `compute_u_kq` for each displaced k±q, builds overlap matrix, inverts, assembles dual states, saves result. Supports in-memory (`dudk_storage`) or disk I/O. After calling `compute_u_kq(ik,0)`, saves `evc` back to `iunwfc`. Forces in-memory storage when `nproc_pool > 1` (disk I/O is not safe with distributed G-vectors). |
+| `converse_kdotp.f90` | Projected Sternheimer du/dk using QE `cgsolve_all` and the full GIPAW Hamiltonian; central differences of H include k-dependent Hubbard projectors. Restores k, projectors and kinetic energies. Uses the same occupied subspace as `covariant`. |
 | `compute_u_kq.f90` | Diagonalises H(k+q). Reads `evc` from `iunwfc` as initial guess (line 133); after diagonalisation, restores `evc` from `iunwfc` (lines 193-196) to not corrupt the k-point buffer. |
 | `dudk_storage.f90` | Module providing in-memory buffer management for du/dk matrices; allocates/deallocates storage and handles retrieval for better performance than disk I/O. |
 | `calc_orbital_magnetization.f90` | Computes all orbital magnetization terms: LC, IC (Berry curvature formula), and GIPAW corrections (`delta_M_bare`, `delta_M_para`, `delta_M_dia`) for both EPR and NMR modes. Contains band-group MPI parallelisation over `ibnd`. |
@@ -316,7 +317,7 @@ The single input namelist is `&input_qeconverse`. Key parameters:
 | `outdir` | char | `./` | Must match the pw.x SCF `outdir`. |
 | `diagonalization` | string | `david` | Only `david` (Davidson) supported. |
 | `q_gipaw` | real | 0.01 | Finite-difference step in k-space (bohr⁻¹). Keep at default. |
-| `dudk_method` | string | `covariant` | Only `covariant` supported. |
+| `dudk_method` | string | `covariant` | `covariant`, `singlepoint`, or `kdotp` (projected Sternheimer). |
 | `diago_thr_init` | real | 1e-7 | Initial diagonalisation convergence threshold (Ry²). |
 | `conv_threshold` | real | 1e-8 | SCF convergence threshold (Ry²). |
 | `mixing_beta` | real | 0.5 | Charge mixing factor. |
