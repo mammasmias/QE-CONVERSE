@@ -51,6 +51,7 @@ CONVERSE_OBJS = electrons_gipaw.o \
                 gipaw_setup.o \
                 init_us_2_no_phase.o \
                 compute_u_kq.o \
+                converse_kdotp.o \
                 compute_dudk_new.o \
                 wfcinit_gipaw.o \
                 rotate_wfc_gipaw.o \

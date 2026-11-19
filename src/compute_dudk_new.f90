@@ -11,6 +11,7 @@
 ! Compute the covariant derivative
 !-----------------------------------------------------------------------
 SUBROUTINE compute_dudk_new(dudk_method)
+  USE converse_kdotp, ONLY : dudk_kdotp
   USE kinds,         ONLY : dp
   USE wvfct,         ONLY : npw, nbnd, npwx
   USE klist,         ONLY : nks, lgauss, ngk
@@ -111,7 +112,7 @@ end if
     allocate (dudk(npwx,nbnd,3) )
     allocate(evq(npwx,nbnd))
 
-  if (ik == 1) write(stdout,*)
+  write(stdout,*)
   write(stdout,'(5X,''Computing du/dk '',$)')
   if (trim(dudk_method) == 'read') then
     write(stdout,'(''(read from disk)'')')
@@ -151,17 +152,21 @@ end if
     enddo
 
     
-!  elseif (trim(dudk_method) == 'kdotp') then
-!    write(stdout,'(''(k \dot p perturbation)'')') 
-!    call find_nbnd_occ(ik, occ, emin, emax)
-   ! determine alpha_pv and store it via gipaw_module
-!    alpha_pv = emax - emin
-!    if (.not. lgauss) alpha_pv = 2.d0 * (emax - emin)
-!    alpha_pv = max(alpha_pv, 1.d-2)
-!    if ( ( me_pool == root_pool ) .and. ( my_pool_id == 0) ) &
-!        write(*,'(5X,''k-point_ik:'',I4,4X,''pool:'',I4,4X,''occ='',I3, 4X, &
-!                     ''alpha_pv='',F10.4)') ik, my_pool_id+1, occ, alpha_pv
-!    call dudk_kdotp(ik, occ, dudk)
+  elseif (trim(dudk_method) == 'kdotp') then
+    write(stdout,'(''(k dot p / Sternheimer)'')')
+    do ik = 1, nks
+      npw = ngk(ik)
+      call find_nbnd_occ(ik, occ, emin, emax)
+      write(stdout,'(5X,''k-point:'',I4,4X,''occ='',I3)') ik, occ
+      call dudk_kdotp(ik, occ, dudk)
+      do ipol = 1, 3
+        if (dudk_in_memory) then
+          call store_dudk(dudk(:,:,ipol), ik, ipol, ngk(ik), nbnd)
+        else
+          call davcio(dudk(1,1,ipol), 2*nwordwfc, iundudk1 + ipol - 1, ik, +1)
+        endif
+      enddo
+    enddo
 
   else
     write(stdout,*)
@@ -259,47 +264,6 @@ END SUBROUTINE dudk_covariant
 
 
 
-!-----------------------------------------------------------------------
-! (k dot p) perturbation
-!-----------------------------------------------------------------------
-!SUBROUTINE dudk_kdotp(ik, occ, dudk)
-!  USE kinds,                ONLY : dp  
-!  USE cell_base,            ONLY : tpiba
-!  USE wvfct,                ONLY : nbnd, npwx, current_k, igk 
-!  USE wavefunctions_module, ONLY : evc
-!  USE buffers,              ONLY : get_buffer, save_buffer
-!  USE gvect,                ONLY : ngm, gcutm, g
-!  USE gipaw_module,         ONLY : q_gipaw, evq, nbnd_occ
-!  USE paw_gipaw,            ONLY : lambda_so
-!  IMPLICIT NONE
-!  complex(dp) :: dudk(npwx,nbnd,3), v_evc(npwx,nbnd)
-!  real(dp) :: q_gipaw3(3)
-!  integer :: ik, i, occ, jpol
-!  integer :: ibnd, jbnd, ipol
-
-!  if (occ == 0) return
-  !
-!  dudk(:,:,:) = (0.d0,0.d0)
-!  q_gipaw3(:) = 0.d0
-  !
-  ! loop over crystal directions
-!  !
-!  do ipol = 1, 3
-    ! apply the velocity operator
-!    v_evc(:,:) = (0.d0,0.d0)
-!    call apply_vel(evc, v_evc, ik, ipol, q_gipaw3)
-!   call apply_vel_H(evc, v_evc, ik, ipol, q_gipaw3)
-    ! solve (k dot p) system
-!    call greenfunction(ik, v_evc, dudk(:,:,ipol), q_gipaw3)
-!  enddo
-   
-!END SUBROUTINE dudk_kdotp
-
-
-
-
-
-  
 !-----------------------------------------------------------------------
 ! covariant derivative (single point)
 !-----------------------------------------------------------------------
